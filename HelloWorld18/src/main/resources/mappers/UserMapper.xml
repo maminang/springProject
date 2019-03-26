@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.user">
+	<update id="updatePoint">
+		update tbl_user set userPoint =
+		userPoint+#{userPoint}
+		where userId = #{userId}
+	</update>
+
+	<select id="login" resultType="UserVO">
+		select * from tbl_user
+		where
+		userid = #{userId} and
+		userpw = #{userPw}
+	</select>
+</mapper>
