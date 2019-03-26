@@ -35,13 +35,6 @@
 		<beans:constructor-arg value="C:\\supload"></beans:constructor-arg>
 	</beans:bean>
 
-	<beans:bean class="kr.co.interceptor.SampleIntercepter"
-		id="sampleIntercepter">
-	</beans:bean>
-
-	<beans:bean class="kr.co.interceptor.MyInterceptor"
-		id="myInterceptor">
-	</beans:bean>
 
 	<beans:bean class="kr.co.interceptor.LoginInterceptor"
 		id="LoginInterceptor">
@@ -51,16 +44,6 @@
 		id="authInterceptor"></beans:bean>
 
 	<interceptors>
-		<interceptor>
-			<mapping path="/doA" />
-			<mapping path="/doB" />
-			<beans:ref bean="sampleIntercepter" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/doE" />
-			<mapping path="/doF" />
-			<beans:ref bean="myInterceptor" />
-		</interceptor>
 		<interceptor>
 			<mapping path="/user" />
 			<mapping path="/user/loginpost" />
