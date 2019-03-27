@@ -13,6 +13,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="../../resources/js/test.js" type="text/javascript"></script>
 <title>Insert title here</title>
 </head>
@@ -22,6 +25,9 @@
 			<a class="btn btn-info" href="/board/write">글쓰기</a>
 		</div>
 		<div class="row">
+			<div class="col-sm-4">.col-sm-4</div>
+  			<div class="col-sm-4">.col-sm-4</div>
+  			<div class="col-sm-4">.col-sm-4</div>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -32,18 +38,31 @@
 						<th>조회수</th>
 					</tr>
 				</thead>
+				
 				<tbody>
 					<c:forEach items="${list}" var="vo">
-						<tr>
+						<div class="col-sm-4">
+						<a href="http://www.naver.com">
+						${vo.writer}<br>
+						<img src="https://media1.tenor.com/images/2b2f12d9b414ccd49999c940a293f448/tenor.gif?itemid=9871568"><br>
+						
+						</a>
+						</div>							
+					</c:forEach>
+				</tbody>
+				
+				<%-- <tbody>
+					<c:forEach items="${list}" var="vo">
+						
 							<td>${vo.bno }</td>
 							<td><a
 								href="/board/read${pm.makeQuery(pm.cri.page)}&bno=${vo.bno}">${vo.title }</a></td>
 							<td>${vo.writer }</td>
 							<td>${vo.regDate }</td>
 							<td>${vo.viewCnt }</td>
-						</tr>
+						
 					</c:forEach>
-				</tbody>
+				</tbody> --%>
 			</table>
 		</div>
 		<div class="row text-center">
