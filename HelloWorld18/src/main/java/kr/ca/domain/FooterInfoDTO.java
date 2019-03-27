@@ -9,11 +9,11 @@ public class FooterInfoDTO implements Serializable {
 	private static final long serialVersionUID = -382425638745274505L;
 	private String companyname;
 	private String representative;
-	private int bsns_reg_no;
+	private String bsns_reg_no;
 	private String cmnct_saler_report;
 	private String address;
 	private String partnership_email;
-	private int phone_number;
+	private String phone_number;
 	private String work_hour;
 	private String account_holder;
 	private String facebook_address;
@@ -25,8 +25,8 @@ public class FooterInfoDTO implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FooterInfoDTO(String companyname, String representative, int bsns_reg_no, String cmnct_saler_report,
-			String address, String partnership_email, int phone_number, String work_hour, String account_holder,
+	public FooterInfoDTO(String companyname, String representative, String bsns_reg_no, String cmnct_saler_report,
+			String address, String partnership_email, String phone_number, String work_hour, String account_holder,
 			String facebook_address, String kakaotalk_address, String instagram_address, String copyright) {
 		super();
 		this.companyname = companyname;
@@ -60,11 +60,11 @@ public class FooterInfoDTO implements Serializable {
 		this.representative = representative;
 	}
 
-	public int getBsns_reg_no() {
+	public String getBsns_reg_no() {
 		return bsns_reg_no;
 	}
 
-	public void setBsns_reg_no(int bsns_reg_no) {
+	public void setBsns_reg_no(String bsns_reg_no) {
 		this.bsns_reg_no = bsns_reg_no;
 	}
 
@@ -92,11 +92,11 @@ public class FooterInfoDTO implements Serializable {
 		this.partnership_email = partnership_email;
 	}
 
-	public int getPhone_number() {
+	public String getPhone_number() {
 		return phone_number;
 	}
 
-	public void setPhone_number(int phone_number) {
+	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
 
