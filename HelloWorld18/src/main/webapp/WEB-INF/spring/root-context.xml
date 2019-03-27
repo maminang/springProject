@@ -20,7 +20,7 @@
 		<property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver"></property>
 		<property name="url"
-			value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+			value="jdbc:oracle:thin:@211.183.8.71:1521:xe"></property>
 		<property name="username" value="spring"></property>
 		<property name="password" value="spring"></property>
 	</bean>
@@ -48,9 +48,7 @@
 	</bean>
 
 	<context:component-scan
-		base-package="kr.co.service" />
-	<context:component-scan base-package="kr.co.dao" />
-	<context:component-scan base-package="kr.co.aop" />
+		base-package="kr.ca.service" />
+	<context:component-scan base-package="kr.ca.dao" />
 
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>
