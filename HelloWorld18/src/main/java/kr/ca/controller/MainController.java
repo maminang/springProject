@@ -40,7 +40,6 @@ public class MainController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(dto);
 		return dto;
 	}
 }

@@ -1,16 +1,21 @@
 select * from TBL_JUNHO;
 
 create table tbl_menu (
+	order_no number primary key,
 	category varchar2(60),
 	href varchar2(120)
 )
 
-insert into TBL_MENU values('시트러스', 'citrus')
-insert into TBL_MENU values('플로랄', 'floral')
-insert into TBL_MENU values('프루티', 'fruity')
-insert into TBL_MENU values('스파이시', 'spicy')
-insert into TBL_MENU values('라이트 플로랄', 'lightFloral')
-insert into TBL_MENU values('우디', 'woody')
+drop table tbl_menu
+
+insert into TBL_MENU values(1,'신제품', 'newProduct')
+insert into TBL_MENU values(2,'베스트셀러', 'bestSeller')
+insert into TBL_MENU values(3,'시트러스', 'citrus')
+insert into TBL_MENU values(4,'플로랄', 'floral')
+insert into TBL_MENU values(5,'프루티', 'fruity')
+insert into TBL_MENU values(6,'스파이시', 'spicy')
+insert into TBL_MENU values(7,'라이트 플로랄', 'lightFloral')
+insert into TBL_MENU values(8,'우디', 'woody')
 
 select * from TBL_MENU
 delete TBL_MENU
