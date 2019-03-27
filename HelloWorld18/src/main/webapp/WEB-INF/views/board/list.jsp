@@ -20,6 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+20190327 커밋 테스트222
 	<div class="container">
 		<div class="row">
 			<a class="btn btn-info" href="/board/write">글쓰기</a>
@@ -38,7 +39,7 @@
 						<th>조회수</th>
 					</tr>
 				</thead>
-				커밋이 왜 안되냐?
+				
 				<tbody>
 					<c:forEach items="${list}" var="vo">
 						<div class="col-sm-4">
