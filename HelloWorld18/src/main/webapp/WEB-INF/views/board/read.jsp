@@ -159,11 +159,7 @@
 			getList(bno, page, perPage);
 			getAllAttach(bno);
 			
-			$(".pagination").on("click", "li a", function(event) {
-				event.preventDefault();
-				page=$(this).attr("href");
-				getList(bno, page, perPage);
-			})
+			c
 			
 			$("#list").click(function() {
 				$("form").attr("action", "list");
