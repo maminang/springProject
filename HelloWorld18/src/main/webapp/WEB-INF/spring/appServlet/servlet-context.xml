@@ -36,34 +36,7 @@
 	</beans:bean>
 
 
-	<beans:bean class="kr.co.interceptor.LoginInterceptor"
-		id="LoginInterceptor">
-	</beans:bean>
-
-	<beans:bean class="kr.co.interceptor.AuthInterceptor"
-		id="authInterceptor"></beans:bean>
-
-	<interceptors>
-		<interceptor>
-			<mapping path="/user" />
-			<mapping path="/user/loginpost" />
-			<beans:ref bean="LoginInterceptor" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/board/write" />
-			<mapping path="/board/update" />
-			<mapping path="/board/delete" />
-			<beans:ref bean="authInterceptor" />
-		</interceptor>
-	</interceptors>
-
-	<context:component-scan base-package="kr.co.ca" />
 	<context:component-scan
-		base-package="kr.co.controller" />
-	<context:component-scan
-		base-package="com.naver.controller" />
-	<context:component-scan
-		base-package="kr.co.restcontroller" />
-
+		base-package="kr.ca.controller"></context:component-scan>
 
 </beans:beans>
