@@ -38,7 +38,7 @@
 						<th>조회수</th>
 					</tr>
 				</thead>
-				
+				커밋이 왜 안되냐?
 				<tbody>
 					<c:forEach items="${list}" var="vo">
 						<div class="col-sm-4">
