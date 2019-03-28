@@ -1,13 +1,17 @@
 id 는 멤버테이블의 id 참조
 pno 는 제품테이블의 pno 참조
+amount 제품수량
 
 create table tbl_shopping_cart (
 	id varchar2(30) references tbl_member(id),
-	pno number references tbl_product(pno)
+	pno number references tbl_product(pno),
+	amount number
 )
 
-insert into tbl_shopping_cart values ('NamepeN', 1)
-insert into tbl_shopping_cart values ('NamepeN', 2)
+drop table tbl_shopping_cart
+
+insert into tbl_shopping_cart values ('NamepeN', 1, 1)
+insert into tbl_shopping_cart values ('NamepeN', 2, 1)
 
 
 
