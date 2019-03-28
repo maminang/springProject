@@ -121,7 +121,8 @@
 			<!-- Button trigger modal 모달 모달모달-->
 			<a data-toggle="modal" data-target="#exampleModalCenter">전성분</a><br>
 			<!-- Button trigger modal 모달 모달모달-->
-
+			
+			장바구니에 용량이랑 가격도 넣어야함
 			<div>
 				<select>
 					<option>$100 30ml</option>

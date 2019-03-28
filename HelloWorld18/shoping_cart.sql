@@ -10,8 +10,12 @@ insert into tbl_shopping_cart values ('NamepeN', 1)
 insert into tbl_shopping_cart values ('NamepeN', 2, 1)
 
 select * from tbl_shopping_cart
-
 delete from tbl_shopping_cart where pno = 1
+
+select * from tbl_shopping_cart where id = 'NamepeN'
+
+select amount from tbl_shopping_cart where id = 'NamepeN' and pno=1
+
 
 id = NamepeN인 회원의 장바구니 목록을 뽑아오고 싶다면
 
