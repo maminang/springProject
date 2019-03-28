@@ -19,6 +19,7 @@
 <br>
 <br>
 <br>
+<a href="/board/readTest.jsp">readTest</a>
 <br>
 <br>
 <br>

@@ -5,9 +5,7 @@
 
 
 <div class="page-footer" style="background-color: white">
-	<div id="footerInfo">
-		
-	</div>
+	<div id="footerInfo"></div>
 </div>
 <script id="footerSource" type="text/x-handlebars-template">
 		{{companyname}}<br>
@@ -25,8 +23,8 @@
 		{{copyright}}<br>
 </script>
 <script type="text/javascript">
-		getMenu();
-		getFooterInfo()
+	getMenu();
+	getFooterInfo()
 
 	function getFooterInfo() {
 		$.getJSON("/footerInfo", function(data) {
