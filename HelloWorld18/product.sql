@@ -16,6 +16,8 @@ create table tbl_product (
 	category varchar2(100) 
 )
 
+select * from tbl_product
+
 drop table tbl_product
 
 insert into tbl_product values (
