@@ -6,7 +6,7 @@ total_price 총금액,
 shipping_memo 배송메모
 is_payed 지불되었는지 확인
 
-회원 테이블 참조
+회원 테이블 참조 안 하는 이유 = 비회원 주문도 있으니깐
 
 create table tbl_dealings (
 	dno number primary key,	
