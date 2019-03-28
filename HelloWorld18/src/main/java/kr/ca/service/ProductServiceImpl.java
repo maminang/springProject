@@ -13,9 +13,9 @@ public class ProductServiceImpl implements ProductService {
 	
 //	장바구니에 담기 insertShoppingCart
 	@Override
-	public void insertShoppingCart(int pno, int bno) {
+	public void insertShoppingCart(String id, int pno) {
 		
-		dao.insertShoppingCart(pno, bno);
+		dao.insertShoppingCart(id, pno);
 		
 	}
 

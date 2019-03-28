@@ -5,8 +5,7 @@
 <mapper namespace="kr.ca.mapper.product">
 	
 	<insert id="insertShoppingCart">
-		insert into
-		
+		insert into tbl_shopping_cart values (#{id}, #{pno})
 	</insert>
 	
 </mapper>

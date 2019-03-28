@@ -16,12 +16,12 @@ public class ProductDAOImpl implements ProductDAO {
 	private final String NS = "kr.ca.mapper.product";
 	
 	@Override
-	public void insertShoppingCart(int pno, int bno) {
+	public void insertShoppingCart(String id, int pno) {
 		 
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		map.put("id", id);
 		map.put("pno", pno);
-		map.put("bno", bno);
 		
 		session.insert(NS+".insertShoppingCart", map);
 		

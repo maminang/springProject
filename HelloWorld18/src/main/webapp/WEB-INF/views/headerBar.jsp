@@ -5,8 +5,14 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"
 	type="text/javascript"></script>
-<nav class="navbar navbar-default bg-warning"
-	style="background-color: white">
+<!-- <style>
+.navbar-center-container {
+	text-align: center;
+	display: inline-block;
+	background-color: red;
+}
+</style> -->
+<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -51,10 +57,8 @@ glyphicon glyphicon-shopping-cart">장바구니</a></li>
 	</div>
 	<!-- /.container-fluid -->
 	<div class="container-fluid">
-
-		<ul class="nav navbar-nav navbar-left" id="menu">
-
-		</ul>
+			<ul class="nav navbar-nav" id="menu">
+			</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown"><a href="#"
 				class="dropdown-toggle glyphicon glyphicon-menu-hamburger"

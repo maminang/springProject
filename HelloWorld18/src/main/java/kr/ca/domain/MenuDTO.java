@@ -7,6 +7,7 @@ public class MenuDTO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -3181853671499594205L;
+	private int order_no;
 	private String category;
 	private String href;
 
@@ -14,10 +15,19 @@ public class MenuDTO implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MenuDTO(String category, String href) {
+	public MenuDTO(int order_no, String category, String href) {
 		super();
+		this.order_no = order_no;
 		this.category = category;
 		this.href = href;
+	}
+
+	public int getOrder_no() {
+		return order_no;
+	}
+
+	public void setOrder_no(int order_no) {
+		this.order_no = order_no;
 	}
 
 	public String getCategory() {
@@ -40,7 +50,7 @@ public class MenuDTO implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
+		result = prime * result + order_no;
 		return result;
 	}
 
@@ -53,17 +63,14 @@ public class MenuDTO implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		MenuDTO other = (MenuDTO) obj;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
+		if (order_no != other.order_no)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "MenuDTO [category=" + category + ", href=" + href + "]";
+		return "MenuDTO [order_no=" + order_no + ", category=" + category + ", href=" + href + "]";
 	}
 
 }

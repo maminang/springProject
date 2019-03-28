@@ -1,12 +1,13 @@
 package kr.ca.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+
 import kr.ca.service.ProductService;
 
-@RestController
+@Controller
 @RequestMapping("product")
 public class ProductController {
 
@@ -14,11 +15,19 @@ public class ProductController {
 	private ProductService service;
 	
 //	장바구니에 담기
-	@RequestMapping(value="/insertShoppingCart", method=RequestMethod.POST)
-	public void insertShoppingCart(int pno, int bno) {
-		
-		service.insertShoppingCart(pno, bno);
-		
+	@RequestMapping(value="/insertShoppingCart", method= {RequestMethod.GET, RequestMethod.POST})
+	public void insertShoppingCart(String id, int pno) {
+		System.out.println("11111111111");
+		System.out.println(id+pno);
+		service.insertShoppingCart(id, pno);
 	}
+	
+//	테스트용임
+	@RequestMapping("/readTest")
+	public String readTest() {
+		
+		return "board/readTest";
+	}
+	
 	
 }

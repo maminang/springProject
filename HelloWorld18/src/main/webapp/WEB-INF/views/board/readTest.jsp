@@ -198,8 +198,8 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			//장바구니에 담기	
-			$("#cart").click(function() {
-				$("form").attr("action", "NewFile.jsp");
+			$("#cart").click(function() {	
+				$("form").attr("action", "/product/insertShoppingCart?pno=1");
 				$("form").submit();
 			});
 
