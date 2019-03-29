@@ -10,6 +10,7 @@ manager 일반 회원은 0 관리자는 1
 
 iNo - id가 기본키역할을 할수 있으니까 뺏어요
 
+
 CREATE TABLE tbl_member(
 id varchar2(30) PRIMARY KEY,
 pw varchar2(30) not null,

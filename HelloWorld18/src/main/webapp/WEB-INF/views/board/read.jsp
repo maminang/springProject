@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,313 +13,214 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"
 	type="text/javascript"></script>
-<script src="../../resources/js/upload.js" type="text/javascript"></script>
-<style>
-	.uploadedList{
-		list-style: none;
-		margin-bottom: 50px;
-		
-	}
-</style>
 <title>Insert title here</title>
+<style type="text/css">
+.container {
+	border: 1px dashed #bcbcbc;
+	text-align: right;
+	width: 700px;
+	height: auto;
+}
+
+.box {
+	border: 1px dashed #bcbcbc;
+	height: auto;
+	text-align: center;
+	margin: auto;
+	width: 800px;
+}
+
+.leftbox {
+	width: 300px;
+	border: 1px dashed red;
+	text-align: center;
+	display: inline-block;
+}
+
+.rightbox {
+	width: 300px;
+	border: 1px dashed red;
+	text-align: center;
+	display: inline-block;
+}
+
+#img {
+	border: 1px dashed blue;
+	height: 300px;
+	width: 300px;
+}
+</style>
 </head>
 <body>
-	<div class="container">
+	<jsp:include page="../headerBar.jsp" />
+	<div class="box">
+		<div class="leftbox">
 
-		<div class="row">
-			<div class="form-group">
-				<label for="title">제목</label> <input class="form-control"
-					readonly="readonly" value="${vo.title }">
-			</div>
-			<div class="form-group">
-				<label for="writer">작성자</label> <input class="form-control"
-					readonly="readonly" value="${vo.writer }">
-			</div>
-			<div class="form-group">
-				<label for="content">내용</label> <input class="form-control"
-					readonly="readonly" value="${vo.content }">
-			</div>
+			<!-- 		이미지 -->
+			<div id="img">
+				<div id="carousel-example-generic" class="carousel slide"
+					data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-generic" data-slide-to="0"
+							class="active"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+					</ol>
 
-			<div class="form-group">
-				<label>첨부파일</label>
-				<ul class="uploadedList clearfix">
-					
-				</ul>
-			</div>
-		</div>
-
-		<%-- 버튼 --%>
-		<div class="row">
-			<div class="form-group">
-				<button id="list" class="btn btn-info">목록</button>
-				<button id="update" class="btn btn-warning">수정</button>
-				<button id="danger" class="btn btn-danger">삭제</button>
-				<button id="reply" class="btn btn-primary">댓글</button>
-			</div>
-		</div>
-
-		<%-- id체크 --%>
-		<div class="row">
-			<input class="form-control" id="inputID" placeholder="rno를 넣어주세요(숫자)">
-			<button class="btn" id="inputCheckBtn">rno체크</button>
-			<p id="msgforUse"></p>
-		</div>
-
-		<%-- 댓글작성UI --%>
-		<div class="row">
-			<div id="myCollapsible" class="collapse">
-				<div class="form-group">
-					<label for="replyer">작성자</label> <input class="form-control"
-						id="replyer">
-				</div>
-				<div class="form-group">
-					<label for="replyText">내용</label> <input class="form-control"
-						id="replyText">
-				</div>
-				<div class="form-group">
-					<button id="replyInsertBtn" class="btn btn-success">등록</button>
-					<button id="replyResetBtn" class="btn btn-default">초기화</button>
-				</div>
-			</div>
-		</div>
-
-		<%-- 댓글 --%>
-		<div id="replies" class="row"></div>
-
-		<%-- 댓글 페이지 --%>
-		<div class="row">
-			<ul class="pagination"></ul>
-		</div>
-
-
-		<%-- 모달 --%>
-		<div class="row">
-			<div id="myModal" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-header">
-						<button data-dismiss="modal" class="close">&times;</button>
-						<p id="modal_rno" style="color: white"></p>
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img src="../resources/img/math_img_1.jpg" alt="...">
+							<div class="carousel-caption">...</div>
+						</div>
+						<div class="item">
+							<img src="../resources/img/math_img_2.jpg" alt="...">
+							<div class="carousel-caption">...</div>
+						</div>
+						<div class="item">
+							<img src="../resources/img/math_img_3.jpg" alt="...">
+							<div class="carousel-caption">...</div>
+						</div>
 					</div>
-					<div class="modal-body">
-						<input id="modal_replyText" class="form-control">
-					</div>
-					<div class="modal-footer">
-						<button id="modal_update" data-dismiss="modal" class="btn btn-xs">수정</button>
-						<button id="modal_delete" data-dismiss="modal" class="btn btn-xs">삭제</button>
-						<button id="modal_close" data-dismiss="modal" class="btn btn-xs">닫기</button>
-					</div>
+
+					<!-- Controls -->
+					<a class="left carousel-control" href="#carousel-example-generic"
+						role="button" data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#carousel-example-generic"
+						role="button" data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
 				</div>
 			</div>
+			<!-- 			이미지 -->
+			<!-- 			이미지 밑에 상품 설명 -->
+			<div>I'm a product description. I'm a great place to add more
+				details about your product such as sizing, material, care
+				instructions and cleaning instructions.</div>
+			<!-- 			이미지 밑에 상품 설명 -->
 		</div>
+		<!-- leftbox -->
 
+		<div class="rightbox">
+			<div>잉글리쉬 페어 앤 프리지아 코롱</div>
+			<div>English Pear & Freesia Cologne</div>
+			<br>
+			<div>은은하면서 신선하고 감미로운 향. 부드럽고 감미로운 향을 부여하는 잉글리쉬 페어 앤 프리지아는 가을의
+				정수라 할 수 있습니다. 화이트 프리지아 부케향에 이제 막 익은 배의 신선함을 입히고, 호박, 파출리, 우디향으로 은은함을
+				더했습니다. 감미롭고 특별한 향이 느껴집니다.</div>
+			<br>
+
+			<!-- Button trigger modal 모달 모달모달-->
+			<a data-toggle="modal" data-target="#exampleModalCenter">전성분</a><br>
+			<!-- Button trigger modal 모달 모달모달-->
+			
+			장바구니에 용량이랑 가격도 넣어야함
+			<div>
+				<select>
+					<option>$100 30ml</option>
+					<option>$200 100ml</option>
+				</select>
+			</div>
+			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
+			<form>
+				수량 : <input type="number" value="1" name="amount" autofocus>
+				<input value="NamepeN" name="id" type="hidden"> <input
+					value="1" name="pno" type="hidden">
+				<button id="cart" class="btn btn-success">장바구니에 담기</button>
+			</form>
+			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
+			<hr>
+			<!-- 			공유하기 modal -->
+			<a type="button" data-toggle="modal"
+				data-target=".bs-example-modal-sm">공유하기</a> <br>
+			<!-- 			공유하기 modal -->
+			<!-- 			리뷰 작성하기 -->
+			<a href="#">리뷰 작성하기</a>
+			<!-- 			리뷰 작성하기 -->
+
+		</div>
 	</div>
-	<%-- class container div end tag --%>
 
 
-	<form>
-		<input type="hidden" value="${vo.bno}" name="bno"> <input
-			type="hidden" value="${cri.page}" name="page"> <input
-			type="hidden" value="${cri.perPage}" name="perPage">
-	</form>
 
-	<script id="sourceAttach" type="text/x-handlebars-template">
-<li class="col-xs-3 pull-left">
-   <span>
-      <img alt="장차법방지" src="{{imgsrc}}">
-   </span>
-   <div>
-      <a href="{{getLink}}">{{fileName}}</a>
-   </div>
-</li>
-</script>
 
-	<script id="source" type="text/x-handlebars-template">
-	{{#each.}}
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<span>rno: {{rno}}, 작성자: {{replyer}}</span> <span class="pull-right">{{updateDate}}</span>
-			</div>
-			<div class="panel-body">
-				<p>{{replyText}}</p>
-				<button data-rno="{{rno}}" data-replyText="{{replyText}}" class="callModal btn btn-sm btn-success">수정/삭제</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenterTitle">Modal
+						title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">전성분: 변성알코올, 정제수, 향료, 리모넨, 부틸페닐메칠프로피오날,
+					리날룰, 제라니올, 헥실신남알, 벤질벤조에이트, 시트로넬올 [ILN36265] *제공된 성분은 동일 제품이라도 경우에
+					따라 변경될 수 있습니다. 최신정보는 제품 포장의 성분을 참고하시거나 본사 고객관리지원팀으로 연락 부탁
+					드립니다.사용기한: 대부분 사용기한 1년 이상 남은 제품을 배송해드립니다.사용방법: 손목, 귀 뒤 등 맥박이 뛰는 곳에
+					뿌려줍니다. 단독으로 사용하거나 다른 제품과 함께 컴바이닝할 수 있으며 같은 라인의 바디 제품과 사용할 수
+					있습니다.기능성 화장품 여부: 해당사항 없음제조국: 영국책임판매업자: 이엘씨에이한국(유)소비자 상담 관련 번호:
+					02-3440-2930사용시 주의사항 1. 화장품을 사용하여 다음과 같이 이상이 있을 경우에는 사용을 중지할 것이며,
+					계속 사용하면 증상을 악화시키므로 피부과 전문의 등에게 상담할 것 1)사용 중 붉은 반점, 부어오름, 가려움증, 자극
+					등의 이상이 있을 경우 2)적용부위가 직사광선에 의해 위와 같은 이상이 있을 경우 2. 상처가 있는 곳 또는 습진 및
+					피부염등의 이상이 있는 부위에는 사용을 금할 것 3. 눈에 들어가지 않도록 주의할 것 4. 보관 및 취급상의 주의사항
+					1)사용 후에는 반드시 마개를 닫아 둘 것 2)유.소아의 손에 닿지 않는 곳에 보관할 것 3)고온 내지 저온의 장소 및
+					직사광선이 닿는 곳에는 보관하지 말 것 *기타 제품 특이적인 주의사항은 제품 포장 참조품질 보증 기준
+					이엘씨에이한국(유)를 통해 공식 수입ㆍ판매되는 제품에 한해서, 제품에 이상이 있을 경우 공정거래위원회고시 품목별 소비자
+					분쟁 해결 기준에 따라 안내 받으실 수 있습니다.</div>
 			</div>
 		</div>
-		{{/each}}
-	</script>
+	</div>
+	${pageContext.request.requestURL }
+	<!-- 	공유하기 Modal -->
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<h3 style="text-align: center;">
+					<a
+						href="http://www.facebook.com/sharer/sharer.php?u=${pageContext.request.requestURL }">facebook</a>
+					<a
+						href="https://twitter.com/intent/tweet?text=TEXT&url=${pageContext.request.requestURL }">twitter</a>
+				</h3>
+			</div>
+		</div>
+	</div>
+
+
+
+	<%-- 	<jsp:include page="footerBar.jsp" /> --%>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var page = 1;
-			var perPage = 15;
-			var bno = ${vo.bno};
-			
-			getList(bno, page, perPage);
-			getAllAttach(bno);
-			
-			c
-			
-			$("#list").click(function() {
-				$("form").attr("action", "list");
+
+			//장바구니에 담기	
+			$("#cart").click(function() {
+				$("form").attr("action", "/product/insertShoppingCart");
+				$("form").attr("method", "GET");
 				$("form").submit();
 			});
 
-			$("#update").click(function() {
-				$("form").attr("action", "update");
-				$("form").submit();
-			});
-
-			$("#danger").click(function() {
-				if (confirm("정말 삭제하시겠습니까?")) {
-					$("form").attr("action", "delete");
-					$("form").submit();
-				}
-			});
-			
-			$("#reply").click(function() {
-				$("#myCollapsible").collapse("toggle");
-			});
-
-			$("#replyInsertBtn").click(function() {
-				var replyer = $("#replyer").val();
-				var replyText = $("#replyText").val();
-
-				$.ajax({
-					type : 'post',
-					url : '/replies',
-					headers : {
-						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "POST"
-					},
-					data:JSON.stringify({
-						replyer:replyer,
-						replyText:replyText,
-						bno:bno
-					}),
-					dataType:"text",
-					success:function(result){
-						$("#replyer").val("");
-						$("#replyText").val("");
-						$("#myCollapsible").collapse("toggle");
-					},
-					error:function(request, status, error){
-						alert("fail");
-						alert("code:"+request.status+"\n"+"msg:"+request.reponseText+"\n"+"error:"+error)	
-					},
-					complete:function(){
-						getList(bno, page, perPage);
-					}
-				})
-			});
-
-			$("#replyResetBtn").click(function() {
-				$("#replyer").val("");
-				$("#replyText").val("");
-			})
-			
-			$("#replies").on("click", ".callModal", function() {
-				var rno = $(this).attr("data-rno");
-				var replyText = $(this).attr("data-replyText");
-				$("#modal_rno").text(rno);
-				$("#modal_replyText").val(replyText);
-				$("#myModal").modal("show");
-			})
-			
-			$("#modal_update").click(function() {
-				var rno=$("#modal_rno").text();
-				var replyText=$("#modal_replyText").val();
-				$.ajax({
-					type : "put",
-					url : "/replies/"+rno,
-					headers : {
-						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "PUT"
-					},
-					data:JSON.stringify({
-						replyText:replyText
-					}),
-					dataType:"text",
-					success:function(result){
-						getList(bno, page, perPage);
-					},
-					error:function(request, status, error){
-						alert("fail");
-						alert("code:"+request.status+"\n"+"msg:"+request.reponseText+"\n"+"error:"+error)	
-					}					
-				})
-			})
-			
-			$("#modal_delete").click(function() {
-				var rno=$("#modal_rno").text();
-				$.ajax({
-					type : "delete",
-					url : "/replies/"+rno,
-					headers : {
-						"Content-Type" : "application/json",
-						"X-HTTP-Method-Override" : "DELETE"
-					},
-					success:function(result){
-						getList(bno, page, perPage);
-					},
-					error:function(request, status, error){
-						alert("fail");
-						alert("code:"+request.status+"\n"+"msg:"+request.reponseText+"\n"+"error:"+error)	
-					}					
-				})
-			})
-			
-			$("#inputCheckBtn").click(function() {
-				var inputID = $("#inputID").val();
-				$.getJSON("/replies/checkID/"+inputID, function(data) {
-					if (data) {
-						$("#msgforUse").text("사용가능");
-					} else {
-						$("#msgforUse").text("사용불가능");
-					}
-				})
-			})
-			function getList(bno, page, perPage) {
-				$.getJSON("/replies/"+bno+"/"+page+"/"+perPage, function(data) {
-					
-					var source=$("#source").html();
-					var template=Handlebars.compile(source)
-					var list = data.list;
-					$("#replies").html(template(list));
-					
-					var pm = data.pm;
-					printPaging(data.pm)
+			$(document).ready(function() {
+				$('[data-toggle="popover"]').popover({
+					container : "body"
 				});
-			}
-			
-			function printPaging(pm) {
-				var str="";
-				if (pm.cri.page>1) {					
-					str+="<li><a href='"+(pm.cri.page-1)+"'>&laquo;</a></li>"
-				}
-				for (var i = pm.beginPageNum; i <= pm.stopPageNum; i++) {
-					var strClass=pm.cri.page == i?'active':'';
-					str+="<li class='"+strClass+"'><a href='"+i+"'>"+i+"</a></li>"
-				}
-				if (pm.cri.page < pm.totalPage) {
-					str+="<li><a href='"+(pm.cri.page+1)+"'>&raquo;</a></li>"
-				}
-				
-				$(".pagination").html(str);
-			}
-			
-			function getAllAttach(bno) {
-				$.getJSON("/board/getAttach/"+bno, function(result) {
-					var source = $("#sourceAttach").html();
-					var template = Handlebars.compile(source);
-					$(result).each(function () {
-						var data=getFileInfo(this);
-						$(".uploadedList").append(template(data));
-					})
-				})
-			}
-		}); //$(document).ready(function() {})
+			});
+
+		});
 	</script>
 </body>
 </html>
