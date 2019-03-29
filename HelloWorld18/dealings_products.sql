@@ -9,3 +9,5 @@ create table tbl_dealings_products (
 )
 
 drop table tbl_dealings_products
+
+select tbl_dealings_products 

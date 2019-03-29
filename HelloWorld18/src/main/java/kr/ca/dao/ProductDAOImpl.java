@@ -1,6 +1,5 @@
 package kr.ca.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +20,9 @@ public class ProductDAOImpl implements ProductDAO {
 	private final String NS = "kr.ca.mapper.product";
 
 	@Override
-	public void insert(ProductDTO dto) {
+	public void write(ProductDTO dto) {
 		dto.setPno(getPno());
+		System.out.println(dto);
 		session.insert(NS + ".insert", dto);
 	}
 
@@ -56,21 +56,26 @@ public class ProductDAOImpl implements ProductDAO {
 		return (int) pino;
 	}
 
-
 //  제품 검색 (이미지는 안 들어감 서비스단에서 addImages(list) 호출하면 이미지 들어가요)
 	@Override
 	public List<ProductDTO> searchProduct(String keyword) {
 		List<ProductDTO> list = session.selectList(NS + ".searchProduct", keyword);
 		return list;
 	}
-	
+
+	// 제품리스트에 이미지 파일을 넣어주는 메서드
 	@Override
 	public void getImages(List<ProductDTO> list) {
 		for (ProductDTO dto : list) {
-			List<String> imageList = session.selectList(NS+".getImages", dto.getPno());
+			List<String> imageList = session.selectList(NS + ".getImages", dto.getPno());
 			String[] images = imageList.toArray(new String[imageList.size()]);
 			dto.setImages(images);
 		}
+	}
+
+	@Override
+	public List<ProductDTO> getBestSeller() {
+		return session.selectList(NS+".getBestSeller");
 	}
 
 //	장바구니에 담기
@@ -101,5 +106,6 @@ public class ProductDAOImpl implements ProductDAO {
 		return session.selectOne(NS + ".selectShoppingCart", id);
 
 	}
+
 
 }

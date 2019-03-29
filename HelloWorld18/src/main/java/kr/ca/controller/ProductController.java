@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.ca.domain.ProductDTO;
 import kr.ca.service.ProductService;
@@ -17,9 +18,20 @@ public class ProductController {
 	@Autowired
 	private ProductService service;
 
+	@RequestMapping(value = "write", method = RequestMethod.GET)
+	public String writeUI() {
+		return "board/write";
+	}
+
+	@RequestMapping(value = "write", method = RequestMethod.POST)
+	public String write(ProductDTO dto) {
+		System.out.println(dto);
+		service.write(dto);
+		return "board/read";
+	}
+
 	@RequestMapping("/search")
 	public String searchProduct(String keyword, Model model) {
-		// 서비스 메서드부터 만들기 시작하면 됨 밥먹고 온 후의 나야
 		List<ProductDTO> searchList = service.searchProduct(keyword);
 		model.addAttribute("searchList", searchList);
 		return "search";

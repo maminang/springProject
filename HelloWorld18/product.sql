@@ -10,7 +10,7 @@ create table tbl_product (
 	pno number primary key,
 	eng_name varchar2(100) not null,
 	kr_name varchar2(100) not null,
-	prdct_dscrp varchar2(600),
+	prdct_dscrp varchar2(1500),
 	volume number not null,
 	price number not null,
 	category varchar2(100) not null
@@ -42,7 +42,6 @@ insert into tbl_product values (
 
 --검색쿼리
 select * from tbl_product where eng_name like '%그레이프%' or kr_name like '%그레이프%' or category like '%그레이프%'
-
 
 
 

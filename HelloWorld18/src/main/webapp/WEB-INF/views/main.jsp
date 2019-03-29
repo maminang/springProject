@@ -21,9 +21,8 @@
 	<jsp:include page="headerBar.jsp" />
 	<div class="container">
 		<div class="row">
-			거래 테이블에서 최근 한달간 많이 거래된 품목을 뽑아와서 뿌려주기 <br> 
-			<a href="product/read">readTest</a>
-			<br> <br> <br>
+			거래 테이블에서 최근 한달간 많이 거래된 품목을 뽑아와서 뿌려주기 <br> <a href="product/read">readTest</a><br>
+			<a href="product/write">to write.jsp</a> <br> <br> <br>
 			<br> <br> <br> <br> <br> <br> <br>
 			<br> <br> <br> <br> <br> <br> <br>
 			<br> <br> <br> <br> <br> <br> <br>
@@ -31,7 +30,7 @@
 			<br> <br>
 		</div>
 	</div>
-	
+
 
 	<jsp:include page="footerBar.jsp" />
 	<script type="text/javascript">

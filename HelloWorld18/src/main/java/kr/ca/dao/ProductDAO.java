@@ -7,16 +7,18 @@ import kr.ca.domain.ShoppingCartDTO;
 
 public interface ProductDAO {
 
-	void insert(ProductDTO dto);
+	void write(ProductDTO dto);
 
 	void addImages(String fullName, int pno);
 
 	void insertShoppingCart(String id, int pno, int amount);
-	
+
 	List<ShoppingCartDTO> selectShoppingCart(String id);
 
 	List<ProductDTO> searchProduct(String keyword);
 
 	void getImages(List<ProductDTO> list);
+
+	List<ProductDTO> getBestSeller();
 
 }

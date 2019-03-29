@@ -8,13 +8,9 @@ create table tbl_shopping_cart (
 	amount number
 )
 
-<<<<<<< HEAD
 drop table tbl_shopping_cart
 
 insert into tbl_shopping_cart values ('NamepeN', 1, 1)
-=======
-insert into tbl_shopping_cart values ('NamepeN', 1)
->>>>>>> refs/remotes/origin/master
 insert into tbl_shopping_cart values ('NamepeN', 2, 1)
 
 select * from tbl_shopping_cart

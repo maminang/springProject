@@ -16,4 +16,6 @@ public interface ProductService {
 //	장바구니 id로 select
 	List<ShoppingCartDTO> selectShoppingCart(String id);
 
+	void write(ProductDTO dto);
+
 }
