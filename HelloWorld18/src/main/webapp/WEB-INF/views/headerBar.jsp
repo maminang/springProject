@@ -31,7 +31,7 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="#" class="glyphicon glyphicon-log-in">로그인</a></li>
-				<li><a href="#" class="glyphicon glyphicon-pencil">회원가입</a></li>
+				<li><a href="/member/signup" class="glyphicon glyphicon-pencil">회원가입</a></li>
 				<li><a href="#" class="glyphicon glyphicon-user">마이페이지</a></li>
 				<li><a href="#" class="
 glyphicon glyphicon-shopping-cart">장바구니</a></li>
