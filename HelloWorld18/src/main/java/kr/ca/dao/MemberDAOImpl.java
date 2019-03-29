@@ -18,6 +18,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void insert(MemberDTO dto) {
 		// TODO Auto-generated method stub
+		System.out.println(dto+"DAOimpl");
 		session.insert(NS+".insert", dto);
 	}
 

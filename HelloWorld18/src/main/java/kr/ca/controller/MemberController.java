@@ -23,7 +23,14 @@ public class MemberController {
 
 	@RequestMapping(value = "signup", method = RequestMethod.GET)
 	public String signup(MemberDTO dto) {
-		service.insert(dto);
+		
 		return "board/signup";
+	}
+	
+	@RequestMapping(value = "signup", method = RequestMethod.POST)
+	public String signuppage(MemberDTO dto) {
+		service.insert(dto);
+		System.out.println(dto+"::::::::::::::::");
+		return "board/login";
 	}
 }

@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void insert(MemberDTO dto) {
 		// TODO Auto-generated method stub
-		
+		dao.insert(dto);
 	}
 
 }

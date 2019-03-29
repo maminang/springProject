@@ -41,7 +41,7 @@
             </div><!-- /.modal -->
             <!--// 모달창 -->
  
-        <form class="form-horizontal" role="form" method="post" action="/member/login">
+        <form class="form-horizontal" role="form" method="post" action="/member/signup">
             <div class="form-group">
                 <label for="provision" class="col-lg-2 control-label">회원가입약관</label>
                 <div class="col-lg-10" id="provision">
@@ -85,7 +85,7 @@
             <div class="form-group" id="divId">
                 <label for="inputId" class="col-lg-2 control-label">아이디</label>
                 <div class="col-lg-10 input-group">
-                    <input type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="10">
+                    <input name="id" type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="10">
 			<span class="input-group-btn">
 				<button id="inputCheckBtn" class="btn btn-info">ID 중복 체크</button>
 			</span>
@@ -95,7 +95,7 @@
             <div class="form-group" id="divPassword">
                 <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                 <div class="col-lg-10">
-                    <input type="password" class="form-control" id="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                    <input type="password" class="form-control" id="password" name="pw" data-rule-required="true" placeholder="패스워드" maxlength="30">
                 </div>
             </div>
             <div class="form-group" id="divPasswordCheck">
@@ -107,21 +107,21 @@
             <div class="form-group" id="divName">
                 <label for="inputName" class="col-lg-2 control-label">이름</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control onlyHangul" id="name" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
+                    <input name="name" type="text" class="form-control onlyHangul" id="name" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
                 </div>
             </div>
                          
             <div class="form-group" id="divEmail">
                 <label for="inputEmail" class="col-lg-2 control-label">이메일</label>
                 <div class="col-lg-10">
-                    <input type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40">
+                    <input name="email" type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40">
                 </div>
             </div>
             
             <div class="form-group" id="divAddress">
                 <label for="divAddress" class="col-lg-2 control-label">주소</label>
                 <div class="input-group col-lg-10">
-                    <input type="text" class="form-control onlyNumber" id="divAddress" data-rule-required="true" placeholder="주소를 입력하세요" maxlength="11">
+                    <input name="address" type="text" class="form-control onlyNumber" id="divAddress" data-rule-required="true" placeholder="주소를 입력하세요" maxlength="11">
                 <span class="input-group-btn">
 					<button id="inputCheckBtn" class="btn btn-info">주소검색</button>
 				</span>
@@ -131,14 +131,14 @@
             <div class="form-group" id="divBirth">
                 <label for="divBirth" class="col-lg-2 control-label">생년월일</label>
                 <div class="col-lg-10">
-                    <input type="date" class="form-control onlyNumber" id="divBirth" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
+                    <input name="birth" type="date" class="form-control onlyNumber" id="divBirth" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
                 </div>
             </div>
             
             <div class="form-group" id="divPhoneNumber">
                 <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
                 <div class="col-lg-10">
-                    <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
+                    <input name="phone" type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
                 </div>
             </div>
             <div class="form-group">

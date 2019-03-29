@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.mapper.member">
+<mapper namespace="kr.ca.mapper.member">
 
 	<insert id="insert">
 	insert into tbl_member (id,pw,name,email,address,phone,birth) values 
