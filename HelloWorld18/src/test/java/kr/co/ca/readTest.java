@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.ca.dao.ProductDAO;
+import kr.ca.dao.ShoppingCartDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/**/*.xml" })
 public class readTest {
 
 	@Autowired
-	private ProductDAO dao;
+	private ShoppingCartDAO dao;
 	
 	@Test
 	public void insertShoppingCartTest() {
