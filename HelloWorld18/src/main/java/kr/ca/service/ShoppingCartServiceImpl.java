@@ -16,8 +16,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	
 //	장바구니에 담기 insertShoppingCart
 	@Override
-	public void insertShoppingCart(String id, int pno, int amount) {
-		dao.insertShoppingCart(id, pno, amount);
+	public void insertShoppingCart(ShoppingCartDTO dto) {
+		dao.insertShoppingCart(dto);
 	}
 //	장바구니 id로 select
 	@Override

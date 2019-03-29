@@ -6,7 +6,7 @@ import kr.ca.domain.ShoppingCartDTO;
 public interface ShoppingCartService {
 
 //	장바구니에 담기
-	void insertShoppingCart(String id, int pno, int amount);
+	void insertShoppingCart(ShoppingCartDTO dto);
 //	장바구니 id로 select
 	List<ShoppingCartDTO> selectShoppingCart(String id);
 
