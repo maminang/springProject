@@ -2,8 +2,8 @@ select * from TBL_JUNHO;
 
 create table tbl_menu (
 	order_no number primary key,
-	category varchar2(60),
-	href varchar2(120)
+	category varchar2(60) not null,
+	href varchar2(120) not null
 )
 
 drop table tbl_menu

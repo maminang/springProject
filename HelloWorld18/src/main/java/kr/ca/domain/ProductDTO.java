@@ -1,14 +1,13 @@
 package kr.ca.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class ProductDTO implements Serializable {
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 7524873768969123719L;
 	private int pno;
 	private String eng_name;
 	private String kr_name;
@@ -16,13 +15,14 @@ public class ProductDTO implements Serializable {
 	private int volume;
 	private int price;
 	private String category;
-	
+	private String[] images;
+
 	public ProductDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public ProductDTO(int pno, String eng_name, String kr_name, String prdct_dscrp, int volume, int price,
-			String category) {
+			String category, String[] images) {
 		super();
 		this.pno = pno;
 		this.eng_name = eng_name;
@@ -31,6 +31,7 @@ public class ProductDTO implements Serializable {
 		this.volume = volume;
 		this.price = price;
 		this.category = category;
+		this.images = images;
 	}
 
 	public int getPno() {
@@ -89,10 +90,12 @@ public class ProductDTO implements Serializable {
 		this.category = category;
 	}
 
-	@Override
-	public String toString() {
-		return "productDTO [pno=" + pno + ", eng_name=" + eng_name + ", kr_name=" + kr_name + ", prdct_dscrp="
-				+ prdct_dscrp + ", volume=" + volume + ", price=" + price + ", category=" + category + "]";
+	public String[] getImages() {
+		return images;
+	}
+
+	public void setImages(String[] images) {
+		this.images = images;
 	}
 
 	@Override
@@ -116,7 +119,12 @@ public class ProductDTO implements Serializable {
 			return false;
 		return true;
 	}
-	
-	 
+
+	@Override
+	public String toString() {
+		return "ProductDTO [pno=" + pno + ", eng_name=" + eng_name + ", kr_name=" + kr_name + ", prdct_dscrp="
+				+ prdct_dscrp + ", volume=" + volume + ", price=" + price + ", category=" + category + ", images="
+				+ Arrays.toString(images) + "]";
+	}
 	
 }
