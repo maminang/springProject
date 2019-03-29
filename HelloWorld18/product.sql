@@ -40,8 +40,43 @@ insert into tbl_product values (
 'citrus'
 )
 
-
-
-
 --검색쿼리
+select * from tbl_product where eng_name like '%그레이프%' or kr_name like '%그레이프%' or category like '%그레이프%'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

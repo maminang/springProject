@@ -42,9 +42,9 @@ glyphicon glyphicon-shopping-cart">장바구니</a></li>
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false"></a>
 					<ul class="dropdown-menu">
-						<li><form class="navbar-form navbar-left">
+						<li><form class="navbar-form navbar-left" action="/product/search">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="검색">
+									<input type="text" class="form-control" placeholder="검색" name="keyword">
 								</div>
 								<button type="submit"
 									class="btn btn-default glyphicon glyphicon-search"></button>

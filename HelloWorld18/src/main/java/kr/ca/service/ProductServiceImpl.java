@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ca.dao.ProductDAO;
+import kr.ca.domain.ProductDTO;
 import kr.ca.domain.ShoppingCartDTO;
 
 @Service
@@ -23,6 +24,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ShoppingCartDTO> selectShoppingCart(String id) {
 		return dao.selectShoppingCart(id);
+	}
+	@Override
+	public List<ProductDTO> searchProduct(String keyword) {
+		return dao.searchProduct(keyword);
 	}
 
 }
