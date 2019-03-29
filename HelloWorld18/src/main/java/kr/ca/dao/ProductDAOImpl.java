@@ -74,8 +74,6 @@ public class ProductDAOImpl implements ProductDAO {
 			System.out.println("impl"+amount);
 			session.insert(NS+".insertShoppingCart", map);
 		}
-		
-		
 	}
 //	장바구니 id로 select
 	@Override

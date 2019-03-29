@@ -39,3 +39,9 @@ insert into tbl_product values (
 186000,
 'citrus'
 )
+
+
+
+
+--검색쿼리
+
