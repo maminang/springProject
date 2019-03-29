@@ -3,8 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ca.mapper.product">
+
+	<select id="selectShoppingCart"
+		resultType="kr.ca.domain.ShoppingCartDTO">
+		select * from tbl_shopping_cart where id = #{id}
+	</select>
+<!-- 	check amount -->
+	<select id="checkAmount" resultType="Integer">
+		select amount from
+		tbl_shopping_cart where id=#{id} and pno=#{pno}
+	</select>
 	
+<!-- 	oAmount가 Null이 아닐때 -->
 	<insert id="insertShoppingCart">
+		update tbl_shopping_cart set amount = amount+#{amount} where id=#{id} and pno=#{pno}
+	</insert>
+
+<!-- 	sAmount가 Null일때 -->
+	<insert id="insertShoppingCartNull">
 		insert into tbl_shopping_cart values (#{id}, #{pno}, #{amount})
 	</insert>
 	
