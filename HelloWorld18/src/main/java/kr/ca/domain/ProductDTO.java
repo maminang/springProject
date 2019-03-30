@@ -16,6 +16,7 @@ public class ProductDTO implements Serializable {
 	private int price;
 	private String category;
 	private String[] images;
+	private int amount;
 
 	public ProductDTO() {
 		// TODO Auto-generated constructor stub
@@ -32,6 +33,20 @@ public class ProductDTO implements Serializable {
 		this.price = price;
 		this.category = category;
 		this.images = images;
+	}
+
+	public ProductDTO(int pno, String eng_name, String kr_name, String prdct_dscrp, int volume, int price,
+			String category, String[] images, int amount) {
+		super();
+		this.pno = pno;
+		this.eng_name = eng_name;
+		this.kr_name = kr_name;
+		this.prdct_dscrp = prdct_dscrp;
+		this.volume = volume;
+		this.price = price;
+		this.category = category;
+		this.images = images;
+		this.amount = amount;
 	}
 
 	public int getPno() {
@@ -98,6 +113,14 @@ public class ProductDTO implements Serializable {
 		this.images = images;
 	}
 
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -124,7 +147,7 @@ public class ProductDTO implements Serializable {
 	public String toString() {
 		return "ProductDTO [pno=" + pno + ", eng_name=" + eng_name + ", kr_name=" + kr_name + ", prdct_dscrp="
 				+ prdct_dscrp + ", volume=" + volume + ", price=" + price + ", category=" + category + ", images="
-				+ Arrays.toString(images) + "]";
+				+ Arrays.toString(images) + ", amount=" + amount + "]";
 	}
-	
+
 }

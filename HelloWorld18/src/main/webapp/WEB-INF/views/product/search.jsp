@@ -16,12 +16,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="headerBar.jsp" />
+	<jsp:include page="../headerBar.jsp" />
 	<div class="container">
 		<div class="row">${searchList}</div>
 	</div>
 
-	<jsp:include page="footerBar.jsp" />
+	<jsp:include page="../footerBar.jsp" />
 	<script type="text/javascript">
 		$(document).ready(function() {
 

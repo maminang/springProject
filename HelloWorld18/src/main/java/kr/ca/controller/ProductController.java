@@ -20,21 +20,20 @@ public class ProductController {
 
 	@RequestMapping(value = "write", method = RequestMethod.GET)
 	public String writeUI() {
-		return "board/write";
+		return "product/write";
 	}
 
 	@RequestMapping(value = "write", method = RequestMethod.POST)
 	public String write(ProductDTO dto) {
-		System.out.println(dto);
 		service.write(dto);
-		return "board/read";
+		return "product/read";
 	}
 
 	@RequestMapping("/search")
 	public String searchProduct(String keyword, Model model) {
 		List<ProductDTO> searchList = service.searchProduct(keyword);
 		model.addAttribute("searchList", searchList);
-		return "search";
+		return "product/search";
 	}
 
 }

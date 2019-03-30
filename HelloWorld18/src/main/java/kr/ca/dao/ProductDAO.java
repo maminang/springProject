@@ -3,7 +3,6 @@ package kr.ca.dao;
 import java.util.List;
 
 import kr.ca.domain.ProductDTO;
-import kr.ca.domain.ShoppingCartDTO;
 
 public interface ProductDAO {
 
