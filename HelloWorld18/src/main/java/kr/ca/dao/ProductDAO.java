@@ -11,10 +11,6 @@ public interface ProductDAO {
 
 	void addImages(String fullName, int pno);
 
-	void insertShoppingCart(String id, int pno, int amount);
-
-	List<ShoppingCartDTO> selectShoppingCart(String id);
-
 	List<ProductDTO> searchProduct(String keyword);
 
 	void getImages(List<ProductDTO> list);

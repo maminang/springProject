@@ -20,18 +20,6 @@ public class ProductServiceImpl implements ProductService {
 		dao.write(dto);
 	}
 
-//	장바구니에 담기 insertShoppingCart
-	@Override
-	public void insertShoppingCart(String id, int pno, int amount) {
-		dao.insertShoppingCart(id, pno, amount);
-	}
-
-//	장바구니 id로 select
-	@Override
-	public List<ShoppingCartDTO> selectShoppingCart(String id) {
-		return dao.selectShoppingCart(id);
-	}
-
 	@Override
 	public List<ProductDTO> searchProduct(String keyword) {
 		List<ProductDTO> list = dao.searchProduct(keyword);

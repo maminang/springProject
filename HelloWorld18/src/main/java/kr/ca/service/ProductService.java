@@ -10,12 +10,6 @@ public interface ProductService {
 
 	List<ProductDTO> searchProduct(String keyword);
 
-//	장바구니에 담기
-	void insertShoppingCart(String id, int pno, int amount);
-
-//	장바구니 id로 select
-	List<ShoppingCartDTO> selectShoppingCart(String id);
-
 	void write(ProductDTO dto);
 
 }
