@@ -44,4 +44,23 @@ public class ProductTest {
 		dao.getImages(list);
 		System.out.println(list);
 	}
+	
+	@Test
+	public void testGetBestSellers() {
+		List<ProductDTO> list = dao.getBestSellers();
+		if (list == null) {
+			System.out.println("tbl_sold에 데이터가 없음");
+		}
+		for (ProductDTO dto : list) {
+			System.out.println(dto);
+		}
+	}
+
+	@Test
+	public void testGetNewProducts() {
+		List<ProductDTO> list = dao.getNewProducts();
+		for (ProductDTO dto : list) {
+			System.out.println(dto);
+		}
+	}
 }

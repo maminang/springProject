@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -63,7 +64,7 @@ public class ProductDAOImpl implements ProductDAO {
 		return list;
 	}
 
-	// 제품리스트에 이미지 파일을 넣어주는 메서드
+// 제품리스트에 이미지 파일을 넣어주는 메서드
 	@Override
 	public void getImages(List<ProductDTO> list) {
 		for (ProductDTO dto : list) {
@@ -73,9 +74,18 @@ public class ProductDAOImpl implements ProductDAO {
 		}
 	}
 
+//  베스트 셀러 6개 리스트 뽑아오기
 	@Override
-	public List<ProductDTO> getBestSeller() {
-		return session.selectList(NS+".getBestSeller");
+	public List<ProductDTO> getBestSellers() {
+		RowBounds rb = new RowBounds(0, 6);
+		return session.selectList(NS + ".getBestSeller", null, rb);
+	}
+
+//  신제품 6개 리스트 뽑아오기
+	@Override
+	public List<ProductDTO> getNewProducts() {
+		RowBounds rb = new RowBounds(0, 6);
+		return session.selectList(NS + ".getNewProducts", null, rb);
 	}
 
 //	장바구니에 담기
@@ -106,6 +116,5 @@ public class ProductDAOImpl implements ProductDAO {
 		return session.selectOne(NS + ".selectShoppingCart", id);
 
 	}
-
 
 }

@@ -19,6 +19,8 @@ public interface ProductDAO {
 
 	void getImages(List<ProductDTO> list);
 
-	List<ProductDTO> getBestSeller();
+	List<ProductDTO> getBestSellers();
+
+	List<ProductDTO> getNewProducts();
 
 }

@@ -34,6 +34,16 @@
 		select fullname from tbl_product_images where pno=#{pno}
 	</select>
 	
+	<!-- 베스트 셀러 리스트 뽑아오기 -->
+	<select id="getBestSeller" resultType="ProductDTO">
+		select * from tbl_sold order by amount_sold desc
+	</select>
+	
+	<!-- 신제품들 리스트 뽑아오기 -->
+	<select id="getNewProducts" resultType="ProductDTO">
+		select * from tbl_product order by pno desc
+	</select>
+	
 	
 	
 	
