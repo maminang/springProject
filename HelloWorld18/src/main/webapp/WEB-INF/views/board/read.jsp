@@ -133,7 +133,7 @@
 			<form>
 				수량 : <input type="number" value="1" name="amount" autofocus>
 				<input value="NamepeN" name="id" type="hidden"> <input
-					value="2" name="pno" type="hidden">
+					value="3" name="pno" type="hidden">
 				<button id="cart" class="btn btn-success">장바구니에 담기</button>
 			</form>
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
