@@ -24,5 +24,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	public List<ShoppingCartDTO> selectShoppingCart(String id) {
 		return dao.selectShoppingCart(id);
 	}
+//	장바구니 list
+	@Override
+	public List<ShoppingCartDTO>  listShoppingCart(ShoppingCartDTO dto) {
+		 
+		return dao.listShoppingCart(dto);
+	}
 
 }

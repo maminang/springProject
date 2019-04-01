@@ -24,25 +24,25 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 		map.put("id", dto.getId());
 		map.put("pno", dto.getPno());
 		map.put("amount", dto.getAmount());
-//		System.out.println(map);
 		
 		Object oAmount = session.selectOne(NS+".checkAmount", map);
 		if(oAmount == null) {
 			session.insert(NS+".insertShoppingCartNull", map);
 		} else {
-//			System.out.println(1111111111);
 			session.insert(NS+".insertShoppingCart", map);
 		}
-		
-		
 	}
 //	장바구니 id로 select
 	@Override
 	public List<ShoppingCartDTO> selectShoppingCart(String id) {
-		
 		 
 		return session.selectOne(NS+".selectShoppingCart", id); 
-		
+	}
+//	장바구니 list
+	@Override
+	public List<ShoppingCartDTO> listShoppingCart(ShoppingCartDTO dto) {
+		 
+		return session.selectList(NS+".listShoppingCart", dto);
 	}
 
 }

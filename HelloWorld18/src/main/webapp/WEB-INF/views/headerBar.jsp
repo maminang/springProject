@@ -57,8 +57,8 @@ glyphicon glyphicon-shopping-cart">장바구니</a></li>
 	</div>
 	<!-- /.container-fluid -->
 	<div class="container-fluid">
-			<ul class="nav navbar-nav" id="menu">
-			</ul>
+		<ul class="nav navbar-nav" id="menu">
+		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown"><a href="#"
 				class="dropdown-toggle glyphicon glyphicon-menu-hamburger"
