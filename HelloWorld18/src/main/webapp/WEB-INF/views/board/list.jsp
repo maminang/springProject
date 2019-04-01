@@ -20,7 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-20190327 커밋 테스트222
+	<jsp:include page="../headerBar.jsp" />
 	<div class="container">
 		<div class="row">
 			<a class="btn btn-info" href="/board/write">글쓰기</a>
@@ -30,40 +30,20 @@
   			<div class="col-sm-4">.col-sm-4</div>
   			<div class="col-sm-4">.col-sm-4</div>
 			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>글번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
 				
-				<tbody>
-					<c:forEach items="${list}" var="vo">
+				
+					<c:forEach items="${citrusList}" var="vo">
 						<div class="col-sm-4">
 						<a href="http://www.naver.com">
-						${vo.writer}<br>
+						${vo.eng_name}<br>
 						<img src="https://media1.tenor.com/images/2b2f12d9b414ccd49999c940a293f448/tenor.gif?itemid=9871568"><br>
 						
 						</a>
 						</div>							
 					</c:forEach>
-				</tbody>
+			
 				
-				<%-- <tbody>
-					<c:forEach items="${list}" var="vo">
-						
-							<td>${vo.bno }</td>
-							<td><a
-								href="/board/read${pm.makeQuery(pm.cri.page)}&bno=${vo.bno}">${vo.title }</a></td>
-							<td>${vo.writer }</td>
-							<td>${vo.regDate }</td>
-							<td>${vo.viewCnt }</td>
-						
-					</c:forEach>
-				</tbody> --%>
+				
 			</table>
 		</div>
 		<div class="row text-center">
@@ -85,7 +65,7 @@
 
 			</ul>
 		</div>
-		<form action="/board/search" method="get" target="blank"
+		<!-- <form action="/board/search" method="get" target="blank"
 			id="searchForm">
 			<div class="row">
 				<div class="col-xs-3 col-sm-2">
@@ -96,6 +76,8 @@
 						<option value="content">내용</option>
 					</select>
 				</div>
+				
+				
 				<div class="input-group col-xs-9 col-sm-10">
 					<input class="form-control" id="keyword" name="keyword"><span
 						class="input-group-btn">
@@ -103,7 +85,7 @@
 					</span>
 				</div>
 			</div>
-		</form>
+		</form> -->
 	</div>
 
 	<script type="text/javascript">
@@ -118,6 +100,7 @@
 			})
 		});
 	</script>
+	<jsp:include page="../footerBar.jsp" />
 	<%-- class container --%>
 </body>
 </html>
