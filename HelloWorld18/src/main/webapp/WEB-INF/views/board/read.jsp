@@ -123,15 +123,15 @@
 			<!-- Button trigger modal 모달 모달모달-->
 
 			장바구니에 용량이랑 가격도 넣어야함
-			<div>
-				<select>
-					<option>$100 30ml</option>
-					<option>$200 100ml</option>
-				</select>
-			</div>
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<form>
-				수량 : <input type="number" value="1" name="amount" autofocus>
+				<div>
+					<select>
+						<option>$100 30ml</option>
+						<option>$200 100ml</option>
+					</select>
+				</div>
+				수량 : <input type="number" value="1" name="amount" required autofocus>
 				<input value="NamepeN" name="id" type="hidden"> <input
 					value="3" name="pno" type="hidden">
 				<button id="cart" class="btn btn-success">장바구니에 담기</button>
@@ -186,6 +186,7 @@
 			</div>
 		</div>
 	</div>
+
 	<!-- 	공유하기 Modal -->
 	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
 		aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -200,11 +201,12 @@
 			</div>
 		</div>
 	</div>
+	<!-- 	공유하기 Modal -->
 
 	${pageContext.request.requestURL }
 
 
-	<%-- 	<jsp:include page="footerBar.jsp" /> --%>
+	<jsp:include page="../footerBar.jsp" />
 
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -215,13 +217,12 @@
 				$("form").attr("method", "GET");
 				$("form").submit();
 			});
-			
+
 			$("#cart").click(function() {
 				$("form").attr("action", "/shoppingCart/insertShoppingCart");
 				$("form").attr("method", "GET");
 				$("form").submit();
 			});
-
 
 		});
 	</script>

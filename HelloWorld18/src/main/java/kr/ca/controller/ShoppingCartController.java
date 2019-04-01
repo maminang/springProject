@@ -1,19 +1,15 @@
 package kr.ca.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.ArrayList; 
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.util.CookieGenerator;
-
 import kr.ca.domain.CookieDTO;
 import kr.ca.domain.ShoppingCartDTO;
 import kr.ca.service.ShoppingCartService;
@@ -44,38 +40,45 @@ public class ShoppingCartController {
 //	장바구니에 담기
 	@RequestMapping("/insertShoppingCart")
 	public String insertShoppingCart(ShoppingCartDTO dto, HttpServletResponse response, HttpServletRequest request,
-			Model model) {
+			HttpSession session, Model model) {
 
-		service.insertShoppingCart(dto);
+		/* 장바구니에 담기 (회원) */
+//		if (session.getId() != null) {
+			service.insertShoppingCart(dto);
+//		}
 
+//		장바구니에 담기 (비회원)
+		/* 쿠키 생성 */
 		Cookie pnoAmount = new Cookie(String.valueOf(dto.getPno()), String.valueOf(dto.getAmount()));
+		/* 쿠키 유지 시간 설정 */
+		pnoAmount.setMaxAge(7 * 24 * 60 * 60);
+		/* 쿠키 패스 설정 */
+		pnoAmount.setPath("/");
+		/* 쿠키 추가 */
+		response.addCookie(pnoAmount);
+		/* 배열에 담기 */
+		Cookie[] cookies = request.getCookies();
+		for (int i = 0; i < cookies.length; i++) {
 
-		if (request.getCookies().length == 1) {
-//			pnoAmount = new Cookie(String.valueOf(dto.getPno()), String.valueOf(dto.getAmount()));
-
-			pnoAmount.setMaxAge(7 * 24 * 60 * 60);
-			pnoAmount.setPath("/");
-			response.addCookie(pnoAmount);
-		} else {
-			Cookie[] cookies = request.getCookies();
-			for (int i = 0; i < cookies.length; i++) {
-				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
-					System.out.println("앙기모띠");
-					System.out.println(cookies[i].getName()+i);
-					continue;
+			/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
+			if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
+				continue;
+			}
+			/* 쿠키의 이름이 pno와 같아야 추가하기 */
+			if (Integer.valueOf(cookies[i].getName()) == dto.getPno()) {
+				/* 쿠키는 string형으로만 들어가기 때문에 연산을 위해 int형으로 변환 */
+				String sCookieValue = cookies[i].getValue();
+				int cookieValue = Integer.valueOf(sCookieValue);
+				/* 기존 value에 amount를 더해주기 (장바구니에서 삭제하면 -를 넣으면 됨) */
+				pnoAmount.setValue(String.valueOf(cookieValue + dto.getAmount()));
+				/* 장바구니에서 수량을 뺄 때 value가 -가 되면 0을 설정하기 */
+				if (cookieValue + dto.getAmount() < 0) {
+					pnoAmount.setValue("0");
 				}
-				String sCookie = cookies[i].getValue();
-				int cookie = Integer.valueOf(sCookie);
-				pnoAmount.setValue(String.valueOf(cookie + dto.getAmount()));
-				System.out.println("dtoAMount" + dto.getAmount());
-				System.out.println(pnoAmount.getValue());
-				System.out.println(cookies[i].getName());
+				/* 쿠키 추가 */
 				response.addCookie(pnoAmount);
 			}
 		}
-
-//		System.out.println(dto.getPno());
-//		System.out.println(dto.getAmount());
 
 		return "board/read";
 	}
