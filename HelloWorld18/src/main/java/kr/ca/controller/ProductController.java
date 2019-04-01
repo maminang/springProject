@@ -24,16 +24,24 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "write", method = RequestMethod.POST)
-	public String write(ProductDTO dto) {
+	public String write(ProductDTO dto, String[] images) {
+		System.out.println(dto);
+		System.out.println(images);
 		service.write(dto);
 		return "product/read";
 	}
 
-	@RequestMapping("/search")
+	@RequestMapping("search")
 	public String searchProduct(String keyword, Model model) {
 		List<ProductDTO> searchList = service.searchProduct(keyword);
 		model.addAttribute("searchList", searchList);
 		return "product/search";
+	}
+
+	@RequestMapping("newProduct")
+	public String newProduct(Model model) {
+		model.addAttribute("newProducts", service.getNewProducts());
+		return "product/newproduct";
 	}
 
 }

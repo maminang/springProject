@@ -11,3 +11,5 @@ create table tbl_product_images (
 drop table tbl_product_images
 
 select * from tbl_product_images
+
+delete * from TBL_PRODUCT_IMAGES

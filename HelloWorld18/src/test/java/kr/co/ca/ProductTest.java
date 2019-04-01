@@ -32,8 +32,8 @@ public class ProductTest {
 
 	@Test
 	public void testAddImages() {
-		String fullName = "asfd";
-		dao.addImages(fullName, 3);
+		String[] images = new String[] {"asdf","1234"}; 
+		dao.addImages(images, 3);
 	}
 
 	@Test

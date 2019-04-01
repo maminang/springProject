@@ -32,7 +32,7 @@
 	</beans:bean>
 
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\\supload"></beans:constructor-arg>
+		<beans:constructor-arg value="C:\Users\Administrator\git\springProject\HelloWorld18\src\main\webapp\resources\img"></beans:constructor-arg>
 	</beans:bean>
 
 

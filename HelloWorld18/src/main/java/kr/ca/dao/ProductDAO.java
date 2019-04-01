@@ -8,7 +8,7 @@ public interface ProductDAO {
 
 	void write(ProductDTO dto);
 
-	void addImages(String fullName, int pno);
+	void addImages(String[] images, int pno);
 
 	List<ProductDTO> searchProduct(String keyword);
 

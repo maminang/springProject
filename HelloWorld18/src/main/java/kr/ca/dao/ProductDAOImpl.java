@@ -11,7 +11,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kr.ca.domain.ProductDTO;
-import kr.ca.domain.ShoppingCartDTO;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -23,8 +22,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void write(ProductDTO dto) {
 		dto.setPno(getPno());
-		System.out.println(dto);
-		session.insert(NS + ".insert", dto);
+		session.insert(NS + ".write", dto);
 	}
 
 	private int getPno() {
@@ -38,13 +36,17 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public void addImages(String fullName, int pno) {
-		int pino = getPino();
+	public void addImages(String[] images, int pno) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("fullName", fullName);
-		map.put("pno", pno);
-		map.put("pino", pino);
-		session.insert(NS + ".addImages", map);
+		
+		for (String image : images) {
+			map.put("fullName", image);
+			map.put("pno", pno);
+			int pino = getPino();
+			map.put("pino", pino);
+			session.insert(NS + ".addImages", map);
+		}
+		
 	}
 
 	private int getPino() {

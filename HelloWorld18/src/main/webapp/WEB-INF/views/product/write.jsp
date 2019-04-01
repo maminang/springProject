@@ -98,6 +98,7 @@
 
 	</div>
 	<jsp:include page="../footerBar.jsp" />
+
 	
 	<%-- 여기까지가 뷰 --%>
 	
@@ -126,26 +127,53 @@
 
 			$(".fileDrop").on("drop", function(event) {
 				event.preventDefault();
-
 				var files = event.originalEvent.dataTransfer.files;
-				var file = files[0];
+				for (var i = 0; i < files.length; i++) {
+					var file = files[i];
 
-				var formData = new FormData();
-				formData.append("file", file);
+					var formData = new FormData();
+					formData.append("file", file);
 
+					$.ajax({
+						url : "/uploadAjax",
+						type : "post",
+						data : formData,
+						dataType : "text",
+						processData : false,
+						contentType : false,
+						success : function(data) {
+							var str = "";
+							str = "<div><img alt='메렁' src='/displayFile?fileName="+data+"'/><a href='/displayFile?fileName="+data+"' target='_blank'>"+getOriginalName(data)+"</a><small data-src='"+data+"' class='btn btn-danger glyphicon glyphicon-remove'>";
+							str += "<input type='hidden' name='images' value='"+data+"'>";
+							str += "</small></div>";
+							$(".uploadedList").append(str);
+						}
+					})
+				}
+			})
+			
+			function getOriginalName(fileName) {
+				var originalName = "";
+
+				var idx = fileName.indexOf("_") + 1;
+				originalName = fileName.substring(idx);
+
+				return originalName;
+			}
+			
+			$(".uploadedList").on("click", "small", function () {
+				var $that = $(this);
+				alert($that)
 				$.ajax({
-					url : "/uploadAjax",
-					type : "post",
-					data : formData,
-					dataType : "text",
-					/* 쿼리로 안되게 막아놓음 */
-					processData : false,
-					/* 컨텐트타입변환되는걸 막아놓음 */
-					contentType : false,
-					success : function(data) {
-						var result = getFileInfo(data);
-						alert(result);
-						$(".uploadedList").append(template(result));
+					url:"/deleteFile",
+					type:"post",
+					data:{
+						fileName:$that.attr("data-src")
+					},
+					dataType: "text",
+					success:function(result){
+						alert("삭제되었습니다")
+						$that.parent("div").remove();
 					}
 				});
 			});
