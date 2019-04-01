@@ -48,10 +48,6 @@
 			<beans:ref bean="AuthInterceptor"/>
 		</interceptor>
 		
-<!-- 		<interceptor> -->
-<!-- 			<mapping path="/member/logout"/> -->
-<!-- 			<beans:ref bean="AuthInterceptor"/> -->
-<!-- 		</interceptor> -->
 		
 	</interceptors>
 	

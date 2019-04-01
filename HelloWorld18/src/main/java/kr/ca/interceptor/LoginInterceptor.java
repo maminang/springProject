@@ -35,7 +35,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			String dest=(String)session.getAttribute("dest");
 				response.sendRedirect(dest);
 		}
-		
 	}
 
 	
