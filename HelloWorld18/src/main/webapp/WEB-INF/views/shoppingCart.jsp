@@ -33,10 +33,12 @@
 				<tbody>
 					<c:forEach items="${list}" var="list">
 						<tr>
-							<td>${list.pno}</td>
-							<td>가격 아직 안함</td>
-							<td>${list.amount}</td>
-							<td>가격 * ${list.amount }</td>
+							<c:if test="${list.pno > 0 }">
+								<td>${list.pno}</td>
+								<td>가격 아직 안함</td>
+								<td>${list.amount}</td>
+								<td>가격 * ${list.amount }</td>
+							</c:if>
 						</tr>
 					</c:forEach>
 				</tbody>
