@@ -34,9 +34,28 @@
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="C:\Users\Administrator\git\springProject\HelloWorld18\src\main\webapp\resources\img"></beans:constructor-arg>
 	</beans:bean>
-
-
-	<context:component-scan
-		base-package="kr.ca.controller"></context:component-scan>
-
+	
+	<beans:bean id="loginInterceptor" class="kr.ca.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="AuthInterceptor" class="kr.ca.interceptor.AuthInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/loginpost"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/member/mypage"/>
+			<beans:ref bean="AuthInterceptor"/>
+		</interceptor>
+		
+<!-- 		<interceptor> -->
+<!-- 			<mapping path="/member/logout"/> -->
+<!-- 			<beans:ref bean="AuthInterceptor"/> -->
+<!-- 		</interceptor> -->
+		
+	</interceptors>
+	
+	<context:component-scan base-package="kr.ca.controller"/>
+	<context:component-scan base-package="kr.ca.interceptor" />
+	
 </beans:beans>
