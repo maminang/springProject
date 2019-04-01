@@ -138,10 +138,12 @@
 			</form>
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<hr>
+
 			<!-- 			공유하기 modal -->
 			<a type="button" data-toggle="modal"
 				data-target=".bs-example-modal-sm">공유하기</a> <br>
 			<!-- 			공유하기 modal -->
+
 			<!-- 			리뷰 작성하기 -->
 			<a href="#">리뷰 작성하기</a>
 			<!-- 			리뷰 작성하기 -->
@@ -186,6 +188,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal -->
 
 	<!-- 	공유하기 Modal -->
 	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
@@ -203,6 +206,13 @@
 	</div>
 	<!-- 	공유하기 Modal -->
 
+	<div class="alert alert-primary">
+		<h4 class="alert-heading">Alert Heading</h4>
+			<p>Alert - Primary / <a href="#" class="alert-link">Alert Link</a></p>
+		<hr>
+		<p class="mb-0">Alert - Primary / <a href="#" class="alert-link">Alert Link</a></p>
+	</div>
+
 	${pageContext.request.requestURL }
 
 
@@ -213,16 +223,23 @@
 
 			//장바구니에 담기	
 			$("#cart").click(function() {
-				$("form").attr("action", "/shoppingCart/insertShoppingCart");
-				$("form").attr("method", "GET");
+				if (confirm("장바구니로 이동")) {
+	                // 확인 버튼 클릭 시 동작
+					$("form").attr("action", "/shoppingCart/listShoppingCart")
+					$("form").attr("method", "GET");
+	            } else {
+	                // 취소 버튼 클릭 시 동작
+					$("form").attr("action", "/shoppingCart/insertShoppingCart");
+					$("form").attr("method", "GET");
+	            }
 				$("form").submit();
 			});
 
-			$("#cart").click(function() {
-				$("form").attr("action", "/shoppingCart/insertShoppingCart");
-				$("form").attr("method", "GET");
-				$("form").submit();
-			});
+// 			$("#redirectShoppingCart").ready(function() {
+// 				$("form"	.attr)
+// 			})
+				
+			
 
 		});
 	</script>

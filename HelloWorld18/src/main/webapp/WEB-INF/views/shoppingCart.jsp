@@ -16,13 +16,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../headerBar.jsp" />
-	
+	<jsp:include page="headerBar.jsp" />
+
 	<div class="container">
-		<div class="row">장바구니입니다</div>
+		<div class="row">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>제품</th>
+						<th>가격</th>
+						<th>수량</th>
+						<th>합계</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<c:forEach items="${list}" var="list">
+						<tr>
+							<td>${list.pno}</td>
+							<td>가격 아직 안함</td>
+							<td>${list.amount}</td>
+							<td>가격 * ${list.amount }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	
-	<jsp:include page="../footerBar.jsp" />
+
+	<jsp:include page="footerBar.jsp" />
 	<script type="text/javascript">
 		$(document).ready(function() {
 

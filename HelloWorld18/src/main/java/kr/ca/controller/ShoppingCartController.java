@@ -1,6 +1,7 @@
 package kr.ca.controller;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,17 +22,38 @@ public class ShoppingCartController {
 	@Autowired
 	private ShoppingCartService service;
 
-//	장바구니 리스트 쿠키 (비로그인)
-	public List<ShoppingCartDTO> listShoppingCartCookie(ShoppingCartDTO dto, HttpServletResponse response) {
+//	장바구니 리스트
+	@RequestMapping("listShoppingCart")
+	public String listShoppingCart(ShoppingCartDTO dto, HttpServletRequest request, Model model) {
 
-		Cookie pno = new Cookie("pno", String.valueOf(dto.getPno()));
-//		System.out.println(pno);
-		pno.setMaxAge(7 * 24 * 60 * 60);
-		pno.setPath("/");
+//		List<ShoppingCartDTO> list = service.listShoppingCart(dto);
+//		model.addAttribute("list", list);
 
-		response.addCookie(pno);
+		Cookie[] cookies = request.getCookies();
+		List<ShoppingCartDTO> cList = new ArrayList<ShoppingCartDTO>();
+		List<Integer> iList = new ArrayList<Integer>();
+		for (int i = 0; i < cookies.length; i++) {
+			/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
+			if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
+				cList.add(new ShoppingCartDTO(dto.getId(), 0, 0));
+				continue;
+			}
 
-		return null;
+			/* 쿠키는 string형으로만 들어가기 때문에 연산을 위해 int형으로 변환 */
+			String sCookiePno = cookies[i].getName();
+			int cookiePno = Integer.valueOf(sCookiePno);
+			String sCookieAmount = cookies[i].getValue();
+			int cookieAmount = Integer.valueOf(sCookieAmount);
+			
+			ShoppingCartDTO sDto = new ShoppingCartDTO();
+			sDto.setId(dto.getId());
+			sDto.setPno(cookiePno);
+			sDto.setAmount(cookieAmount);
+			cList.add(i, sDto);
+			model.addAttribute("list", cList);
+		}
+
+		return "shoppingCart";
 	}
 
 	CookieDTO cookieDTO = new CookieDTO(null, null);
@@ -44,7 +66,7 @@ public class ShoppingCartController {
 
 		/* 장바구니에 담기 (회원) */
 //		if (session.getId() != null) {
-			service.insertShoppingCart(dto);
+		service.insertShoppingCart(dto);
 //		}
 
 //		장바구니에 담기 (비회원)
@@ -83,11 +105,17 @@ public class ShoppingCartController {
 		return "board/read";
 	}
 
-//	테스트용임
+//	read.jsp로 가기
 	@RequestMapping("/read")
 	public String readTest() {
 
 		return "board/read";
 	}
 
+//	shoppingCart.jsp로 가기
+	@RequestMapping("/goShoppingCart")
+	public String main() {
+
+		return "shoppingCart";
+	}
 }
