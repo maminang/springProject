@@ -21,7 +21,7 @@
 	<div class="container">
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
-				<form method="post" action="/member/login">
+				<form method="post" action="/member/loginpost">
 					<h3 style="text-align: center;">로그인</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디"
@@ -31,8 +31,10 @@
 						<input type="password" class="form-control" placeholder="비밀번호"
 							name="pw" maxlength="20">
 					</div>
+					<div class="form-group">
 					<button type="submit" class="btn" id="loginBtn" value="로그인">로그인</button>
 					<button type="submit" class="btn" id="signinBtn" value="회원가입">회원가입</button>
+					</div>
 				</form>
 		</div>
 	</div>
@@ -45,11 +47,10 @@
 			$("form").attr("method","get");
 			$("form").submit();
 		});
-		$("#loginBtn").click(function(){
-			$("form").attr("action","login");
-			$("form").attr("method","get");
-			$("form").submit();
-		});
+		
+		
+		
+		
 	});
 </script>	
 <jsp:include page="../footerBar.jsp" />
