@@ -37,12 +37,15 @@
 	<jsp:include page="../headerBar.jsp" />
 	<div class="container">
 		<div class="row">
-			<div>
+		
+			<div class="col-sm-6">
 				<img src="/resources/img/csCenter.jpg">
 			</div>
+			<div class="col-sm-6">
 			<a> <img src="/resources/img/faqtitle.jpg" alt="faq">
 			</a> <a> <img src="/resources/img/qnatitle.jpg" alt="qna">
 			</a>
+			</div>
 
 		</div>
 	</div>
@@ -61,22 +64,20 @@
 					<!-- ${cslist } 컨트롤러 model에 바인딩할 때 "" 안에 있는 값과 대소문자까지 일치해야 불러올 수 있다. -->
 					<c:forEach var="cs" items="${cslist }">
 						<tr>
-							<a href="javascript:doDisplay();">
+							
 							<td>${cs.idnbr }</td>
 							<%-- <td><a href="/board/read${pm.makeQuery(pm.cri.page)}&bno=${vo.bno }">${vo.title}</a></td> --%>
-							<td>${cs.qtype}</td>
-							<td>${cs.qtitle}</td>
+							<td><a href="javascript:doDisplay();">${cs.qtype}</a></td>
+							<td><a href="javascript:doDisplay();">${cs.qtitle}</a></td>
 							<!-- DTO에 선언된 변수명과 일치해야한다. -->
 							</a>
 
 							<!--자바스크립트 이용하여 내용 숨기기 mainia.tistory.com/2710-->
 						</tr>
 						<tr>
-							<td>
-							<div style="display:block" id="hiddencontent">
+							<div id="hiddencontent" style="display:none;">
 								${cs.qcontent}
 							</div>
-							</td>
 						</tr>
 						
 					</c:forEach>

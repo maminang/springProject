@@ -33,10 +33,24 @@
 				
 				
 					<c:forEach items="${citrusList}" var="vo">
-						<div class="col-sm-4">
+						<div class="col-sm-4" style="border:1px solid black">
 						<a href="http://www.naver.com">
-						${vo.eng_name}<br>
-						<img src="https://media1.tenor.com/images/2b2f12d9b414ccd49999c940a293f448/tenor.gif?itemid=9871568"><br>
+						
+						
+						${vo.eng_name}
+						<br>
+						
+						<img src="resources/img/temp.jpg" style="width:350px">
+						
+						<!-- https://media1.tenor.com/images/2b2f12d9b414ccd49999c940a293f448/tenor.gif?itemid=9871568 -->
+						
+						<br>
+						제품명 : ${vo.kr_name}
+						<br>
+						용량 : ${vo.volume}
+						<br>
+						가격 : ${vo.price}
+						
 						
 						</a>
 						</div>							
