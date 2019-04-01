@@ -15,6 +15,8 @@ create table tbl_footerinfo (
 	copyright varchar2(150)
 )
 
+drop table tbl_footerinfo
+
 insert into tbl_footerinfo values (
 	'데모네요',
 	'임하민',
