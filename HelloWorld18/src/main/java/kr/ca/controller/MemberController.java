@@ -35,17 +35,19 @@ public class MemberController {
 		session.setAttribute("login", mdto);
 	}
 
-////로그아웃	
-//	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-//	public String logout(LoginDTO dto, HttpSession session) throws Exception {
-//		
-//		Object login=session.getAttribute("login");
-//		if(login!=null) {
-//			session.removeAttribute("login");
-//		}
-//		return "/main";
-//		
-//	}
+//로그아웃	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(LoginDTO dto, HttpSession session) throws Exception {
+		System.out.println("로그아웃");
+		Object login=session.getAttribute("login");
+		System.out.println("::::::::::::1"+login);
+		if(login!=null) {
+			session.removeAttribute("login");
+		}
+		System.out.println("::::::::::2"+login);
+		return "/main";
+		
+	}
 
 //회원가입
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
@@ -69,17 +71,13 @@ public class MemberController {
 		model.addAttribute("mDto", mDto);
 	}
 
-	
-	
-//	@RequestMapping(value = "/mypage", method = RequestMethod.POST)
-//	public void mypageUI(LoginDTO dto, Model model) {
-//		dto = service.mypage(dto);
-//		System.out.println(dto + "히히히히히히");
-//		if (dto == null) {
-//			return;
+////회원정보 수정
+//		@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+//		public void mypageUI(HttpSession session, Model model) {
+//			
+//			LoginDTO login=(LoginDTO)session.getAttribute("login");
+//			MemberDTO mDto=service.mypage(login);
+//			model.addAttribute("mDto", mDto);
 //		}
-//		model.addAttribute("dto", dto);
-//	}
-
 
 }
