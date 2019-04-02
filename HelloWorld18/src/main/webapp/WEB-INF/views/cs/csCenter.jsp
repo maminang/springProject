@@ -14,11 +14,20 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-
+<style>
+.floating {
+	position: fixed;
+	right: 50%;
+	bottom: 50px;
+	margin-right: -720px;
+	text-align: center;
+	width: 120px;
+}
+</style>
 <script>
 	var bDisplay = true;
 	function doDisplay() {
-		var con = document.getElementById("hiddencontent");
+		var con = document.getElementByClassName("hiddencontent");
 		if (con.style.display == 'none') {
 			con.style.display = 'block';
 		} else {
@@ -32,19 +41,30 @@
 <body>
 
 
+	<div class="floating">
+		<a href="https://open.kakao.com/o/s5ZqXQib"> <img
+			style="width: 50px; height: 50px" src="/resources/img/kakao.jpg">
+		</a>
+	</div>
+
+
 
 
 	<jsp:include page="../headerBar.jsp" />
 	<div class="container">
 		<div class="row">
-		
+			<a class="btn btn-info" href="/cs/write">글쓰기</a>
+		</div>
+	
+		<div class="row" style="text-align: center;">
+			<img src="/resources/img/csCenter.jpg"> <br>
 			<div class="col-sm-6">
-				<img src="/resources/img/csCenter.jpg">
+				<a> <img src="/resources/img/faqtitle.jpg" alt="faq">
+				</a>
 			</div>
 			<div class="col-sm-6">
-			<a> <img src="/resources/img/faqtitle.jpg" alt="faq">
-			</a> <a> <img src="/resources/img/qnatitle.jpg" alt="qna">
-			</a>
+				<a> <img src="/resources/img/qnatitle.jpg" alt="qna">
+				</a>
 			</div>
 
 		</div>
@@ -64,25 +84,26 @@
 					<!-- ${cslist } 컨트롤러 model에 바인딩할 때 "" 안에 있는 값과 대소문자까지 일치해야 불러올 수 있다. -->
 					<c:forEach var="cs" items="${cslist }">
 						<tr>
-							
+
 							<td>${cs.idnbr }</td>
 							<%-- <td><a href="/board/read${pm.makeQuery(pm.cri.page)}&bno=${vo.bno }">${vo.title}</a></td> --%>
 							<td><a href="javascript:doDisplay();">${cs.qtype}</a></td>
 							<td><a href="javascript:doDisplay();">${cs.qtitle}</a></td>
 							<!-- DTO에 선언된 변수명과 일치해야한다. -->
-							</a>
 
-							<!--자바스크립트 이용하여 내용 숨기기 mainia.tistory.com/2710-->
+
 						</tr>
 						<tr>
-							<div id="hiddencontent" style="display:none;">
+							<td colspan="3" class="hiddencontent" style="display: none;">
+								<!--자바스크립트 이용하여 내용 숨기기 mainia.tistory.com/2710-->
 								${cs.qcontent}
-							</div>
+							</td>
 						</tr>
-						
+
 					</c:forEach>
 				</tbody>
 			</table>
+		</div>
 		</div>
 		<!-- class row -->
 
@@ -105,7 +126,7 @@
 				</c:if>
 
 			</ul>
-		</div>
+		</div>e
 
 
 		<jsp:include page="../footerBar.jsp" />

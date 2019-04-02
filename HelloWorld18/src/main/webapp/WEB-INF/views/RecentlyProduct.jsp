@@ -18,25 +18,16 @@
 </head>
 <body>
 
-	<jsp:include page="headerBar.jsp" />
+
+	<!--<jsp:include page="headerBar.jsp" />-->
 	<div class="container">
 		<div class="row">
-			거래 테이블에서 최근 한달간 많이 거래된 품목을 뽑아와서 뿌려주기 <br> 
-			<a href="product/read">readTest</a><br>
-			<a href="cs/csCenter">고객센터 테스트</a><br>
-			<a href="citrus">리스트 Test</a>
-			<a href="shoppingCart/read">readTest</a>
-			<br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br>
+			
 		</div>
 	</div>
 	
 
-	<jsp:include page="footerBar.jsp" />
+	<!--<jsp:include page="footerBar.jsp" />-->
 	<script type="text/javascript">
 		$(document).ready(function() {
 

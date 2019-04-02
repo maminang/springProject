@@ -2,6 +2,27 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<% 
+	String cp=request.getContextPath();
+	request.setCharacterEncoding("UTF-8");
+	
+	//Cookie("key", "value")   ?정수형 값을 저장할 때에도 ""쌍따옴표 사용해야하나?
+	Cookie c1=new Cookie("name","hong");
+	Cookie c2=new Cookie("age","20");
+	
+	//set cookie effective time
+	c1.setMaxAge(60*60*24);	//60second*60minute*24hour
+	c2.setMaxAge(60*60*24);
+	 
+	//reference note 
+	//c1.setMaxAge(-1)  //remove cookie when the browser is closed
+	//c1.setMaxAge(0)	//
+	
+	response.addCookie(c1);
+	response.addCookie(c2);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>

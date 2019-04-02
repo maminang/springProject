@@ -9,42 +9,40 @@ import org.springframework.stereotype.Repository;
 import kr.ca.domain.ShoppingCartDTO;
 
 @Repository
-public class ProductDAOImpl implements ProductDAO {
+public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 
 	@Autowired
 	private SqlSession session;
 	
-	private final String NS = "kr.ca.mapper.product";
+	private final String NS = "kr.ca.mapper.shoppingCart";
 	
 //	장바구니에 담기
 	@Override
-	public void insertShoppingCart(String id, int pno, int amount) {
+	public void insertShoppingCart(ShoppingCartDTO dto) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("id", id);
-		map.put("pno", pno);
-		map.put("amount", amount);
-		System.out.println("impl"+amount+"id"+id+"pno"+pno);
-		System.out.println(map);
+		map.put("id", dto.getId());
+		map.put("pno", dto.getPno());
+		map.put("amount", dto.getAmount());
 		
 		Object oAmount = session.selectOne(NS+".checkAmount", map);
 		if(oAmount == null) {
 			session.insert(NS+".insertShoppingCartNull", map);
 		} else {
-			System.out.println(1111111111);
-			System.out.println("impl"+amount);
 			session.insert(NS+".insertShoppingCart", map);
 		}
-		
-		
 	}
 //	장바구니 id로 select
 	@Override
 	public List<ShoppingCartDTO> selectShoppingCart(String id) {
-		
 		 
 		return session.selectOne(NS+".selectShoppingCart", id); 
-		
+	}
+//	장바구니 list
+	@Override
+	public List<ShoppingCartDTO> listShoppingCart(ShoppingCartDTO dto) {
+		 
+		return session.selectList(NS+".listShoppingCart", dto);
 	}
 
 }

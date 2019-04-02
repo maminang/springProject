@@ -22,9 +22,7 @@
 <body>
 	<jsp:include page="../headerBar.jsp" />
 	<div class="container">
-		<div class="row">
-			<a class="btn btn-info" href="/board/write">글쓰기</a>
-		</div>
+		
 		<div class="row">
 			<div class="col-sm-4">.col-sm-4</div>
   			<div class="col-sm-4">.col-sm-4</div>
