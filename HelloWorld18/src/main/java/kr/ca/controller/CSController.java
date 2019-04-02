@@ -33,11 +33,9 @@ public class CSController {
 		
 		model.addAttribute("pm",pm);
 		model.addAttribute("cslist",cslist);
-		System.out.println(pm);
-		System.out.println(cslist);
+		
 		try {
 			cslist = service.csList();
-			System.out.println("cslist에 데이터 잘 넣었나?"+cslist);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

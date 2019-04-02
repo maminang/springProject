@@ -18,7 +18,6 @@ public class CSServiceImple implements CSService{
 	private CSDAO cdao;
 	
 	public List<CSDTO> csList(){
-		System.out.println("서비스까지 정상 도착");
 		
 		return cdao.csList();
 	}
@@ -32,8 +31,7 @@ public class CSServiceImple implements CSService{
 	@Override
 	public List<CSDTO> listPage(Criteria cri) {
 		// TODO Auto-generated method stub
-		System.out.println("2. csserviceimpl -> csdaoimple listpage(cri)");
-		
+				
 		return cdao.listPage(cri);
 	}
 
