@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,24 +25,29 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "write", method = RequestMethod.POST)
-	public String write(ProductDTO dto, String[] images) {
-		System.out.println(dto);
-		System.out.println(images);
+	public String write(ProductDTO dto, int[] volume, int[] price, String[] images) {
 		service.write(dto);
 		return "product/read";
+	}
+
+	@RequestMapping("list/{category}")
+	public String listByCategory(Model model, @PathVariable String category) {
+		List<ProductDTO> list = service.getListByCategory(category);
+		model.addAttribute("list", list);
+		return "product/list";
 	}
 
 	@RequestMapping("search")
 	public String searchProduct(String keyword, Model model) {
 		List<ProductDTO> searchList = service.searchProduct(keyword);
-		model.addAttribute("searchList", searchList);
-		return "product/search";
+		model.addAttribute("list", searchList);
+		return "product/list";
 	}
 
 	@RequestMapping("newProduct")
 	public String newProduct(Model model) {
-		model.addAttribute("newProducts", service.getNewProducts());
-		return "product/newproduct";
+		model.addAttribute("list", service.getNewProducts());
+		return "product/list";
 	}
 
 }

@@ -19,3 +19,5 @@ create table tbl_review (
 	age_group varchar2(15) not null,
 	favorite_scent varchar2(30)
 )
+
+delete tbl_review

@@ -22,6 +22,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public List<ProductDTO> getListByCategory(String category) {
+		List<ProductDTO> list = dao.getListByCategory(category);
+		dao.getImages(list);
+		return list;
+	}
+	
+	@Override
 	public List<ProductDTO> searchProduct(String keyword) {
 		List<ProductDTO> list = dao.searchProduct(keyword);
 		dao.getImages(list);
@@ -34,5 +41,7 @@ public class ProductServiceImpl implements ProductService {
 		dao.getImages(list);
 		return list;
 	}
+
+	
 
 }

@@ -150,6 +150,7 @@
 
 		</div>
 	</div>
+	<jsp:include page="../footerBar.jsp"/>
 
 
 
@@ -215,13 +216,12 @@
 				$("form").attr("method", "GET");
 				$("form").submit();
 			});
-			
+
 			$("#cart").click(function() {
 				$("form").attr("action", "/shoppingCart/insertShoppingCart");
 				$("form").attr("method", "GET");
 				$("form").submit();
 			});
-
 
 		});
 	</script>

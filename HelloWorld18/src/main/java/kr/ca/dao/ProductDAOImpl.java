@@ -23,6 +23,14 @@ public class ProductDAOImpl implements ProductDAO {
 	public void write(ProductDTO dto) {
 		dto.setPno(getPno());
 		session.insert(NS + ".write", dto);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pno", dto.getPno());
+		for (int i = 0; i < dto.getVolume().length; i++) {
+			map.put("volume", dto.getVolume()[i]);
+			map.put("price", dto.getPrice()[i]);
+			session.insert(NS+".writeDetail", map);
+		}
 	}
 
 	private int getPno() {
@@ -46,7 +54,6 @@ public class ProductDAOImpl implements ProductDAO {
 			map.put("pino", pino);
 			session.insert(NS + ".addImages", map);
 		}
-		
 	}
 
 	private int getPino() {
@@ -90,4 +97,9 @@ public class ProductDAOImpl implements ProductDAO {
 		return session.selectList(NS + ".getNewProducts", null, rb);
 	}
 
+//  카테고리로 리스트 뽑아오기
+	@Override
+	public List<ProductDTO> getListByCategory(String category) {
+		return session.selectList(NS+".getListByCategory", category);
+	}
 }

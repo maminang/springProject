@@ -79,16 +79,21 @@
 					<label>제품 소개</label>
 					<textarea class="form-control" rows="10" name="prdct_dscrp"></textarea>
 				</div>
+				
+				<div id="detail">
+					<button id="addDetailForm" class="btn">디테일추가</button>
 
-				<div class="volume">
-					<label>용량</label><input class="form-control" name="volume" required>
+					<div class="volume">
+						<label>용량</label><input class="form-control" name="volume"
+							required>
+					</div>
+
+					<div class="form-group">
+						<label>가격</label><input id="price" class="form-control"
+							name="price" required><br>
+					</div>
 				</div>
-
-				<div class="form-group">
-					<label>가격</label><input id="price" class="form-control"
-						name="price" required><br>
-				</div>
-
+				
 				<div class="row">
 					<button class="btn btn-secondary" type="reset" value="초기화">초기화</button>
 					<button class="btn btn-success" type="submit" value="등록">등록</button>
@@ -99,9 +104,9 @@
 	</div>
 	<jsp:include page="../footerBar.jsp" />
 
-	
+
 	<%-- 여기까지가 뷰 --%>
-	
+
 	<script id="source" type="text/x-handlebars-template">
 		<li class="col-xs-3"><span><img src="{{imgsrc}}"></span>
 			<div>
@@ -142,6 +147,8 @@
 						processData : false,
 						contentType : false,
 						success : function(data) {
+							/* db에 넣을 이미지파일이름만 추출 */
+							var OrgFileName = data.substring(data.indexOf('img')+4, data.length);
 							var str = "";
 							str = "<div><img alt='메렁' src='/displayFile?fileName="+data+"'/><a href='/displayFile?fileName="+data+"' target='_blank'>"+getOriginalName(data)+"</a><small data-src='"+data+"' class='btn btn-danger glyphicon glyphicon-remove'>";
 							str += "<input type='hidden' name='images' value='"+data+"'>";
@@ -177,7 +184,12 @@
 					}
 				});
 			});
-
+			
+			$("#addDetailForm").click(function() {
+				var str="";
+				str = "<div class='volume'><label>용량</label><input class='form-control' name='volume' required></div><div class='form-group'><label>가격</label><input id='price' class='form-control' name='price' required><br></div>"
+				$("#detail").append(str);
+			});
 		});
 	</script>
 </body>

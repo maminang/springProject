@@ -9,8 +9,12 @@
 		select max(pno) from tbl_product
 	</select>
 	<insert id="write">insert into tbl_product
-		(pno,eng_name,kr_name,prdct_dscrp,volume,price,category) values
-		(#{pno},#{eng_name},#{kr_name},#{prdct_dscrp},#{volume},#{price},#{category})
+		(pno,eng_name,kr_name,prdct_dscrp,category) values
+		(#{pno},#{eng_name},#{kr_name},#{prdct_dscrp},#{category})
+	</insert>
+	<insert id="writeDetail">
+		insert into tbl_product_detail (pno,volume,price)
+		values (#{pno},#{volume},#{price})
 	</insert>
 
 	<!-- 제품 이미지 등록시에 쓰는 쿼리 -->
@@ -30,20 +34,27 @@
 		upper(kr_name) like '%'||upper(#{keyword})||'%' or upper(category)
 		like '%'||upper(#{keyword})||'%'
 	</select>
-	
+
 	<!-- 제품리스트에 이미지 넣어주기 -->
 	<select id="getImages" resultType="String">
-		select fullname from tbl_product_images where pno=#{pno}
+		select fullname from
+		tbl_product_images where pno=#{pno}
 	</select>
-	
+
 	<!-- 베스트 셀러 리스트 뽑아오기 -->
 	<select id="getBestSeller" resultType="ProductDTO">
-		select * from tbl_sold order by amount_sold desc
+		select * from tbl_sold
+		order by amount_sold desc
 	</select>
-	
+
 	<!-- 신제품들 리스트 뽑아오기 -->
 	<select id="getNewProducts" resultType="ProductDTO">
-		select * from tbl_product order by pno desc
+		select * from tbl_product
+		order by pno desc
+	</select>
+	
+	<select id="getListByCategory" resultType="ProductDTO">
+		select * from tbl_product where category = #{category}
 	</select>
 
 </mapper>

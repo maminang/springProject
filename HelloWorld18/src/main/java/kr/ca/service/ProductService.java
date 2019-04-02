@@ -12,4 +12,6 @@ public interface ProductService {
 
 	List<ProductDTO> getNewProducts();
 
+	List<ProductDTO> getListByCategory(String category);
+
 }

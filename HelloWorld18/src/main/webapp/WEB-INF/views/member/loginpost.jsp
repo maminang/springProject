@@ -25,7 +25,7 @@
 	
 <script type="text/javascript">
 	$(document).ready(function(){
-		if (${dto==null}) {
+		if (${login==null}) {
 			self.location="/member/login";
 		}
 		

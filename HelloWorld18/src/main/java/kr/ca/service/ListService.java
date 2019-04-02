@@ -5,6 +5,5 @@ import java.util.List;
 import kr.ca.domain.ProductDTO;
 
 public interface ListService {
-	
-	List<ProductDTO> citrusList();
+	List<ProductDTO> getListByCategory(String category);
 }
