@@ -24,7 +24,6 @@ public class CSController {
 	@RequestMapping(value = "csCenter", method = RequestMethod.GET)
 	public String csList(Criteria cri, Model model) {
 		
-		
 		int amount=service.getAmount();
 		
 		PageMaker pm=new PageMaker(amount,cri);
