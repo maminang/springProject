@@ -5,17 +5,31 @@
 <mapper namespace="kr.ca.mapper.member">
 
 	<insert id="insert">
-	insert into tbl_member (id,pw,name,email,address,phone,birth) values 
-	(#{id},#{pw},#{name},#{email},#{address},#{phone},#{birth})
+	INSERT INTO tbl_member (id,pw,name,postNum,address,DTL_ADRES,email,phone,birth) VALUES 
+	(#{id},#{pw},#{name},#{postNum},#{address},#{DTL_ADRES},#{email},#{phone},#{birth})
 	</insert>
 	
 	<select id="login" resultType="LoginDTO">
-	select id, pw from tbl_member where id=#{id} and pw=#{pw}
+	SELECT id, pw from tbl_member WHERE id=#{id} and pw=#{pw}
 	</select>
-	
 	
 	<select id="mypage" resultType="MemberDTO">
-	select * from tbl_member where id=#{id} and pw=#{pw}
+	SELECT * FROM tbl_member WHERE id=#{id} and pw=#{pw}
 	</select>
+	
+	<select id="updateui" resultType="MemberDTO">
+	SELECT * FROM tbl_member WHERE
+		id=#{id}
+	</select>
+	
+	<select id="update" resultType="MemberDTO">
+	UPDATE tbl_member SET pw=#{pw}, email=#{email},name=#{name},postNum=#{postNum},DTL_ADRES=#{DTL_ADRES},birth=#{birth},address=#{address},phone=#{phone} 
+	WHERE id=#{id}
+	</select>
+	
+	<select id="idcheck" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM tbl_member WHERE id = #{id}
+	</select>
+	
 	
 </mapper>

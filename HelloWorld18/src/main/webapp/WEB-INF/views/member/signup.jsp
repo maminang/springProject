@@ -12,17 +12,19 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
  <body>
- <!-- ::::::::::::::::::::::::::::::::::::헤더:::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+
+<!-- header -->
+
  <jsp:include page="../headerBar.jsp" />
        
- <!-- ::::::::::::::::::::::::::::::::::::본문:::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- body -->
         <div class="container">
-            <!-- 모달창 -->
+<!-- modal -->
             <div class="modal fade" id="defaultModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -39,25 +41,26 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-            <!--// 모달창 -->
+<!--// modal -->
  
-        <form class="form-horizontal" role="form" method="post" action="/member/signup">
+        <form name="frm" id="frm" class="form-horizontal" role="form" method="post" action="/member/signup">
             <div class="form-group">
+ <!-- Terms of Service -->
                 <label for="provision" class="col-lg-2 control-label">회원가입약관</label>
                 <div class="col-lg-10" id="provision">
                     <textarea class="form-control" rows="8" style="resize:none">
-약관동의sdfsdfsdfdsf
+					약관동의sdfsdfsdfdsf
                     </textarea>
                     <div class="radio">
                         <label>
                             <input type="radio" id="provisionYn" name="provisionYn" value="Y" autofocus="autofocus" checked>
-                            동의합니다.
+                         	   동의합니다.
                         </label>
                     </div>
                     <div class="radio">
                         <label>
                             <input type="radio" id="provisionYn" name="provisionYn" value="N">
-                            동의하지 않습니다.
+                   	         동의하지 않습니다.
                         </label>
                     </div>
                 </div>
@@ -66,28 +69,30 @@
                 <label for="memberInfo" class="col-lg-2 control-label">개인정보취급방침</label>
                 <div class="col-lg-10" id="memberInfo">
                     <textarea class="form-control" rows="8" style="resize:none">
-개인정보의 항목 및 수집방법
+					개인정보의 항목 및 수집방법
                     </textarea>
                     <div class="radio">
                         <label>
                             <input type="radio" id="memberInfoYn" name="memberInfoYn" value="Y" checked>
-                            동의합니다.
+                         	동의합니다.
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" id="memberInfoYn" name="memberInfoYn" value="N">
-                            동의하지 않습니다.
+                         <input type="radio" id="memberInfoYn" name="memberInfoYn" value="N">
+                       	 동의하지 않습니다.
                         </label>
                     </div>
                 </div>
             </div>
+            
+ <!-- Privacy -->
             <div class="form-group" id="divId">
                 <label for="inputId" class="col-lg-2 control-label">아이디</label>
                 <div class="col-lg-10 input-group">
                     <input name="id" type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="10">
 			<span class="input-group-btn">
-				<button id="inputCheckBtn" class="btn btn-info">ID 중복 체크</button>
+				<button id="idcheck" class="btn btn-info">ID 중복 체크</button>
 			</span>
                 </div>
             </div>
@@ -120,12 +125,10 @@
             
             <div class="form-group" id="divAddress">
                 <label for="divAddress" class="col-lg-2 control-label">주소</label>
-                <div class="input-group col-lg-10">
-                    <input name="address" type="text" class="form-control onlyNumber" id="divAddress" data-rule-required="true" placeholder="주소를 입력하세요" maxlength="11">
-                <span class="input-group-btn">
-					<button id="inputCheckBtn" class="btn btn-info">주소검색</button>
-				</span>
-                </div>
+                <input name="postNum" type="text" id="postNum" placeholder="우편번호">
+				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input name="address" type="text" id="address" placeholder="주소"><br>
+				<input name="DTL_ADRES" type="text" id="DTL_ADRES" placeholder="상세주소"><br>
             </div>
             
             <div class="form-group" id="divBirth">
@@ -170,14 +173,62 @@
             </div>
         </form>
          
+<!-- script -->     
+        <script type="text/javascript">
          
-        <script>
-         
-            $(function(){
+//address search
+        function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                 // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("DTL_ADRES").value = extraAddr;
+                
+                } else {
+                    document.getElementById("DTL_ADRES").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("postNum").value = data.zonecode;
+                document.getElementById("address").value = addr;
+                document.getElementById("DTL_ADRES").focus();
+            }
+        }).open();
+    }
+    
+ //modal       
+            $(document).ready(function(){
                 //모달을 전역변수로 선언
                 var modalContents = $(".modal-contents");
                 var modal = $("#defaultModal");
-                 
+                //id 체크에 사용할 변수
+                var idck = 0;
                 $('.onlyAlphabetAndNumber').keyup(function(event){
                     if (!(event.keyCode >=37 && event.keyCode<=40)) {
                         var inputVal = $(this).val();
@@ -199,7 +250,7 @@
                     }
                 });
                  
-                //------- 검사하여 상태를 class에 적용
+//------- 검사하여 상태를 class에 적용
                 $('#id').keyup(function(event){
                      
                     var divId = $('#divId');
@@ -294,7 +345,7 @@
                 });
                  
                  
-                //------- validation 검사
+//------- validation
                 $( "form" ).submit(function( event ) {
                      
                     var provision = $('#provision');
@@ -348,7 +399,18 @@
                         divId.removeClass("has-error");
                         divId.addClass("has-success");
                     }
-                     
+                    
+//아이디 중복 확인 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::id 체크 관련 하민이 봐야할곳:::::::::::::::::::::::::::::::::::::::::::
+ //                   $(".btn-default").click(function() {
+                            if(idck==0){
+                                alert('아이디 중복체크를 해주세요');
+                                return false;
+//                            }else{
+//                           alert("회원가입을 축하합니다");
+//                            $("#frm").submit();
+                            }
+//                        });
+                 	
                     //패스워드 검사
                     if($('#password').val()==""){
                         modalContents.text("패스워드를 입력하여 주시기 바랍니다.");
@@ -433,11 +495,53 @@
                         divPhoneNumber.addClass("has-success");
                     }
                      
-                 
+//                     $(".btn-default").click(function() {
+//                         if(confirm("회원가입을 하시겠습니까?")){
+//                             if(idck==0){
+//                                 alert('아이디 중복체크를 해주세요');
+//                                 return false;
+//                             }else{
+//                             alert("회원가입을 축하합니다");
+//                             $("#frm").submit();
+//                             }
+//                         }
+//                         });
                 });
-                 
+                
+//ID Duplicate check
+                $("#idcheck").click(function() {
+
+                	var id =  $("#id").val(); 
+                    
+                    $.ajax({
+                        async: true,
+                        type : 'POST',
+                        data : id,
+                        url : "/member/idcheck",
+                        dataType : "json",
+                        contentType: "application/json; charset=UTF-8",
+                        success : function(data) {
+                        	//휴대폰 번호
+                            if(data.cnt > 0){
+                                modalContents.text("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+                                modal.modal('show');
+                                 
+                                $("#id").focus();
+                            }else{
+                            	modalContents.text("사용가능한 아이디입니다.");
+                            	modal.modal('show');
+                                $("#pw").focus();
+                                //아이디가 중복하지 않으면  idck = 1 
+                                idck = 1;
+                            }
+                        	
+                        }
+                    })
+                });
             });
-             
+            
+            
+            
         </script>
             <hr/>
         </div>
@@ -446,10 +550,8 @@
     </body>
 
 	
-<script type="text/javascript">
-	$(document).ready(function(){
-		
-	});
-</script>	
-</body>
+
+	
+
+ </body>
 </html>

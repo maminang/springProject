@@ -36,6 +36,24 @@ public class MemberServiceImpl implements MemberService {
 		return dao.login(dto);
 	}
 
+	@Override
+	public Object updateui(String id) {
+		// TODO Auto-generated method stub
+		return dao.updateui(id);
+	}
+
+	@Override
+	public void update(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		dao.update(dto);
+	}
+
+	@Override
+	public int idcheck(String id) {
+		// TODO Auto-generated method stub
+		return dao.idcheck(id);
+	}
+
 	
 
 }

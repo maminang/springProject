@@ -19,52 +19,46 @@
 <jsp:include page="../headerBar.jsp" />
 	
 	<div class="container">
-	<form action="#">
+	<form action="member/update" method="post">
 		<div class="row" align="center">
-			<h3># 님 환영합니다</h3>
+			<h3>${mDto.id} 님 환영합니다</h3>
+			<a href=infoUpdate.jsp> 회원정보 수정</a>
 			<h1>p. ##</h1><br><br>
 		</div>
-
+		
+		<div class="form-group">
+			<label for="pw" class="col-lg-2 ">ID</label>
+			<input name="pw" value="${mDto.pw}">
+		</div>
+		
 		<div class="form-group">
 			<label for="id" class="col-lg-2 ">ID</label>
-			<div class="col-lg-10">
-			<input class="form-control" value="#" readonly><br><br>
-			</div>
+			<input name="id" value="${mDto.id}">
 		</div>
 
 		<div class="form-group">
 			<label for="name" class="col-lg-2 ">name</label>
-			<div class="col-lg-10">
-			<input class="form-control" value="#" ><br><br>
-			</div>
+			<input name="name" value="${mDto.name}">
 		</div>
 
 		<div class="form-group">
 			<label for="birth" class="col-lg-2 ">birth</label>
-			<div class="col-lg-10">
-			<input class="form-control" value="#" ><br><br>
-			</div>
+			<input name="birth" value="${mDto.birth}">
 		</div>
 
 		<div class="form-group">
 			<label for="e-mail" class="col-lg-2 ">e-mail</label>
-			<div class="col-lg-10">
-			<input class="form-control" value="#" ><br><br>
-			</div>
+			<input name="email" value="${mDto.email}">
 		</div>
 
 		<div class="form-group">
 			<label for="address" class="col-lg-2 ">address</label>
-			<div class="col-lg-10">
-			<input class="form-control" value="#" ><br><br>
-			</div>
+			<input name="address" value="${mDto.address}">
 		</div>
 
 		<div class="form-group">
 			<label for="phone" class="col-lg-2 ">phone</label>
-			<div class="col-lg-10">
-			<input class="form-control" value="#" ><br><br>
-			</div>
+			<input name="phone" value="${mDto.phone}">
 		</div>
 
 

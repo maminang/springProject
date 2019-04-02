@@ -10,5 +10,11 @@ public interface MemberDAO {
 	MemberDTO mypage(LoginDTO login);
 
 	LoginDTO login(LoginDTO dto);
+
+	Object updateui(String id);
+
+	void update(MemberDTO dto);
+
+	int idcheck(String id);
 	
 }
