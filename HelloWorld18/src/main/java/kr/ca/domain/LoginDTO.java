@@ -43,7 +43,7 @@ public class LoginDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return id+":"+pw;
+		return id;
 	}
 
 	@Override

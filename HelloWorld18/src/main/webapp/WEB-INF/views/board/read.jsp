@@ -132,8 +132,9 @@
 					</select>
 				</div>
 				수량 : <input type="number" value="1" name="amount" required autofocus>
-				<input value="NamepeN" name="id" type="hidden"> <input
-					value="3" name="pno" type="hidden">
+				<input value="${login }" name="id" type="hidden"> 
+				<input value="3" name="pno" type="hidden">
+				<input id="a" value="a" name="a" type="hidden" >
 				<button id="cart" class="btn btn-success">장바구니에 담기</button>
 			</form>
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
@@ -208,9 +209,13 @@
 
 	<div class="alert alert-primary">
 		<h4 class="alert-heading">Alert Heading</h4>
-			<p>Alert - Primary / <a href="#" class="alert-link">Alert Link</a></p>
+		<p>
+			Alert - Primary / <a href="#" class="alert-link">Alert Link</a>
+		</p>
 		<hr>
-		<p class="mb-0">Alert - Primary / <a href="#" class="alert-link">Alert Link</a></p>
+		<p class="mb-0">
+			Alert - Primary / <a href="#" class="alert-link">Alert Link</a>
+		</p>
 	</div>
 
 	${pageContext.request.requestURL }
@@ -220,28 +225,26 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-
 			//장바구니에 담기	
 			$("#cart").click(function() {
 				if (confirm("장바구니로 이동")) {
-	                // 확인 버튼 클릭 시 동작
-					$("form").attr("action", "/shoppingCart/listShoppingCart")
+				// 확인 버튼 클릭 시 동작
+					document.getElementById("#a").value = "#a";
+					$("form").attr("action", "/shoppingCart/insertShoppingCart")
 					$("form").attr("method", "GET");
-	            } else {
-	                // 취소 버튼 클릭 시 동작
+				} else {
+				// 취소 버튼 클릭 시 동작
 					$("form").attr("action", "/shoppingCart/insertShoppingCart");
 					$("form").attr("method", "GET");
-	            }
-				$("form").submit();
+				}
+					$("form").submit();
 			});
 
-// 			$("#redirectShoppingCart").ready(function() {
-// 				$("form"	.attr)
-// 			})
-				
-			
+							// 			$("#redirectShoppingCart").ready(function() {
+							// 				$("form"	.attr)
+							// 			})
 
-		});
+						});
 	</script>
 </body>
 </html>
