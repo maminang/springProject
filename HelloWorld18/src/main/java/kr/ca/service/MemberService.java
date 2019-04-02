@@ -10,5 +10,11 @@ public interface MemberService {
 	MemberDTO mypage(LoginDTO login);
 
 	LoginDTO login(LoginDTO dto);
+
+	void update(MemberDTO dto);
+
+	int idcheck(String id);
+
+	Object updateui(String id);
 	
 }

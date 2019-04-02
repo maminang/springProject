@@ -22,7 +22,7 @@
 	<form action="#">
 		<div class="row" align="center">
 			<h3>${mDto.id} 님 환영합니다</h3>
-			<a href=infoUpdate.jsp> 회원정보 수정</a>
+			<a href="/member/updateui"> 회원정보 수정</a>
 			<h1>p. ##</h1><br><br>
 		</div>
 		
@@ -48,7 +48,10 @@
 
 		<div class="form-group">
 			<label for="address" class="col-lg-2 ">address</label>
+			
+			우)${mDto.postNum}
 			${mDto.address}
+			${mDto.DTL_ADRES}
 		</div>
 
 		<div class="form-group">
