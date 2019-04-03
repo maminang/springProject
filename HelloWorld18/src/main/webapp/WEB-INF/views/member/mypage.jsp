@@ -19,10 +19,10 @@
 <jsp:include page="../headerBar.jsp" />
 	
 	<div class="container">
-	<form action="#">
+	<form action="member/mypage" method="post">
 		<div class="row" align="center">
 			<h3>${mDto.id} 님 환영합니다</h3>
-			<a href="/member/updateui"> 회원정보 수정</a>
+			<a href="/member/updateui?id=${mDto.id}"> 회원정보 수정</a>
 			<h1>p. ##</h1><br><br>
 		</div>
 		

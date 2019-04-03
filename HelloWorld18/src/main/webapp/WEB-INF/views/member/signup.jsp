@@ -224,6 +224,8 @@
     
  //modal       
             $(document).ready(function(){
+            	
+            	
                 //모달을 전역변수로 선언
                 var modalContents = $(".modal-contents");
                 var modal = $("#defaultModal");
@@ -466,7 +468,7 @@
                         divName.removeClass("has-error");
                         divName.addClass("has-success");
                     }
-                     
+                  
                     //이메일
                     if($('#email').val()==""){
                         modalContents.text("이메일을 입력하여 주시기 바랍니다.");

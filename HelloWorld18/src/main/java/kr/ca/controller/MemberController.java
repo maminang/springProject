@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,19 +75,19 @@ public class MemberController {
 	}
 
 //회원정보 수정
-		@RequestMapping(value = "/updateui", method = RequestMethod.GET)
+		@RequestMapping("/updateui")
 		public String updateui(Model model, String id) {
-			
-			model.addAttribute("dto", service.updateui(id));
-			
-			return "member/update";
+			MemberDTO dto= service.updateui(id);
+			model.addAttribute("dto",dto);
+			return "board/update";
 		}
-		
+	
 		@RequestMapping("/update")
 		public String update(MemberDTO dto) {
 			service.update(dto);
 			return "redirect:/member/mypage";
 		}
+	
 
 //id 체크
 		@RequestMapping("/idcheck")

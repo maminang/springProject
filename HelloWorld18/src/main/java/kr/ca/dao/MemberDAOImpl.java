@@ -36,14 +36,16 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public Object updateui(String id) {
+	public MemberDTO updateui(String id) {
 		// TODO Auto-generated method stub
-		return session.update(NS+".updateui", id);
+		return session.selectOne(NS + ".updateui", id);
+
 	}
 
 	@Override
 	public void update(MemberDTO dto) {
 		// TODO Auto-generated method stub
+		
 		session.update(NS+".update", dto);
 	}
 

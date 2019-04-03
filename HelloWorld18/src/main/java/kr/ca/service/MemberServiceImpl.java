@@ -37,8 +37,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Object updateui(String id) {
+	public MemberDTO updateui(String id) {
 		// TODO Auto-generated method stub
+
 		return dao.updateui(id);
 	}
 

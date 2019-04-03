@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,48 +18,63 @@
 </head>
 <body>
 <jsp:include page="../headerBar.jsp" />
-	
 	<div class="container">
-	<form action="member/update" method="post">
+	<form action="/member/update" method="post">
 		<div class="row" align="center">
-			<h3>${mDto.id} 님 환영합니다</h3>
-			<a href=infoUpdate.jsp> 회원정보 수정</a>
-			<h1>p. ##</h1><br><br>
+			<h3>${dto.id} 님 회원정보 수정하기
 		</div>
 		
 		<div class="form-group">
-			<label for="pw" class="col-lg-2 ">ID</label>
-			<input name="pw" value="${mDto.pw}">
+			<label for="signUpDate" class="col-lg-2 ">signUpDate</label>
+			${dto.signUpDate}
+		</div>
+		
+		<div class="form-group">
+			<label for="point" class="col-lg-2 ">point</label>
+			${dto.point}
 		</div>
 		
 		<div class="form-group">
 			<label for="id" class="col-lg-2 ">ID</label>
-			<input name="id" value="${mDto.id}">
+			<input id="id" name="id" value="${dto.id}">
+		</div>
+
+		<div class="form-group">
+			<label for="pw" class="col-lg-2 ">pw</label>
+			<input id="pw" name="pw" value="${dto.pw}">
 		</div>
 
 		<div class="form-group">
 			<label for="name" class="col-lg-2 ">name</label>
-			<input name="name" value="${mDto.name}">
+			<input id="name" name="name" value="${dto.name}">
 		</div>
-
-		<div class="form-group">
-			<label for="birth" class="col-lg-2 ">birth</label>
-			<input name="birth" value="${mDto.birth}">
-		</div>
+		
+		
+		<div class="form-group" id="divBirth">
+             <label for="birth" class="col-lg-2">birth</label>
+        <c:out value="${fn:substring(dto.birth,0,10)}"/>
+        </div>
 
 		<div class="form-group">
 			<label for="e-mail" class="col-lg-2 ">e-mail</label>
-			<input name="email" value="${mDto.email}">
+			<input id="email" name="email" value="${dto.email}">
+		</div>
+
+
+		<div class="form-group">
+			<label for="postNum" class="col-lg-2 ">postNum</label>
+			<input id="postNum" name="postNum" value="${dto.postNum}">
 		</div>
 
 		<div class="form-group">
 			<label for="address" class="col-lg-2 ">address</label>
-			<input name="address" value="${mDto.address}">
+			<input id="address" name="address" value="${dto.address}">
+			<input id="DTL_ADRES" name="DTL_ADRES" value="${dto.DTL_ADRES}">
 		</div>
 
 		<div class="form-group">
 			<label for="phone" class="col-lg-2 ">phone</label>
-			<input name="phone" value="${mDto.phone}">
+			<input id="phone" name="phone" value="${dto.phone}">
 		</div>
 
 
