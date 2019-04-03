@@ -6,17 +6,30 @@ volume 용량
 price 가격
 category 카테고리
 
+select * from v$resource_limit where resource_name = 'processes'
+alter system set processes=200 scope=spfile;
+
+
+select count(volume) from tbl_product_detail
+where pno = 2 and volume = 30
+
+update tbl_product_detail set volume = 30 where volume = 2345
+delete tbl_product_detail where price = 234
+
 create table tbl_product (
 	pno number primary key,
-	eng_name varchar2(100),
-	kr_name varchar2(100),
+	eng_name varchar2(100) not null,
+	kr_name varchar2(100) not null,
 	prdct_dscrp varchar2(600),
-	volume number,
-	price number,
-	category varchar2(100) 
+	volume number not null,
+	price number not null,
+	category varchar2(100) not null
 )
 
 select * from tbl_product
+
+select * from tbl_shopping_Cart
+select * from TBL_PRODUCT_DETAIL
 
 drop table tbl_product
 

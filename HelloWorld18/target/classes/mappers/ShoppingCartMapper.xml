@@ -29,7 +29,20 @@
 	<select id="listShoppingCart" resultType="kr.ca.domain.ShoppingCartDTO">
 		select * from tbl_shopping_cart where id = #{id} order by pno desc
 	</select>
+	
+<!-- 	장바구니 물건 개수 update -->
+	<update id="updateShoppingCart">
+		update tbl_shopping_cart set amount = #{amount} where id = #{id} and pno = #{pno}
+	</update>
+	
+<!-- 	장바구니 delete -->
+	<delete id="deleteShoppingCart">
+		delete from tbl_shopping_cart where id = #{id} and pno = #{pno}
+	</delete>
 
+	<select id="selectShoppingCartPno" resultType="Integer">
+		select pno from tbl_shopping_cart where id = #{id}
+	</select>
 	
 </mapper>
 

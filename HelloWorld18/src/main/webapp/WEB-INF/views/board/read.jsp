@@ -57,6 +57,8 @@
 </head>
 <body>
 	<jsp:include page="../headerBar.jsp" />
+	${pd.pno}
+	${pdd }
 	<div class="box">
 		<div class="leftbox">
 
@@ -110,12 +112,10 @@
 		<!-- leftbox -->
 
 		<div class="rightbox">
-			<div>잉글리쉬 페어 앤 프리지아 코롱</div>
-			<div>English Pear & Freesia Cologne</div>
+			<div>${pd.kr_name }</div>
+			<div>${pd.eng_name }</div>
 			<br>
-			<div>은은하면서 신선하고 감미로운 향. 부드럽고 감미로운 향을 부여하는 잉글리쉬 페어 앤 프리지아는 가을의
-				정수라 할 수 있습니다. 화이트 프리지아 부케향에 이제 막 익은 배의 신선함을 입히고, 호박, 파출리, 우디향으로 은은함을
-				더했습니다. 감미롭고 특별한 향이 느껴집니다.</div>
+			<div>${pd.prdct_dscrp }</div>
 			<br>
 
 			<!-- Button trigger modal 모달 모달모달-->
@@ -126,15 +126,15 @@
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<form>
 				<div>
-					<select>
+					<select name="vp">
 						<option>$100 30ml</option>
 						<option>$200 100ml</option>
 					</select>
 				</div>
-				수량 : <input type="number" value="1" name="amount" required autofocus>
-				<input value="NamepeN" name="id" type="hidden"> <input
-					value="3" name="pno" type="hidden">
-				<button id="cart" class="btn btn-success">장바구니에 담기</button>
+				수량 : <input type="number" value="1" name="amount" min="1" required autofocus>
+				<input value="NamepeN" name="id" type="hidden"> 
+				<input value="${pd.pno }" name="pno" type="hidden">
+				<a id="cart" class="btn btn-success" >장바구니에 담기</a>
 			</form>
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<hr>
@@ -147,8 +147,6 @@
 			<!-- 			리뷰 작성하기 -->
 			<a href="#">리뷰 작성하기</a>
 			<!-- 			리뷰 작성하기 -->
-
-			<button id="saveCookie">쿠키 받아오기</button>
 
 		</div>
 	</div>
@@ -206,13 +204,6 @@
 	</div>
 	<!-- 	공유하기 Modal -->
 
-	<div class="alert alert-primary">
-		<h4 class="alert-heading">Alert Heading</h4>
-			<p>Alert - Primary / <a href="#" class="alert-link">Alert Link</a></p>
-		<hr>
-		<p class="mb-0">Alert - Primary / <a href="#" class="alert-link">Alert Link</a></p>
-	</div>
-
 	${pageContext.request.requestURL }
 
 
@@ -220,26 +211,14 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-
+			
 			//장바구니에 담기	
 			$("#cart").click(function() {
-				if (confirm("장바구니로 이동")) {
-	                // 확인 버튼 클릭 시 동작
-					$("form").attr("action", "/shoppingCart/listShoppingCart")
-					$("form").attr("method", "GET");
-	            } else {
-	                // 취소 버튼 클릭 시 동작
-					$("form").attr("action", "/shoppingCart/insertShoppingCart");
-					$("form").attr("method", "GET");
-	            }
+				$("form").attr("action", "/shoppingCart/insertShoppingCart");
+				$("form").attr("method", "GET");
 				$("form").submit();
+				alert("장바구니에 담겼습니다");
 			});
-
-// 			$("#redirectShoppingCart").ready(function() {
-// 				$("form"	.attr)
-// 			})
-				
-			
 
 		});
 	</script>

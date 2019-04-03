@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ca.mapper.product">
+
+	<select id="getPno" resultType="Integer">
+		select max(pno) from tbl_product
+	</select>
+	<insert id="insert">insert into tbl_product
+		(pno,eng_name,kr_name,prdct_dscrp,volume,price,category) values
+		(#{pno},#{eng_name},#{kr_name},#{prdct_dscrp},#{volume},#{price},#{category})
+	</insert>
+
+	<select id="getPino" resultType="Integer">
+		select max(pino) from
+		tbl_product_images
+	</select>
+	<insert id="addImages">
+		insert into tbl_product_images (pno,pino,fullname)
+		values(#{pno},#{pino},#{fullName})
+	</insert>
+
+	<!-- product pno로 검색 -->
+	<select id="selectProduct" resultType="kr.ca.domain.ProductDTO">
+		select * from tbl_product
+		where pno = #{pno}
+	</select>
+	<!-- productDetail pno로 검색 -->
+	<select id="selectProductDetail"
+		resultType="kr.ca.domain.ProductDetailDTO">
+		select * from tbl_product_detail where pno = #{pno}
+	</select>
+
+	<select id="selectOneProductDetail"
+		resultType="kr.ca.domain.ProductDetailDTO">
+		select * from tbl_product_detail where pno = #{pno} and volume = #{volume}
+	</select>
+	
+	<select id="selectCountProductDetail" resultType="Integer">
+		select count(volume) from tbl_product_detail
+	</select>
+	
+	<select id="selectShoppingCart"
+		resultType="kr.ca.domain.ShoppingCartDTO">
+		select * from tbl_shopping_cart where id = #{id}
+	</select>
+
+</mapper>

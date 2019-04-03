@@ -17,7 +17,6 @@
 </head>
 <body>
 	<jsp:include page="headerBar.jsp" />
-
 	<div class="container">
 		<div class="row">
 			<table class="table table-hover">
@@ -27,6 +26,7 @@
 						<th>가격</th>
 						<th>수량</th>
 						<th>합계</th>
+						<th></th>
 					</tr>
 				</thead>
 
@@ -35,9 +35,17 @@
 						<tr>
 							<c:if test="${list.pno > 0 }">
 								<td>${list.pno}</td>
-								<td>가격 아직 안함</td>
+								<td>${pdd.price }</td>
 								<td>${list.amount}</td>
-								<td>가격 * ${list.amount }</td>
+								<td>${list.amount * pdd.price}</td>
+								<td>
+									<form method="post">
+										<input type="number" value="1" min="1" max="${list.amount }" name="amount"
+											required autofocus> 
+											<input hidden="hidden" value="${list.pno }" name="pno" >
+										<button id="X">X</button>
+									</form>
+								</td>
 							</c:if>
 						</tr>
 					</c:forEach>
@@ -49,6 +57,12 @@
 	<jsp:include page="footerBar.jsp" />
 	<script type="text/javascript">
 		$(document).ready(function() {
+
+			$("#X").click(function() {
+				$("form").attr("action", "/shoppingCart/deleteShoppingCart");
+				$("form").attr("method", "GET");
+				$("Form").submit();
+			});
 
 		});
 	</script>
