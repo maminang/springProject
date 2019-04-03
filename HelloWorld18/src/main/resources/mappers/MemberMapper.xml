@@ -22,10 +22,10 @@
 		id=#{id}
 	</select>
 	
-	<select id="update" resultType="MemberDTO">
-	UPDATE tbl_member SET pw=#{pw}, email=#{email},name=#{name},postNum=#{postNum},DTL_ADRES=#{DTL_ADRES},birth=#{birth},address=#{address},phone=#{phone} 
+	<update id="update">
+	UPDATE tbl_member SET pw=#{pw}, email=#{email},name=#{name},postNum=#{postNum},DTL_ADRES=#{DTL_ADRES},address=#{address},phone=#{phone} 
 	WHERE id=#{id}
-	</select>
+	</update>
 	
 	<select id="idcheck" parameterType="String" resultType="Integer">
       SELECT COUNT(*) FROM tbl_member WHERE id = #{id}

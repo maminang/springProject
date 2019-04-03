@@ -31,6 +31,7 @@ insert into tbl_member (id,pw,name,email,address,phone,birth) values ('NamepeN',
 insert into tbl_member (id,pw,name,email,address,phone,birth) values ('maminang', 'qlalfqjsgh', '임하민', 'maminang@gmail.com','서울특별시 성북구 장월로 11길 11-1 중앙빌라 112호', '010-2334-4290', '2019-03-28')
 
 select * from tbl_member
+SELECT * FROM tbl_member WHERE id='aa'
 
 drop table tbl_member
 
@@ -40,7 +41,8 @@ alter table tbl_member add DTL_ADRES varchar2(50)
 
 delete tbl_member
 
-
+	UPDATE tbl_member SET email='aaa@aaa',name='aa'
+	WHERE id='aaa'
 
 
 
