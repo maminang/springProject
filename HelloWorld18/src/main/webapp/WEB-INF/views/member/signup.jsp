@@ -16,7 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- <body>
+
 
 <!-- header -->
 
@@ -48,9 +48,7 @@
  <!-- Terms of Service -->
                 <label for="provision" class="col-lg-2 control-label">회원가입약관</label>
                 <div class="col-lg-10" id="provision">
-                    <textarea class="form-control" rows="8" style="resize:none">
-					약관동의sdfsdfsdfdsf
-                    </textarea>
+                    <textarea class="form-control" rows="8" style="resize:none">약관동의sdfsdfsdfdsf </textarea>
                     <div class="radio">
                         <label>
                             <input type="radio" id="provisionYn" name="provisionYn" value="Y" autofocus="autofocus" checked>
@@ -68,9 +66,7 @@
             <div class="form-group">
                 <label for="memberInfo" class="col-lg-2 control-label">개인정보취급방침</label>
                 <div class="col-lg-10" id="memberInfo">
-                    <textarea class="form-control" rows="8" style="resize:none">
-					개인정보의 항목 및 수집방법
-                    </textarea>
+                    <textarea class="form-control" rows="8" style="resize:none">개인정보의 항목 및 수집방법</textarea>
                     <div class="radio">
                         <label>
                             <input type="radio" id="memberInfoYn" name="memberInfoYn" value="Y" checked>
@@ -92,7 +88,7 @@
                 <div class="col-lg-10 input-group">
                     <input name="id" type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="10자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="10">
 			<span class="input-group-btn">
-				<button id="idcheck" class="btn btn-info">ID 중복 체크</button>
+				<button type="button"id="idcheck" class="btn btn-info">ID 중복 체크</button>
 			</span>
                 </div>
             </div>
@@ -400,16 +396,11 @@
                         divId.addClass("has-success");
                     }
                     
-//아이디 중복 확인 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::id 체크 관련 하민이 봐야할곳:::::::::::::::::::::::::::::::::::::::::::
- //                   $(".btn-default").click(function() {
-                            if(idck==0){
-                                alert('아이디 중복체크를 해주세요');
-                                return false;
-//                            }else{
-//                           alert("회원가입을 축하합니다");
-//                            $("#frm").submit();
-                            }
-//                        });
+					//아이디 중복 확인 
+                    if(idck==0){
+                    	alert('아이디 중복체크를 해주세요');
+                    	return false;
+                    }
                  	
                     //패스워드 검사
                     if($('#password').val()==""){
@@ -494,22 +485,10 @@
                         divPhoneNumber.removeClass("has-error");
                         divPhoneNumber.addClass("has-success");
                     }
-                     
-//                     $(".btn-default").click(function() {
-//                         if(confirm("회원가입을 하시겠습니까?")){
-//                             if(idck==0){
-//                                 alert('아이디 중복체크를 해주세요');
-//                                 return false;
-//                             }else{
-//                             alert("회원가입을 축하합니다");
-//                             $("#frm").submit();
-//                             }
-//                         }
-//                         });
                 });
                 
 //ID Duplicate check
-                $("#idcheck").click(function() {
+                $("#idcheck").click(function(event) {
 
                 	var id =  $("#id").val(); 
                     
@@ -538,16 +517,19 @@
                         }
                     })
                 });
+                
+                // var idck reset
+                $("#id").change(function() {
+					idck = 0;
+				})
             });
             
             
             
         </script>
-            <hr/>
         </div>
  <!-- :::::::::::::::::::::::::::::::::::: 푸터 :::::::::::::::::::::::::::::::::::::: -->
         <jsp:include page="../footerBar.jsp" />
-    </body>
 
 	
 

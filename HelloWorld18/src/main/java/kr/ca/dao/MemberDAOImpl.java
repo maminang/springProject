@@ -49,7 +49,6 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public int idcheck(String id) {
-		// TODO Auto-generated method stub
 		return session.selectOne(NS+".idcheck", id);
 	}
 

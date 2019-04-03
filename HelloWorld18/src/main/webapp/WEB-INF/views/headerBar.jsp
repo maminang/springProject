@@ -5,13 +5,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"
 	type="text/javascript"></script>
-<!-- <style>
-.navbar-center-container {
-	text-align: center;
-	display: inline-block;
-	background-color: red;
-}
-</style> -->
+
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -26,16 +20,16 @@
 			<a class="navbar-brand" href="/">DEmoNeyo</a>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-			<c:if test="${empty login}">
-				<li><a href="/member/login" class="glyphicon glyphicon-log-in">로그인</a></li>
-			</c:if>
-			<c:if test="${not empty login}">
-				<li><a href="/member/logout" class="glyphicon glyphicon-log-out">로그아웃</a></li>
-			</c:if>
+				<c:if test="${empty login}">
+					<li><a href="/member/login" class="glyphicon glyphicon-log-in">로그인</a></li>
+				</c:if>
+				<c:if test="${not empty login}">
+					<li><a href="/member/logout"
+						class="glyphicon glyphicon-log-out">로그아웃</a></li>
+				</c:if>
 				<li><a href="/member/signup" class="glyphicon glyphicon-pencil">회원가입</a></li>
 				<li><a href="/member/mypage" class="glyphicon glyphicon-user">마이페이지</a></li>
 				<li><a href="#" class="glyphicon glyphicon-shopping-cart">장바구니</a></li>
@@ -46,9 +40,11 @@
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false"></a>
 					<ul class="dropdown-menu">
-						<li><form class="navbar-form navbar-left" action="/product/search">
+						<li><form class="navbar-form navbar-left"
+								action="/product/search">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="검색" name="keyword">
+									<input type="text" class="form-control" placeholder="검색"
+										name="keyword">
 								</div>
 								<button type="submit"
 									class="btn btn-default glyphicon glyphicon-search"></button>
@@ -57,9 +53,7 @@
 
 			</ul>
 		</div>
-		<!-- /.navbar-collapse -->
 	</div>
-	<!-- /.container-fluid -->
 	<div class="container-fluid">
 		<ul class="nav navbar-nav" id="menu">
 		</ul>

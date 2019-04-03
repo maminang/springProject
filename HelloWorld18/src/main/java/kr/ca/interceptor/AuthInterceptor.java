@@ -21,7 +21,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
          return false;
       }
       saveDest(request);
-      return true;
+      return true; 
    }
 
    private void saveDest(HttpServletRequest request) {

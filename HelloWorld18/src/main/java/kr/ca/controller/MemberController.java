@@ -33,11 +33,9 @@ public class MemberController {
 	@RequestMapping(value = "/loginpost", method = RequestMethod.POST)
 	public void loginPost(LoginDTO dto, HttpSession session) throws Exception {
 		LoginDTO mdto = service.login(dto);
-		
-		if (dto == null) {
-			return;
+		if (dto != null) {
+			session.setAttribute("login", mdto);
 		}
-		session.setAttribute("login", mdto);
 	}
 
 //로그아웃	
