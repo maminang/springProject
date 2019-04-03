@@ -49,7 +49,7 @@
 		<div class="form-group">
 			<label for="address" class="col-lg-2 ">address</label>
 			
-			우)${mDto.postNum}
+			${mDto.postNum}
 			${mDto.address}
 			${mDto.DTL_ADRES}
 		</div>
