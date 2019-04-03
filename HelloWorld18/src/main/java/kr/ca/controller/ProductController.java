@@ -29,6 +29,11 @@ public class ProductController {
 		service.write(dto);
 		return "product/read";
 	}
+	
+	@RequestMapping("read")
+	public String read(String pno) {
+		return "product/read";
+	}
 
 	@RequestMapping("list/{category}")
 	public String listByCategory(Model model, @PathVariable String category) {

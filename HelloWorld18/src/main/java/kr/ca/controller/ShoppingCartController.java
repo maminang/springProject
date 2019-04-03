@@ -1,7 +1,6 @@
 package kr.ca.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,13 +24,8 @@ public class ShoppingCartController {
 //	장바구니 리스트
 	@RequestMapping("listShoppingCart")
 	public String listShoppingCart(ShoppingCartDTO dto, HttpServletRequest request, Model model) {
-
-//		List<ShoppingCartDTO> list = service.listShoppingCart(dto);
-//		model.addAttribute("list", list);
-
 		Cookie[] cookies = request.getCookies();
 		List<ShoppingCartDTO> cList = new ArrayList<ShoppingCartDTO>();
-		List<Integer> iList = new ArrayList<Integer>();
 		for (int i = 0; i < cookies.length; i++) {
 			/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
 			if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
@@ -104,14 +98,7 @@ public class ShoppingCartController {
 
 		return "board/read";
 	}
-
-//	read.jsp로 가기
-	@RequestMapping("/read")
-	public String readTest() {
-
-		return "board/read";
-	}
-
+	
 //	shoppingCart.jsp로 가기
 	@RequestMapping("/goShoppingCart")
 	public String main() {

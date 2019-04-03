@@ -101,4 +101,16 @@ public class MemberController {
 	        return map;
 	    }
 		
+// 포인트 충전
+		@RequestMapping("pointCharge")
+		public void pointCharge() {
+		}
+		
+		@RequestMapping(value = "pointCharge", method = RequestMethod.POST)
+		public String pointCharge(int id, int point) {
+			System.out.println(id);
+			System.out.println(point);
+			return "redirect:/member/mypage/";
+		}
+		
 }
