@@ -64,26 +64,6 @@
 				$("Form").submit();
 			});
 			
-			var mergeItem="";
-			var mergeCount=0;
-			var mergeRowNum=0;
-			
-			$('tr','table').each(function(row) {
-				if(row>2) {
-					var thisTr=$(this);
-					var item = $(':first-child',thisTr).html();
-					
-					if(mergeItem != item) {
-						mergeCount=1;
-						mergeItem=item;
-						mergeRowNum=Number(row);
-					} else {
-						mergeCount=Number(mergeCount) + 1;
-						$("tr:eq("+mergeRowNum+")>td:first-child").attr("rowspan", mergeCount);
-						$('td:first-child',thisTr).remove();
-					}
-				}
-			
 		});
 	</script>
 

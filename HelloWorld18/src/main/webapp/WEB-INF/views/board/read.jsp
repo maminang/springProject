@@ -127,8 +127,8 @@
 			<form>
 				<div>
 					<select name="vp">
-						<option>${pdd[0].price } 30ml</option>
-						<option>${pdd[1].price } 100ml</option>
+						<option>${pdd[0].price } ${pdd[0].volume }ml</option>
+						<option>${pdd[1].price } ${pdd[1].volume }ml</option>
 					</select>
 				</div>
 				수량 : <input type="number" value="1" name="amount" min="1" required autofocus>

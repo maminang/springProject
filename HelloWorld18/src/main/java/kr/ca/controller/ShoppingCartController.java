@@ -61,19 +61,19 @@ public class ShoppingCartController {
 			System.out.println(list);
 			model.addAttribute("list", list);
 
-			int count = productDAO.selectCountProductDetail();
-			System.out.println("count : " + count);
-			List<ProductDetailDTO> pddList = new ArrayList<ProductDetailDTO>();
-			System.out.println(pddList);
-				for (int j = 0; j < list.size(); j++) {
-					pddList.add(productDAO.selectOneProductDetail(list.get(j).getPno(), 30));
-					pddList.add(productDAO.selectOneProductDetail(list.get(j).getPno(), 100));
-				}
-			/* pddList의 null 제거 */
-			while (pddList.remove(null))
-				;
-			System.out.println("pddList : " + pddList);
-			model.addAttribute("pdd", pddList);
+//			int count = productDAO.selectCountProductDetail();
+//			System.out.println("count : " + count);
+//			List<ProductDetailDTO> pddList = new ArrayList<ProductDetailDTO>();
+//			System.out.println(pddList);
+//				for (int j = 0; j < list.size(); j++) {
+//					pddList.add(productDAO.selectOneProductDetail(list.get(j).getPno(), 30));
+//					pddList.add(productDAO.selectOneProductDetail(list.get(j).getPno(), 100));
+//				}
+//			/* pddList의 null 제거 */
+//			while (pddList.remove(null))
+//				;
+//			System.out.println("pddList : " + pddList);
+//			model.addAttribute("pdd", pddList);
 
 		} else {
 
