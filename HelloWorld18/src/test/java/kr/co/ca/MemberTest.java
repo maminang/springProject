@@ -1,5 +1,7 @@
 package kr.co.ca;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -8,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.ca.dao.MemberDAO;
+import kr.ca.domain.ChargeHistoryDTO;
 import kr.ca.domain.LoginDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,5 +28,11 @@ public class MemberTest {
 		dao.pointCharge("NamepeN", 100);
 		LoginDTO login = new LoginDTO("NamepeN", "qlalfqjsgh");
 		System.out.println(dao.mypage(login));
+	}
+	
+	@Test
+	public void testGetChargeHistory() {
+		List<ChargeHistoryDTO> list = dao.getChargeHistory("NamepeN");
+		System.out.println(list);
 	}
 }

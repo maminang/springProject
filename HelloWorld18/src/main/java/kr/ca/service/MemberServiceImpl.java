@@ -1,11 +1,14 @@
 package kr.ca.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.ca.dao.MemberDAO;
+import kr.ca.domain.ChargeHistoryDTO;
 import kr.ca.domain.LoginDTO;
 import kr.ca.domain.MemberDTO;
 
@@ -59,6 +62,12 @@ public class MemberServiceImpl implements MemberService {
 	public void pointCharge(String id, int point) {
 		// TODO Auto-generated method stub
 		dao.pointCharge(id,point);
+	}
+
+	@Override
+	public List<ChargeHistoryDTO> getChargeHistory(String id) {
+		// TODO Auto-generated method stub
+		return dao.getChargeHistory(id);
 	}
 
 }

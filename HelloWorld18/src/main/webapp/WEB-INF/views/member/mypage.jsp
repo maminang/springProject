@@ -15,7 +15,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"
+	type="text/javascript"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -56,10 +58,18 @@
 			<div class="form-group">
 				<label for="phone" class="col-lg-2 ">phone</label> ${mDto.phone}
 			</div>
-			
+
 			<div class="form-group">
 				<label for="point" class="col-lg-2 ">point</label> ${mDto.point}
+				<button type="button" onclick="toggleChargeHistory()"
+					class="btn btn-xs">충전내역</button>
 			</div>
+
+
+
+
+
+
 
 			<!-- ::::::::::::::::::::::::::::::::::::::::::::::::주문List:::::::::::::::::::::::::::::::::::: -->
 			<c:forEach items="#" var="#">
@@ -83,15 +93,77 @@
 	</div>
 
 
+	<!-- point charge history modal -->
+	<div id="chargeHistoryModal" class="modal fade" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">충전내역</h4>
+				</div>
+				<div class="modal-body" id="chargeHistoryList">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>충전일</th>
+								<th>포인트</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{chargedate}}</td>
+								<td>{{point}}</td>
+							<tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
 
+	<script id="chargeHistorySource" type="text/x-handlebars-template">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>충전일</th>
+					<th>포인트</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each.}}
+				<tr>
+					<td>{{chargedate}}</td>
+					<td>{{point}}</td>
+				<tr>
+				{{/each}}
+			</tbody>
+		</table>
+</script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			/* if (${empty login}) {
-				alert("dddddddddd");
-				self.location="/member/login";
-			} */
 		});
+
+		function toggleChargeHistory() {
+			$('#chargeHistoryModal').modal('toggle')
+			var id = "${mDto.id}";
+			$.getJSON("/member/getChargeHistory/" + id, function(data) {
+				var source = $("#chargeHistorySource").html();
+				var template = Handlebars.compile(source)
+
+				$("#chargeHistoryList").html(template(data));
+			})
+		}
 	</script>
 	<jsp:include page="../footerBar.jsp" />
 </body>

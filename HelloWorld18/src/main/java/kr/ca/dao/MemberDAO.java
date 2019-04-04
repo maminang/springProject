@@ -1,5 +1,8 @@
 package kr.ca.dao;
 
+import java.util.List;
+
+import kr.ca.domain.ChargeHistoryDTO;
 import kr.ca.domain.LoginDTO;
 import kr.ca.domain.MemberDTO;
 
@@ -18,6 +21,8 @@ public interface MemberDAO {
 	int idcheck(String id);
 
 	void pointCharge(String id, int point);
+
+	List<ChargeHistoryDTO> getChargeHistory(String id);
 
 	
 }

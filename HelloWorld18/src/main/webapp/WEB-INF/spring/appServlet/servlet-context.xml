@@ -45,6 +45,7 @@
 		
 		<interceptor>
 			<mapping path="/member/mypage"/>
+			<mapping path="/member/pointCharge"/>
 			<beans:ref bean="AuthInterceptor"/>
 		</interceptor>
 		

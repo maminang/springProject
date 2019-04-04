@@ -35,5 +35,11 @@
 		update tbl_member set point = point+#{point} where id = #{id}
 	</update>
 	
+	<insert id="chargeHistory">
+		insert into tbl_charge_history (id,point) values (#{id},#{point})
+	</insert>
 	
+	<select id="getChargeHistory" resultType="ChargeHistoryDTO">
+		select * from tbl_charge_history where id = #{id} order by chargedate desc
+	</select>
 </mapper>

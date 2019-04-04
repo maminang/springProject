@@ -1,6 +1,7 @@
 package kr.ca.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -8,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.ca.domain.ChargeHistoryDTO;
 import kr.ca.domain.LoginDTO;
 import kr.ca.domain.MemberDTO;
 
@@ -63,6 +65,12 @@ public class MemberDAOImpl implements MemberDAO {
 		map.put("id", id);
 		map.put("point", point);
 		session.update(NS+".pointCharge", map);
+		session.insert(NS+".chargeHistory", map);
+	}
+
+	@Override
+	public List<ChargeHistoryDTO> getChargeHistory(String id) {
+		return session.selectList(NS+".getChargeHistory", id);
 	}
 
 
