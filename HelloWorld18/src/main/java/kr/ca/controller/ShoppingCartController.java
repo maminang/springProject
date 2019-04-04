@@ -61,23 +61,20 @@ public class ShoppingCartController {
 			System.out.println(list);
 			model.addAttribute("list", list);
 
-
 			int count = productDAO.selectCountProductDetail();
 			System.out.println("count : " + count);
 			List<ProductDetailDTO> pddList = new ArrayList<ProductDetailDTO>();
-			for (int j = 0; j < count; j++) {
-				if (productDAO.selectOneProductDetail(j, 30) != null) {
-					pddList.add(productDAO.selectOneProductDetail(j, 30));
+			System.out.println(pddList);
+				for (int j = 0; j < list.size(); j++) {
+					pddList.add(productDAO.selectOneProductDetail(list.get(j).getPno(), 30));
+					pddList.add(productDAO.selectOneProductDetail(list.get(j).getPno(), 100));
 				}
-				System.out.println(productDAO.selectOneProductDetail(j, 30));
-				if (productDAO.selectOneProductDetail(j, 100) != null) {
-					pddList.add(productDAO.selectOneProductDetail(j, 100));
-				}
-			}
+			/* pddList의 null 제거 */
+			while (pddList.remove(null))
+				;
 			System.out.println("pddList : " + pddList);
-
 			model.addAttribute("pdd", pddList);
-			
+
 		} else {
 
 			Cookie[] cookies = request.getCookies();
@@ -85,7 +82,7 @@ public class ShoppingCartController {
 			for (int i = 0; i < cookies.length; i++) {
 				/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
 				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
-					cList.add(new ShoppingCartDTO(dto.getId(), 0, 0));
+					cList.add(new ShoppingCartDTO(dto.getId(), 0, 0, 0, 0));
 					continue;
 				}
 
@@ -121,8 +118,8 @@ public class ShoppingCartController {
 		pd = productDAO.selectProduct(pd);
 		/* value, price 받아오기 */
 		String[] sVp = vp.split(" ");
-		pd.setVolume(Integer.valueOf(sVp[0].replaceAll("[^0-9]", "")));
-		pd.setPrice(Integer.valueOf(sVp[1].replaceAll("[^0-9]", "")));
+		pd.setPrice(Integer.valueOf(sVp[0].replaceAll("[^0-9]", "")));
+		pd.setVolume(Integer.valueOf(sVp[1].replaceAll("[^0-9]", "")));
 
 		model.addAttribute("pd", pd);
 
@@ -132,6 +129,9 @@ public class ShoppingCartController {
 		/* 장바구니에 담기 (회원) */
 		if (login != null) {
 			dto.setId(login.toString());
+			dto.setVolume(Integer.valueOf(sVp[1].replaceAll("[^0-9]", "")));
+			dto.setPrice(Integer.valueOf(sVp[0].replaceAll("[^0-9]", "")));
+			System.out.println(dto);
 			service.insertShoppingCart(dto);
 		} else {
 
@@ -181,15 +181,19 @@ public class ShoppingCartController {
 	@RequestMapping("/deleteShoppingCart")
 	public RedirectView deleteShoppingCart(ShoppingCartDTO dto, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
-
+		System.out.println("aaa");
 		Object login = session.getAttribute("login");
+		System.out.println(dto);
 		/* 로그인 했을 때 */
 		if (login != null) {
-			ShoppingCartDTO member = dao.selectShoppingCart(login.toString());
+			dto.setId(login.toString());
+			ShoppingCartDTO member = dao.selectShoppingCart(dto);
+			System.out.println(member);
 			if (dto.getAmount() >= member.getAmount()) {
 				service.deleteShoppingCart(member);
 			}
 			member.setAmount(member.getAmount() - dto.getAmount());
+			System.out.println(member);
 			service.updateShoppingCart(member);
 			/* 로그인 안했을 때 */
 		} else {
@@ -245,6 +249,7 @@ public class ShoppingCartController {
 		List<ProductDetailDTO> pdd = productDAO.selectProductDetail(pd.getPno());
 		model.addAttribute("pd", pd);
 		model.addAttribute("pdd", pdd);
+		System.out.println(pdd);
 
 		return "board/read";
 	}

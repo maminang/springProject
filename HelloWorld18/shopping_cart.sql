@@ -6,11 +6,16 @@ create table tbl_shopping_cart (
 	pno number references tbl_product(pno)
 )
 
+alter table tbl_shopping_cart add price number
+
 insert into tbl_shopping_cart values ('NamepeN', 1)
-insert into tbl_shopping_cart values ('NamepeN', 2, 1)
+insert into tbl_shopping_cart values ('NamepeN', 2, 1, 30)
 
 select * from tbl_shopping_cart order by pno asc
+update tbl_shopping_cart set price = 93000 where volume=30
 delete from tbl_shopping_cart where pno = 1
+
+
 
 select * from tbl_shopping_cart where id = 'NamepeN'
 

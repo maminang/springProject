@@ -24,6 +24,8 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 		map.put("id", dto.getId());
 		map.put("pno", dto.getPno());
 		map.put("amount", dto.getAmount());
+		map.put("volume", dto.getVolume());
+		map.put("price", dto.getPrice());
 
 		Object oAmount = session.selectOne(NS + ".checkAmount", map);
 		if (oAmount == null) {
@@ -35,9 +37,9 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 
 //	장바구니 id로 select
 	@Override
-	public ShoppingCartDTO selectShoppingCart(String id) {
+	public ShoppingCartDTO selectShoppingCart(ShoppingCartDTO dto) {
 
-		return session.selectOne(NS + ".selectShoppingCart", id);
+		return session.selectOne(NS + ".selectShoppingCart", dto);
 	}
 
 //	장바구니 list

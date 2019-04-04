@@ -11,7 +11,7 @@ public interface ShoppingCartDAO {
 	void insertShoppingCart(ShoppingCartDTO dto);
 
 //	장바구니 id로 select
-	ShoppingCartDTO selectShoppingCart(String id);
+	ShoppingCartDTO selectShoppingCart(ShoppingCartDTO dto);
 
 //	장바구니 list
 	List<ShoppingCartDTO> listShoppingCart(ShoppingCartDTO dto);

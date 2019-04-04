@@ -22,8 +22,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 //	장바구니 id로 select
 	@Override
-	public ShoppingCartDTO selectShoppingCart(String id) {
-		return dao.selectShoppingCart(id);
+	public ShoppingCartDTO selectShoppingCart(ShoppingCartDTO dto) {
+		return dao.selectShoppingCart(dto);
 	}
 
 //	장바구니 list

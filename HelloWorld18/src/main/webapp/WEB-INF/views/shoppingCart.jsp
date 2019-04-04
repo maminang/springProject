@@ -23,30 +23,30 @@
 				<thead>
 					<tr>
 						<th>제품</th>
+						<th>용량</th>
 						<th>가격</th>
 						<th>수량</th>
 						<th>합계</th>
 						<th></th>
 					</tr>
 				</thead>
-
 				<tbody>
-					<c:forEach items="${list}" var="list">
+					<c:forEach items="${list}" var="list" varStatus="status">
 						<tr>
-							<c:if test="${list.pno > 0 }">
-								<td>${list.pno}</td>
-								<td>${pdd.price }</td>
-								<td>${list.amount}</td>
-								<td>${list.amount * pdd.price}</td>
-								<td>
-									<form method="post">
-										<input type="number" value="1" min="1" max="${list.amount }" name="amount"
-											required autofocus> 
-											<input hidden="hidden" value="${list.pno }" name="pno" >
-										<button id="X">X</button>
-									</form>
-								</td>
-							</c:if>
+							<td>${list.pno}</td>
+							<td>${list.volume }</td>
+							<td>${list.price }</td>
+							<td>${list.amount}</td>
+							<td>${list.amount*list.price}</td>
+							<td>
+								<form method="post">
+									<input type="number" value="1" min="1" max="${list.amount }"
+										name="amount" required autofocus> <input
+										hidden="hidden" value="${list.pno }" name="pno"> <input
+										type="hidden" value="${list.volume }" name="volume">
+									<button class="X">X</button>
+								</form>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -58,12 +58,32 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 
-			$("#X").click(function() {
+			$(".X").click(function() {
 				$("form").attr("action", "/shoppingCart/deleteShoppingCart");
 				$("form").attr("method", "GET");
 				$("Form").submit();
 			});
-
+			
+			var mergeItem="";
+			var mergeCount=0;
+			var mergeRowNum=0;
+			
+			$('tr','table').each(function(row) {
+				if(row>2) {
+					var thisTr=$(this);
+					var item = $(':first-child',thisTr).html();
+					
+					if(mergeItem != item) {
+						mergeCount=1;
+						mergeItem=item;
+						mergeRowNum=Number(row);
+					} else {
+						mergeCount=Number(mergeCount) + 1;
+						$("tr:eq("+mergeRowNum+")>td:first-child").attr("rowspan", mergeCount);
+						$('td:first-child',thisTr).remove();
+					}
+				}
+			
 		});
 	</script>
 
