@@ -108,9 +108,8 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value = "pointCharge", method = RequestMethod.POST)
-		public String pointCharge(int id, int point) {
-			System.out.println(id);
-			System.out.println(point);
+		public String pointCharge(String id, int point) {
+			service.pointCharge(id, point);
 			return "redirect:/member/mypage/";
 		}
 		

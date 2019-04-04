@@ -24,12 +24,11 @@
 	<div class="container">
 		<form action="member/mypage" method="post">
 			<div class="row" align="center">
-				<h3>${mDto.id}님 환영합니다</h3>
+				<h3>${mDto.id}님환영합니다</h3>
 				<a href="/member/updateui?id=${mDto.id}"> 회원정보 수정</a> <a
 					href="/member/pointCharge">포인트 충전</a>
 				<h1>p. ##</h1>
-				<br>
-				<br>
+				<br> <br>
 			</div>
 
 			<div class="form-group">
@@ -56,6 +55,10 @@
 
 			<div class="form-group">
 				<label for="phone" class="col-lg-2 ">phone</label> ${mDto.phone}
+			</div>
+			
+			<div class="form-group">
+				<label for="point" class="col-lg-2 ">point</label> ${mDto.point}
 			</div>
 
 			<!-- ::::::::::::::::::::::::::::::::::::::::::::::::주문List:::::::::::::::::::::::::::::::::::: -->

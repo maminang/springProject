@@ -21,7 +21,7 @@
 		<div class="row">
 			<form action="/member/pointCharge" method="post">
 				<div class="form-group">
-					<input type="${login.id}" name="id"> <input
+					<input type="hidden" name="id" value="${login.id}"> <input
 						placeholder="충전할 금액을 입력해 주세요" name="point" class="form-control">
 					<input type="submit" class="btn">
 				</div>

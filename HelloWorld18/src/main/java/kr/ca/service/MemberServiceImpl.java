@@ -55,6 +55,10 @@ public class MemberServiceImpl implements MemberService {
 		return dao.idcheck(id);
 	}
 
-	
+	@Override
+	public void pointCharge(String id, int point) {
+		// TODO Auto-generated method stub
+		dao.pointCharge(id,point);
+	}
 
 }

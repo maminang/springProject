@@ -1,5 +1,8 @@
 package kr.ca.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -52,6 +55,14 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int idcheck(String id) {
 		return session.selectOne(NS+".idcheck", id);
+	}
+
+	@Override
+	public void pointCharge(String id, int point) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("point", point);
+		session.update(NS+".pointCharge", map);
 	}
 
 

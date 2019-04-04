@@ -17,5 +17,7 @@ public interface MemberDAO {
 
 	int idcheck(String id);
 
+	void pointCharge(String id, int point);
+
 	
 }

@@ -31,5 +31,9 @@
       SELECT COUNT(*) FROM tbl_member WHERE id = #{id}
 	</select>
 	
+	<update id="pointCharge">
+		update tbl_member set point = point+#{point} where id = #{id}
+	</update>
+	
 	
 </mapper>
