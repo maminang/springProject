@@ -103,7 +103,8 @@ public class MemberController {
 		
 // 포인트 충전
 		@RequestMapping("pointCharge")
-		public void pointCharge() {
+		public String pointCharge() {
+			return "member/pointcharge";
 		}
 		
 		@RequestMapping(value = "pointCharge", method = RequestMethod.POST)
