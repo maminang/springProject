@@ -21,39 +21,39 @@
 	<div class="container">
 	<form action="#">
 		<div class="row" align="center">
-			<h3># 님 환영합니다</h3>
+			<h3>${mDto.id} 님 환영합니다</h3>
 			<a href=infoUpdate.jsp> 회원정보 수정</a>
 			<h1>p. ##</h1><br><br>
 		</div>
 		
 		<div class="form-group">
 			<label for="id" class="col-lg-2 ">ID</label>
-			<a>#</a>
+			${mDto.id}
 		</div>
 
 		<div class="form-group">
 			<label for="name" class="col-lg-2 ">name</label>
-			<a>#</a>
+			${mDto.name}
 		</div>
 
 		<div class="form-group">
 			<label for="birth" class="col-lg-2 ">birth</label>
-			<a>#</a>
+			${mDto.birth}
 		</div>
 
 		<div class="form-group">
 			<label for="e-mail" class="col-lg-2 ">e-mail</label>
-			<a>#</a>
+			${mDto.email}
 		</div>
 
 		<div class="form-group">
 			<label for="address" class="col-lg-2 ">address</label>
-			<a>#</a>
+			${mDto.address}
 		</div>
 
 		<div class="form-group">
 			<label for="phone" class="col-lg-2 ">phone</label>
-			<a>#</a>
+			${mDto.phone}
 		</div>
 		
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::주문List:::::::::::::::::::::::::::::::::::: -->
@@ -67,7 +67,7 @@
 <%-- 				<td>${price}</td> --%>
 			</tr>
 		</c:forEach>
-		<img alt="#" src="img">
+<!-- 		<img alt="#" src="img"> -->
 		<a>주문List</a> |
 		<a href="#">배송조회</a><br>
 		주문List주문List주문List주문List주문List주문List주문List주문List주문List주문List
@@ -83,6 +83,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		/* if (${empty login}) {
+			alert("dddddddddd");
+			self.location="/member/login";
+		} */
 	});
 </script>
 <jsp:include page="../footerBar.jsp" />	

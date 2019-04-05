@@ -30,11 +30,25 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="#" class="glyphicon glyphicon-log-in">로그인</a></li>
+<<<<<<< HEAD
+			
+				<li><a href="/member/login" class="glyphicon glyphicon-log-in">로그인</a></li>
+				<li><a href="/member/logout" class="glyphicon glyphicon-log-out">로그아웃</a></li>
+=======
+			<c:if test="${empty login}">
+				<li><a href="/member/login" class="glyphicon glyphicon-log-in">로그인</a></li>
+			</c:if>
+			<c:if test="${not empty login}">
+				<li><a href="/member/logout" class="glyphicon glyphicon-log-out">로그아웃</a></li>
+			</c:if>
+>>>>>>> branch 'eunju' of https://github.com/maminang/springProject.git
 				<li><a href="/member/signup" class="glyphicon glyphicon-pencil">회원가입</a></li>
-				<li><a href="#" class="glyphicon glyphicon-user">마이페이지</a></li>
-				<li><a href="#" class="
-glyphicon glyphicon-shopping-cart">장바구니</a></li>
+				<li><a href="/member/mypage" class="glyphicon glyphicon-user">마이페이지</a></li>
+<<<<<<< HEAD
+				<li><a href="/shoppingCart/listShoppingCart?id=${login }" class="glyphicon glyphicon-shopping-cart">장바구니</a></li>
+=======
+				<li><a href="#" class="glyphicon glyphicon-shopping-cart">장바구니</a></li>
+>>>>>>> branch 'eunju' of https://github.com/maminang/springProject.git
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a
@@ -57,8 +71,8 @@ glyphicon glyphicon-shopping-cart">장바구니</a></li>
 	</div>
 	<!-- /.container-fluid -->
 	<div class="container-fluid">
-			<ul class="nav navbar-nav" id="menu">
-			</ul>
+		<ul class="nav navbar-nav" id="menu">
+		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown"><a href="#"
 				class="dropdown-toggle glyphicon glyphicon-menu-hamburger"

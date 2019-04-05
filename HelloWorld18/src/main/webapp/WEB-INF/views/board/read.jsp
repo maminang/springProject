@@ -121,30 +121,35 @@
 			<!-- Button trigger modal 모달 모달모달-->
 			<a data-toggle="modal" data-target="#exampleModalCenter">전성분</a><br>
 			<!-- Button trigger modal 모달 모달모달-->
-			
+
 			장바구니에 용량이랑 가격도 넣어야함
-			<div>
-				<select>
-					<option>$100 30ml</option>
-					<option>$200 100ml</option>
-				</select>
-			</div>
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<form>
-				수량 : <input type="number" value="1" name="amount" autofocus>
-				<input value="NamepeN" name="id" type="hidden"> <input
-					value="1" name="pno" type="hidden">
+				<div>
+					<select>
+						<option>$100 30ml</option>
+						<option>$200 100ml</option>
+					</select>
+				</div>
+				수량 : <input type="number" value="1" name="amount" required autofocus>
+				<input value="${login }" name="id" type="hidden"> 
+				<input value="3" name="pno" type="hidden">
+				<input id="a" value="a" name="a" type="hidden" >
 				<button id="cart" class="btn btn-success">장바구니에 담기</button>
 			</form>
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<hr>
+
 			<!-- 			공유하기 modal -->
 			<a type="button" data-toggle="modal"
 				data-target=".bs-example-modal-sm">공유하기</a> <br>
 			<!-- 			공유하기 modal -->
+
 			<!-- 			리뷰 작성하기 -->
 			<a href="#">리뷰 작성하기</a>
 			<!-- 			리뷰 작성하기 -->
+
+			<button id="saveCookie">쿠키 받아오기</button>
 
 		</div>
 	</div>
@@ -184,7 +189,8 @@
 			</div>
 		</div>
 	</div>
-	${pageContext.request.requestURL }
+	<!-- Modal -->
+
 	<!-- 	공유하기 Modal -->
 	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
 		aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -192,35 +198,53 @@
 			<div class="modal-content">
 				<h3 style="text-align: center;">
 					<a
-						href="http://www.facebook.com/sharer/sharer.php?u=${pageContext.request.requestURL }">facebook</a>
+						href="http://www.facebook.com/sharer/sharer.php?u=http://211.183.8.71:8089/shoppingCart/read">facebook</a>
 					<a
 						href="https://twitter.com/intent/tweet?text=TEXT&url=${pageContext.request.requestURL }">twitter</a>
 				</h3>
 			</div>
 		</div>
 	</div>
+	<!-- 	공유하기 Modal -->
+
+	<div class="alert alert-primary">
+		<h4 class="alert-heading">Alert Heading</h4>
+		<p>
+			Alert - Primary / <a href="#" class="alert-link">Alert Link</a>
+		</p>
+		<hr>
+		<p class="mb-0">
+			Alert - Primary / <a href="#" class="alert-link">Alert Link</a>
+		</p>
+	</div>
+
+	${pageContext.request.requestURL }
 
 
-
-	<%-- 	<jsp:include page="footerBar.jsp" /> --%>
+	<jsp:include page="../footerBar.jsp" />
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-
 			//장바구니에 담기	
 			$("#cart").click(function() {
-				$("form").attr("action", "/product/insertShoppingCart");
-				$("form").attr("method", "GET");
-				$("form").submit();
+				if (confirm("장바구니로 이동")) {
+				// 확인 버튼 클릭 시 동작
+					document.getElementById("#a").value = "#a";
+					$("form").attr("action", "/shoppingCart/insertShoppingCart")
+					$("form").attr("method", "GET");
+				} else {
+				// 취소 버튼 클릭 시 동작
+					$("form").attr("action", "/shoppingCart/insertShoppingCart");
+					$("form").attr("method", "GET");
+				}
+					$("form").submit();
 			});
 
-			$(document).ready(function() {
-				$('[data-toggle="popover"]').popover({
-					container : "body"
-				});
-			});
+							// 			$("#redirectShoppingCart").ready(function() {
+							// 				$("form"	.attr)
+							// 			})
 
-		});
+						});
 	</script>
 </body>
 </html>
