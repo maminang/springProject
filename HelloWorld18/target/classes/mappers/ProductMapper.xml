@@ -23,15 +23,15 @@
 
 	<!-- product pno로 검색 -->
 	<select id="selectProduct" resultType="kr.ca.domain.ProductDTO">
-		select * from tbl_product
-		where pno = #{pno}
+		select * from tbl_product where pno = #{pno}
 	</select>
 	<!-- productDetail pno로 검색 -->
 	<select id="selectProductDetail"
 		resultType="kr.ca.domain.ProductDetailDTO">
 		select * from tbl_product_detail where pno = #{pno}
 	</select>
-
+	
+<!-- 	productDetail pno, volume으로 하나만 검색 -->
 	<select id="selectOneProductDetail"
 		resultType="kr.ca.domain.ProductDetailDTO">
 		select * from tbl_product_detail where pno = #{pno} and volume = #{volume}

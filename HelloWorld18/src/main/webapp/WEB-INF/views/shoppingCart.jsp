@@ -32,22 +32,26 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="list" varStatus="status">
-						<tr>
-							<td>${list.pno}</td>
-							<td>${list.volume }</td>
-							<td>${list.price }</td>
-							<td>${list.amount}</td>
-							<td>${list.amount*list.price}</td>
-							<td>
-								<form method="post">
-									<input type="number" value="1" min="1" max="${list.amount }"
-										name="amount" required autofocus> <input
-										hidden="hidden" value="${list.pno }" name="pno"> <input
-										type="hidden" value="${list.volume }" name="volume">
-									<button class="X">X</button>
-								</form>
-							</td>
-						</tr>
+						<c:if test="${list.pno != 0 }">
+							<tr>
+								<td>${list.pno}</td>
+								<td>${list.volume }</td>
+								<td>${list.price }</td>
+								<td>${list.amount}</td>
+								<td>${list.amount*list.price}</td>
+								<td>
+									<form method="post">
+										<input type="number" value="1" min="1" max="${list.amount }"
+											name="amount" required autofocus> 
+										<input
+											hidden="hidden" value="${list.pno }" name="pno"> 
+										<input
+											type="hidden" value="${list.volume }" name="volume">
+										<button class="X">X</button>
+									</form>
+								</td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -63,7 +67,7 @@
 				$("form").attr("method", "GET");
 				$("Form").submit();
 			});
-			
+
 		});
 	</script>
 
