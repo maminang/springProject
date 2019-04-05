@@ -4,14 +4,81 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.mapper.CSMapper">
 	<select id="csList" resultType="kr.ca.domain.CSDTO">
-		select * from tbl_faq order by idNbr desc
+		select * from tbl_faq order by
+		idNbr desc
 	</select>
-	
+
 	<select id="createBno" resultType="Integer">
 		select max(idNbr) from tbl_faq
 	</select>
-	
+
 	<select id="getAmount" resultType="Integer">
-		select count(idNbr) from tbl_faq
+		select count(idNbr) from
+		tbl_faq
 	</select>
+
+
+	<insert id="insert">
+		insert into tbl_faq (idnbr, quser, qpassword, qtitle,
+		qcontent, qtype, qfile, qphone, email, openStatus, qanswer)
+		values(#{idnbr}, #{quser}, #{qpassword}, #{qtitle}, #{qcontent},
+		#{qtype}, #{qfile}, #{qphone}, #{email}, #{openStatus}, null)
+	</insert>
+
+	<select id="createIdnbr" resultType="Integer">
+		select max(idnbr) from
+		tbl_faq
+	</select>
+
+
+
+
+	<select id="listSearch" resultType="BoardVO">
+
+<![CDATA[  
+
+  select * 
+
+  from tbl_board 
+
+  where bno > 0 
+
+]]>
+
+
+
+		<include refid="search"></include>
+
+  
+
+<![CDATA[    
+
+  order by bno desc
+
+  limit #{pageStart}, #{perPageNum}
+
+]]>
+
+	</select>
+
+
+
+	<select id="listSearchCount" resultType="int">
+
+<![CDATA[  
+
+  select count(bno) 
+
+  from tbl_board 
+
+  where bno > 0 
+
+]]>
+
+		<include refid="search"></include>
+
+
+
+	</select>
+
 </mapper>

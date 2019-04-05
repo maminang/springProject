@@ -11,4 +11,9 @@ public interface CSDAO {
 	List<CSDTO> listPage(Criteria cri);
 	
 	int getAmount();
+	
+	
+	void insert(CSDTO cdto);
+	
+	/* void addAttach(String fileName, int idbno); */
 }

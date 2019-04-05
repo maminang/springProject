@@ -1,6 +1,7 @@
 package kr.ca.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class CSDTO implements Serializable{
 
@@ -9,49 +10,20 @@ public class CSDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// 식별번호 
-    private int idnbr;
-
-    // 질문자 
-    private String quser;
-
-    // 비밀번호 
-    private String qpassword;
-
-    // 질문제목 
-    private String qtitle;
-
-    // 질문유형 
-    private String qtype;
-
-    // 질문내용 
-    private String qcontent;
-
-    // 첨부파일 
-    private String qfile;
-
-    // 전화번호 
-    private String qphone;
-
-    // 이메일 
-    private String email;
+	private int idnbr;
+	private String quser;
+	private String qpassword;
+	private String qtitle;
+	private String qcontent;
+	private String qtype;
+	private String[] qfile;
+	private String qphone;
+	private String email;
+	private int openStatus;
+	private String qanswer;
     
-    public CSDTO() {
+	public CSDTO() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public CSDTO(int idnbr, String quser, String qpassword, String qtitle, String qtype, String qcontent, String qfile,
-			String qphone, String email) {
-		super();
-		this.idnbr = idnbr;
-		this.quser = quser;
-		this.qpassword = qpassword;
-		this.qtitle = qtitle;
-		this.qtype = qtype;
-		this.qcontent = qcontent;
-		this.qfile = qfile;
-		this.qphone = qphone;
-		this.email = email;
 	}
 
 	public int getIdnbr() {
@@ -86,14 +58,6 @@ public class CSDTO implements Serializable{
 		this.qtitle = qtitle;
 	}
 
-	public String getQtype() {
-		return qtype;
-	}
-
-	public void setQtype(String qtype) {
-		this.qtype = qtype;
-	}
-
 	public String getQcontent() {
 		return qcontent;
 	}
@@ -102,11 +66,19 @@ public class CSDTO implements Serializable{
 		this.qcontent = qcontent;
 	}
 
-	public String getQfile() {
+	public String getQtype() {
+		return qtype;
+	}
+
+	public void setQtype(String qtype) {
+		this.qtype = qtype;
+	}
+
+	public String[] getQfile() {
 		return qfile;
 	}
 
-	public void setQfile(String qfile) {
+	public void setQfile(String[] qfile) {
 		this.qfile = qfile;
 	}
 
@@ -124,6 +96,22 @@ public class CSDTO implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getOpenStatus() {
+		return openStatus;
+	}
+
+	public void setOpenStatus(int openStatus) {
+		this.openStatus = openStatus;
+	}
+
+	public String getQanswer() {
+		return qanswer;
+	}
+
+	public void setQanswer(String qanswer) {
+		this.qanswer = qanswer;
 	}
 
 	public static long getSerialversionuid() {
@@ -154,8 +142,12 @@ public class CSDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CSDTO [idnbr=" + idnbr + ", quser=" + quser + ", qtitle=" + qtitle + "]";
+		return "CSDTO [idnbr=" + idnbr + ", quser=" + quser + ", qpassword=" + qpassword + ", qtitle=" + qtitle
+				+ ", qcontent=" + qcontent + ", qtype=" + qtype + ", qfile=" + Arrays.toString(qfile) + ", qphone="
+				+ qphone + ", email=" + email + ", openStatus=" + openStatus + ", qanswer=" + qanswer + "]";
 	}
-    
-    
+
+	
+	
+	
 }

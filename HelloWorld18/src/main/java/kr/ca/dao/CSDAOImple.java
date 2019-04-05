@@ -2,7 +2,9 @@ package kr.ca.dao;
 
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -46,6 +48,39 @@ public class CSDAOImple implements CSDAO{
 		return session.selectList(NS+".csList", 0, rb);
 		//파라미터값 cri.getStartNum()-1로 하지 않으면 맨 마지막에 쓴 글이 표시되지 않는다.
 	}
+
+
+	@Override
+	//insert user_question
+	public void insert(CSDTO cdto) {
+		// TODO Auto-generated method stub
+		Integer idnbr=createIdnbr();
+		if(idnbr==null) {
+			idnbr=1;
+		}else {
+			idnbr++;
+		}
+		cdto.setIdnbr(idnbr);
+		session.insert(NS+".insert",idnbr);
+	}
+	
+	//get IndexNbr from tbl_faq
+	private Integer createIdnbr() {
+		return session.selectOne(NS+".createBno");
+	}
+
+
+	/*
+	 * @Override public void addAttach(String fileName, int idbno) { // TODO
+	 * Auto-generated method stub
+	 * 
+	 * int idnbr=getIdnbr(); Map<String,Object> map = new HashMap<String,Object>();
+	 * map.put("fullName", fullName); map.put("idnbr", idnbr);
+	 * session.insert(NS+".addAttach",map);
+	 * 
+	 * 
+	 * }
+	 */
 	
 	
 

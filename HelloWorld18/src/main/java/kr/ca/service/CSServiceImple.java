@@ -36,4 +36,17 @@ public class CSServiceImple implements CSService{
 	}
 
 	
+
+	@Override
+	public void insert(CSDTO cdto) {
+		// TODO Auto-generated method stub
+		cdao.insert(cdto);
+		String[] files=cdto.getQfile();
+		/*
+		 * if(files==null) { return; } for(int i=0;i<files.length;i++) {
+		 * cdao.addAttach(files[i],cdto.getIdnbr()); }
+		 */
+	}
+
+	
 }

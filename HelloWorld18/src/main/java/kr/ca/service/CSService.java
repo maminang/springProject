@@ -13,5 +13,10 @@ public interface CSService {
 	int getAmount();
 
 	List<CSDTO> listPage(Criteria cri);
-
+	
+	
+	
+	
+	// insert values into faq_tbl (it needs faq_tbl index number)
+	void insert(CSDTO cdto);
 }

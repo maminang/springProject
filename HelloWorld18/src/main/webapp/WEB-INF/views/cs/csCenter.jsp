@@ -56,7 +56,7 @@
 
 	function doDisplay() {
 
-		var con = document.getElementByClassName("hiddencontent");
+		/* var con = document.getElementByClassName("hiddencontent");
 
 		if (con.style.display == 'none') {
 
@@ -66,7 +66,7 @@
 
 			con.style.display = 'none';
 
-		}
+		} */
 
 	}
 
@@ -108,10 +108,28 @@
 
 		<div class="row">
 
-			<a class="btn btn-info" href="/cs/write">글쓰기</a>
+			<a class="btn btn-info" href="/cs/csWrite">글쓰기</a>
 
 		</div>
 
+		<table>
+			<tr>
+				<td height="0">
+				<div Style="height:100%"><img src="/resources/img/faqtitle.jpg"></div>
+				<td height="0">
+				<div Style="height:100%"><img src="/resources/img/qnatitle.jpg"></div>
+			</tr>
+		</table>
+		
+		<table>
+			<tr>
+				<td height="0">
+				<div Style="max-width:100%"><img src="/resources/img/faqtitle.jpg"></div>
+				<td height="0">
+				<div Style="max-width:100%"><img src="/resources/img/qnatitle.jpg"></div>
+			</tr>
+		</table>
+	
 	
 
 		<div class="row" style="text-align: center;">
@@ -167,7 +185,7 @@
 					<!-- ${cslist } 컨트롤러 model에 바인딩할 때 "" 안에 있는 값과 대소문자까지 일치해야 불러올 수 있다. -->
 
 					<c:forEach var="cs" items="${cslist }">
-
+						
 						<tr>
 
  
@@ -176,29 +194,30 @@
 
 							<%-- <td><a href="/board/read${pm.makeQuery(pm.cri.page)}&bno=${vo.bno }">${vo.title}</a></td> --%>
 
-							<td><a href="javascript:doDisplay();">${cs.qtype}</a></td>
+							<td id="c${cs.idnbr}">${cs.qtype}</td>
 
-							<td><a href="javascript:doDisplay();">${cs.qtitle}</a></td>
+							<td>${cs.qtitle}</td>
 
 							<!-- DTO에 선언된 변수명과 일치해야한다. -->
 
- 
+ 	
 
  
 
 						</tr>
 
-						<tr>
-
-							<td colspan="3" class="hiddencontent" style="display: none;">
+						<tr style="display: none;">
+							
+							<td colspan="3" id="h${cs.idnbr}" >
 
 								<!--자바스크립트 이용하여 내용 숨기기 mainia.tistory.com/2710-->
 
 								${cs.qcontent}
 
 							</td>
-
+						
 						</tr>
+						
 
  
 
@@ -265,12 +284,40 @@
 		<script type="text/javascript">
 
 			$(document).ready(function() {
-
- 
-
+				
+				alert("test");
+				
+				var f_target=$(this).parent("tr").next("tr").css("display","inline");
+				
+				
+				
+				
+				
+				$(#).click(function(event){
+					$('#h51').parent("tr").next("tr").css("display","onblock");
+					/* if($('.name_by_id2').css("display", "none")){
+						$('name_by_id2').css("display", "inline-block");
+					}else{
+						$('name_by_id2').css("display", "none");
+					} */
+				}); 
+				$(this)
+				$('#c${cs.idnbr}').click(function(event){
+					alert("test");	
+					
+					/* if($('.name_by_id2').css("display", "none")){
+						$('name_by_id2').css("display", "inline-block");
+					}else{
+						$('name_by_id2').css("display", "none");
+					} */
+				});
+			
 			});
 
 		</script>	
+
+
+
 
 </body>
 
