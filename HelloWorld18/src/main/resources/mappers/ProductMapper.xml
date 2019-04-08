@@ -56,5 +56,13 @@
 	<select id="getListByCategory" resultType="ProductDTO">
 		select * from tbl_product where category = #{category}
 	</select>
+	
+	<select id="selectProduct" resultType="ProductDTO">
+		select * from tbl_product where pno=#{pno}
+	</select>
+	
+	<select id="selectProductDetail" resultType="ProductDetailDTO">
+		select * from tbl_product_detail where pno=#{pno}
+	</select>
 
 </mapper>

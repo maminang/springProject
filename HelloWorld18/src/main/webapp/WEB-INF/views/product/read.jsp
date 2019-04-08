@@ -66,26 +66,42 @@
 					data-ride="carousel">
 					<!-- Indicators -->
 					<ol class="carousel-indicators">
-						<li data-target="#carousel-example-generic" data-slide-to="0"
-							class="active"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+					
+						<%-- 이미지갯수에 맞춰서 li나오게 --%>
+						<c:forEach items="${pd.images}" varStatus="status">
+						
+							<%-- 반드시 첫번째 carousel은 class="active가 들어가야함" --%>
+							<c:if test="${status.index == 0}">
+								<li data-target="#carousel-example-generic"
+									data-slide-to="${status.index}" class="active"></li>
+							</c:if>
+							<c:if test="${status.index != 0}">
+								<li data-target="#carousel-example-generic"
+									data-slide-to="${status.index}"></li>
+							</c:if>
+						</c:forEach>
 					</ol>
 
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
-						<div class="item active">
-							<img src="../resources/img/math_img_1.jpg" alt="...">
-							<div class="carousel-caption">...</div>
-						</div>
-						<div class="item">
-							<img src="../resources/img/math_img_2.jpg" alt="...">
-							<div class="carousel-caption">...</div>
-						</div>
-						<div class="item">
-							<img src="../resources/img/math_img_3.jpg" alt="...">
-							<div class="carousel-caption">...</div>
-						</div>
+					
+						<%-- 위와 같이 이미지갯수에 맞춤 --%>
+						<c:forEach items="${pd.images}" varStatus="status">
+						
+							<%-- 위와 같이 class="active" --%>
+							<c:if test="${status.index == 0}">
+								<div class="item active">
+									<img src="/displayFile?fileName=${pd.images[status.index]}"
+										alt="...">
+								</div>
+							</c:if>
+							<c:if test="${status.index != 0}">
+								<div class="item">
+									<img src="/displayFile?fileName=${pd.images[status.index]}"
+										alt="...">
+								</div>
+							</c:if>
+						</c:forEach>
 					</div>
 
 					<!-- Controls -->
@@ -101,21 +117,14 @@
 				</div>
 			</div>
 			<!-- 			이미지 -->
-			<!-- 			이미지 밑에 상품 설명 -->
-			<div>I'm a product description. I'm a great place to add more
-				details about your product such as sizing, material, care
-				instructions and cleaning instructions.</div>
-			<!-- 			이미지 밑에 상품 설명 -->
 		</div>
 		<!-- leftbox -->
 
 		<div class="rightbox">
-			<div>잉글리쉬 페어 앤 프리지아 코롱</div>
-			<div>English Pear & Freesia Cologne</div>
+			<div>${pd.kr_name }</div>
+			<div>${pd.eng_name }</div>
 			<br>
-			<div>은은하면서 신선하고 감미로운 향. 부드럽고 감미로운 향을 부여하는 잉글리쉬 페어 앤 프리지아는 가을의
-				정수라 할 수 있습니다. 화이트 프리지아 부케향에 이제 막 익은 배의 신선함을 입히고, 호박, 파출리, 우디향으로 은은함을
-				더했습니다. 감미롭고 특별한 향이 느껴집니다.</div>
+			<div>${pd.prdct_dscrp }</div>
 			<br>
 
 			<!-- Button trigger modal 모달 모달모달-->
@@ -123,34 +132,34 @@
 			<!-- Button trigger modal 모달 모달모달-->
 
 			장바구니에 용량이랑 가격도 넣어야함
-			<div>
-				<select>
-					<option>$100 30ml</option>
-					<option>$200 100ml</option>
-				</select>
-			</div>
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<form>
-				수량 : <input type="number" value="1" name="amount" autofocus>
-				<input value="NamepeN" name="id" type="hidden"> <input
-					value="2" name="pno" type="hidden">
-				<button id="cart" class="btn btn-success">장바구니에 담기</button>
+				<div>
+					<select name="vp">
+						<c:forEach items="${pdd}" var="var">
+							<option>₩${var.price } ${var.volume}ml</option>
+						</c:forEach>
+					</select>
+				</div>
+				수량 : <input type="number" value="1" name="amount" min="1" required
+					autofocus> <input value="NamepeN" name="id" type="hidden">
+				<input value="${pd.pno }" name="pno" type="hidden"> <a
+					id="cart" class="btn btn-success">장바구니에 담기</a>
 			</form>
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<hr>
+
 			<!-- 			공유하기 modal -->
 			<a type="button" data-toggle="modal"
 				data-target=".bs-example-modal-sm">공유하기</a> <br>
 			<!-- 			공유하기 modal -->
+
 			<!-- 			리뷰 작성하기 -->
 			<a href="#">리뷰 작성하기</a>
 			<!-- 			리뷰 작성하기 -->
 
-			<button id="saveCookie">쿠키 받아오기</button>
-
 		</div>
 	</div>
-	<jsp:include page="../footerBar.jsp"/>
 
 
 
@@ -187,6 +196,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal -->
+
 	<!-- 	공유하기 Modal -->
 	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
 		aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -201,11 +212,9 @@
 			</div>
 		</div>
 	</div>
+	<!-- 	공유하기 Modal -->
 
-	${pageContext.request.requestURL }
-
-
-	<%-- 	<jsp:include page="footerBar.jsp" /> --%>
+	<jsp:include page="../footerBar.jsp" />
 
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -215,12 +224,7 @@
 				$("form").attr("action", "/shoppingCart/insertShoppingCart");
 				$("form").attr("method", "GET");
 				$("form").submit();
-			});
-
-			$("#cart").click(function() {
-				$("form").attr("action", "/shoppingCart/insertShoppingCart");
-				$("form").attr("method", "GET");
-				$("form").submit();
+				alert("장바구니에 담겼습니다");
 			});
 
 		});

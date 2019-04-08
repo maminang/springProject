@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.ca.domain.ProductDTO;
+import kr.ca.domain.ProductDetailDTO;
 import kr.ca.service.ProductService;
 
 @Controller
@@ -27,6 +28,24 @@ public class ProductController {
 	@RequestMapping(value = "write", method = RequestMethod.POST)
 	public String write(ProductDTO dto, int[] volume, int[] price, String[] images) {
 		service.write(dto);
+		return "product/read";
+	}
+	
+//	read.jsp로 가기
+	@RequestMapping("/read")
+	public String read(int pno, Model model) {
+
+		
+//		pd = productDAO.selectProduct(pd); 
+//		List<ProductDetailDTO> pdd = productDAO.selectProductDetail(pd.getPno()); 
+//		model.addAttribute("pd", pd);
+//		model.addAttribute("pdd", pdd); 
+//		System.out.println(pdd);
+		ProductDTO pd = service.selectProduct(pno);
+		model.addAttribute("pd", pd);
+		List<ProductDetailDTO> pdd = service.selectProductDetail(pd.getPno());
+		model.addAttribute("pdd", pdd);
+
 		return "product/read";
 	}
 

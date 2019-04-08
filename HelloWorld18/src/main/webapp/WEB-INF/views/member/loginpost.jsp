@@ -16,7 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<jsp:include page="../headerBar.jsp"/>
 	<div class="container">
 		<div class="row">
 		
@@ -26,11 +26,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		if (${login==null}) {
+			alert("해당하는 회원이 없습니다 다시 로그인해주세요")
 			self.location="/member/login";
+		} else {
+			self.location="/"
 		}
-		
-		
-		
 	});
 </script>	
 </body>

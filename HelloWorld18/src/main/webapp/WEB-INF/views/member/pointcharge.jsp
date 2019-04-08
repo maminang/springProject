@@ -18,14 +18,21 @@
 <body>
 	<jsp:include page="../headerBar.jsp" />
 	<div class="container">
-		<div class="row">${searchList}</div>
+		<div class="row">
+			<form action="/member/pointCharge" method="post">
+				<div class="form-group">
+					<input type="hidden" name="id" value="${login.id}"> <input
+						placeholder="충전할 금액을 입력해 주세요" name="point" class="form-control">
+					<input type="submit" class="btn">
+				</div>
+			</form>
+		</div>
 	</div>
-
-	<jsp:include page="../footerBar.jsp" />
 	<script type="text/javascript">
 		$(document).ready(function() {
 
 		});
 	</script>
+	<jsp:include page="../footerBar.jsp" />
 </body>
 </html>

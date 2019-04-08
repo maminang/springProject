@@ -3,6 +3,7 @@ package kr.ca.dao;
 import java.util.List;
 
 import kr.ca.domain.ProductDTO;
+import kr.ca.domain.ProductDetailDTO;
 
 public interface ProductDAO {
 
@@ -12,6 +13,8 @@ public interface ProductDAO {
 
 	List<ProductDTO> searchProduct(String keyword);
 
+	void getImages(ProductDTO dto);
+	
 	void getImages(List<ProductDTO> list);
 
 	List<ProductDTO> getBestSellers();
@@ -19,4 +22,9 @@ public interface ProductDAO {
 	List<ProductDTO> getNewProducts();
 
 	List<ProductDTO> getListByCategory(String category);
+
+	ProductDTO selectProduct(int pno);
+
+	List<ProductDetailDTO> selectProductDetail(int pno);
+
 }
