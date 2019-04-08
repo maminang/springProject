@@ -29,13 +29,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		
-		HttpSession session=request.getSession();
-		ModelMap map= modelAndView.getModelMap();
-		if (map!=null) {
-			String dest=(String)session.getAttribute("dest");
-				response.sendRedirect(dest);
-		}
-	}
+	      HttpSession session = request.getSession();
+	      ModelMap map = modelAndView.getModelMap();
+	      if (map != null) {
+	         String dest = (String) session.getAttribute("dest");
+	         if (dest != null) {            
+	            response.sendRedirect(dest);
+	         }
+	      }
 
-	
+	}
 }
