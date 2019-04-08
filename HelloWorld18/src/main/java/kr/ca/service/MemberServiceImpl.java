@@ -55,6 +55,13 @@ public class MemberServiceImpl implements MemberService {
 		return dao.idcheck(id);
 	}
 
+	@Override
+	public void newPW(LoginDTO dto) {
+		// TODO Auto-generated method stub
+		
+		dao.newPW(dto);
+	}
+
 	
 
 }

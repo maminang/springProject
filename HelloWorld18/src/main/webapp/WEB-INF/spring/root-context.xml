@@ -24,7 +24,32 @@
 		<property name="username" value="spring"></property>
 		<property name="password" value="spring"></property>
 	</bean>
+	
+	<!-- mail  -->
 
+	   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	      <property name="host" value="smtp.gmail.com" />
+	      <property name="port" value="587" />
+	      <property name="defaultEncoding" value="utf-8"/>
+	      <property name="username" value="demoneyo.oooo" />
+	      <property name="password" value="eunju1234!" />
+
+     <!-- email 요청시는 SMTP -->
+	      <property name="javaMailProperties">
+	         <props>
+	            <prop key="mail.transport.protocol">smtp</prop>
+	            <prop key="mail.smtp.auth">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.debug">true</prop>
+	         </props>
+	      </property>
+	   </bean>
+
+	<bean id="email" class="kr.ca.utils.Email">
+	</bean>
+	<bean id="emailSender" class="kr.ca.utils.EmailSender">
+	</bean>
+	
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
 		id="sqlSessionFactory">
 		<property ref="dataSource" name="dataSource"></property>

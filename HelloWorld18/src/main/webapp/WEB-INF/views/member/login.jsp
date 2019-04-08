@@ -34,6 +34,7 @@
 					<div class="form-group">
 					<button type="submit" class="btn" id="loginBtn" value="로그인">로그인</button>
 					<button type="submit" class="btn" id="signinBtn" value="회원가입">회원가입</button>
+					<button type="submit" class="btn" id="findPW" value="비밀번호 찾기">비밀번호 찾기</button>
 					</div>
 				</form>
 		</div>
@@ -48,6 +49,11 @@
 			$("form").submit();
 		});
 		
+		$("#findPW").click(function(){
+			$("form").attr("action","findPW");
+			$("form").attr("method","get");
+			$("form").submit();
+		});
 		
 		
 		

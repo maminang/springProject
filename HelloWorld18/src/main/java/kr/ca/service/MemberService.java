@@ -16,5 +16,7 @@ public interface MemberService {
 	int idcheck(String id);
 
 	MemberDTO updateui(String id);
+
+	void newPW(LoginDTO dto);
 	
 }

@@ -38,6 +38,7 @@ drop table tbl_member
 alter table tbl_member modify phone varchar2(50)
 alter table tbl_member add postNum number
 alter table tbl_member add DTL_ADRES varchar2(50)
+alter table tbl_member modify pw varchar2(100); 
 
 delete tbl_member
 

@@ -9,27 +9,37 @@
 	(#{id},#{pw},#{name},#{postNum},#{address},#{DTL_ADRES},#{email},#{phone},#{birth})
 	</insert>
 	
+<!-- 	<select id="login" resultType="LoginDTO"> -->
+<!-- 	SELECT id, pw from tbl_member WHERE id=#{id} and pw=#{pw} -->
+<!-- 	</select> -->
+	
 	<select id="login" resultType="LoginDTO">
-	SELECT id, pw from tbl_member WHERE id=#{id} and pw=#{pw}
+	SELECT id, pw FROM tbl_member where id = #{id}
 	</select>
 	
 	<select id="mypage" resultType="MemberDTO">
-	SELECT * FROM tbl_member WHERE id=#{id} and pw=#{pw}
+	SELECT * FROM tbl_member WHERE id=#{id}
 	</select>
 	
 	<select id="updateui" resultType="MemberDTO">
-	SELECT * FROM tbl_member WHERE
-		id=#{id}
+	SELECT * FROM tbl_member WHERE id=#{id}
 	</select>
 	
 	<update id="update">
-	UPDATE tbl_member SET pw=#{pw}, email=#{email},name=#{name},postNum=#{postNum},DTL_ADRES=#{DTL_ADRES},birth=#{birth},address=#{address},phone=#{phone} 
+	UPDATE tbl_member SET email=#{email},name=#{name},postNum=#{postNum},DTL_ADRES=#{DTL_ADRES},address=#{address},phone=#{phone} 
 	WHERE id=#{id}
 	</update>
 	
 	<select id="idcheck" parameterType="String" resultType="Integer">
-      SELECT COUNT(*) FROM tbl_member WHERE id = #{id}
+     SELECT COUNT(*) FROM tbl_member WHERE id = #{id}
 	</select>
 	
+	<update id="newPW" parameterType="MemberDTO">
+	UPDATE tbl_member SET pw= #{pw} WHERE id=#{id}
+	</update>
+	
+	<select id="selectMemberDTO" resultType="MemberDTO">
+	SELECT * FROM tbl_member WHERE id=#{id}
+	</select>
 	
 </mapper>

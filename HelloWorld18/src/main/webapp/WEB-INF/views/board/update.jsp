@@ -41,7 +41,7 @@
 
 		<div class="form-group">
 			<label for="pw" class="col-lg-2 ">pw</label>
-			<input id="pw" name="pw" value="${dto.pw}">
+			<a href="#">비밀번호 수정하기</a>
 		</div>
 
 		<div class="form-group">

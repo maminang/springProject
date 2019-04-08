@@ -17,5 +17,9 @@ public interface MemberDAO {
 
 	int idcheck(String id);
 
+	void newPW(LoginDTO dto);
+
+	MemberDTO selectMemberDTO(String id);
+
 	
 }
