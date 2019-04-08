@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.ca.dao.ProductDAO;
 import kr.ca.domain.ProductDTO;
+import kr.ca.domain.ProductDetailDTO;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -40,6 +41,18 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductDTO> list = dao.getNewProducts();
 		dao.getImages(list);
 		return list;
+	}
+
+	@Override
+	public ProductDTO selectProduct(int pno) {
+		ProductDTO dto = dao.selectProduct(pno);
+		dao.getImages(dto);
+		return dto;
+	}
+
+	@Override
+	public List<ProductDetailDTO> selectProductDetail(int pno) {
+		return dao.selectProductDetail(pno);
 	}
 
 	

@@ -31,7 +31,7 @@
 			<table class="table table-hover">
 				<c:forEach items="${list}" var="vo">
 					<div class="col-sm-4" style="border: 1px solid black">
-						<a href="http://www.naver.com"> ${vo.eng_name} <br> <img
+						<a href="/product/read?pno=${vo.pno}"> ${vo.eng_name} <br> <img
 							src='/displayFile?fileName=${vo.images[0]}' alt="이미지 안나옴"
 							style="width: 350px"> <br> 제품명 : ${vo.kr_name}
 						</a>

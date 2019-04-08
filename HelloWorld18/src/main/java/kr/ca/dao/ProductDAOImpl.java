@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kr.ca.domain.ProductDTO;
+import kr.ca.domain.ProductDetailDTO;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -75,6 +76,13 @@ public class ProductDAOImpl implements ProductDAO {
 
 // 제품리스트에 이미지 파일을 넣어주는 메서드
 	@Override
+	public void getImages(ProductDTO dto) {
+		List<String> imageList = session.selectList(NS + ".getImages", dto.getPno());
+		String[] images = imageList.toArray(new String[imageList.size()]);
+		dto.setImages(images);
+	}
+	
+	@Override
 	public void getImages(List<ProductDTO> list) {
 		for (ProductDTO dto : list) {
 			List<String> imageList = session.selectList(NS + ".getImages", dto.getPno());
@@ -102,4 +110,16 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<ProductDTO> getListByCategory(String category) {
 		return session.selectList(NS+".getListByCategory", category);
 	}
+
+	@Override
+	public ProductDTO selectProduct(int pno) {
+		return session.selectOne(NS+".selectProduct", pno);
+	}
+
+	@Override
+	public List<ProductDetailDTO> selectProductDetail(int pno) {
+		return session.selectList(NS+".selectProductDetail", pno);
+	}
+
+	
 }

@@ -3,6 +3,7 @@ package kr.ca.service;
 import java.util.List;
 
 import kr.ca.domain.ProductDTO;
+import kr.ca.domain.ProductDetailDTO;
 
 public interface ProductService {
 
@@ -13,5 +14,9 @@ public interface ProductService {
 	List<ProductDTO> getNewProducts();
 
 	List<ProductDTO> getListByCategory(String category);
+
+	ProductDTO selectProduct(int pno);
+
+	List<ProductDetailDTO> selectProductDetail(int pno);
 
 }
