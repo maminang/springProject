@@ -22,7 +22,7 @@
 
 <!-- 	oAmount가 Null일때 -->
 	<insert id="insertShoppingCartNull">
-		insert into tbl_shopping_cart values (#{id}, #{pno}, #{amount})
+		insert into tbl_shopping_cart (id,pno,amount) values (#{id}, #{pno}, #{amount})
 	</insert>
 	
 <!-- 	장바구니 list	 -->

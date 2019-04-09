@@ -36,7 +36,7 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 	@Override
 	public List<ShoppingCartDTO> selectShoppingCart(String id) {
 		 
-		return session.selectOne(NS+".selectShoppingCart", id); 
+		return session.selectList(NS+".selectShoppingCart", id); 
 	}
 //	장바구니 list
 	@Override

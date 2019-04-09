@@ -44,6 +44,12 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="row">
+			<form action="/order/checkout">
+				<input type="submit" class="btn" value="주문하기">
+				<input type="hidden" value="${login.id}" name="id">
+			</form>
+		</div>
 	</div>
 
 	<jsp:include page="footerBar.jsp" />
@@ -51,6 +57,10 @@
 		$(document).ready(function() {
 
 		});
+
+		function order() {
+
+		}
 	</script>
 
 </body>

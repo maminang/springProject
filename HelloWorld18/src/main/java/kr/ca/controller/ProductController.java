@@ -31,16 +31,9 @@ public class ProductController {
 		return "product/read";
 	}
 	
-//	read.jsp로 가기
 	@RequestMapping("/read")
 	public String read(int pno, Model model) {
 
-		
-//		pd = productDAO.selectProduct(pd); 
-//		List<ProductDetailDTO> pdd = productDAO.selectProductDetail(pd.getPno()); 
-//		model.addAttribute("pd", pd);
-//		model.addAttribute("pdd", pdd); 
-//		System.out.println(pdd);
 		ProductDTO pd = service.selectProduct(pno);
 		model.addAttribute("pd", pd);
 		List<ProductDetailDTO> pdd = service.selectProductDetail(pd.getPno());

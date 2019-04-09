@@ -12,6 +12,4 @@ public interface ShoppingCartService {
 	
 	List<ShoppingCartDTO>  listShoppingCart(ShoppingCartDTO dto);
 
-	
-	
 }
