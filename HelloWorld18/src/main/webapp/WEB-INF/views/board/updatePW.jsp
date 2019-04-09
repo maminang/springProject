@@ -36,7 +36,6 @@
             </div><!-- /.modal -->
 <!--// modal -->
 	<form action="/member/updatePW?id=${dto.id}&pw=${dto.pw}">
-	
                 <input type="hidden" value="${dto.id }" class="form-control" id="id" name="id"  placeholder="id" maxlength="30">
 			<div class="form-group" id="OridivPassword">
                 <label for="inputPassword" class="col-lg-2 control-label">기존 패스워드 입력</label>
@@ -99,7 +98,7 @@
              var divPassword = $('#divPassword');
              var divPasswordCheck = $('#divPasswordCheck');
              var oripassword = $('#oripassword');
-             var pw = "${dto.pw}";
+             var pm = "	${passMatch}";
              
            //기존 패스워드
              if($('#oripassword').val()==""){
@@ -144,15 +143,15 @@
              }
               
              //기존 패스워드 비교
-//              if($('#oripassword').val()!=pw){
-//                  modalContents.text("기존 패스워드가 일치하지 않습니다.");
-//                  modal.modal('show');
-//                  return false;
-//              }
+             if(pm==false){
+                 modalContents.text("기존 패스워드가 일치하지 않습니다.");
+                 modal.modal('show');
+                 return false;
+             }
              
            //패스워드 비교
              if($('#pw').val()!=$('#passwordCheck').val() || $('#passwordCheck').val()==""){
-                 modalContents.text("패스워드가 일치하지 않습니다.");
+                 modalContents.text("새로운 패스워드와 확인이 일치하지 않습니다.");
                  modal.modal('show');
                   
                  divPasswordCheck.removeClass("has-success");

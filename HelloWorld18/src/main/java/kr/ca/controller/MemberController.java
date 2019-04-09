@@ -213,8 +213,8 @@ public class MemberController {
 		
 		LoginDTO mdto = service.login(dto);
 		boolean passMatch=passEncoder.matches(oripw,mdto.getPw());
+		model.addAttribute("passMatch", passMatch);
 		if (passMatch) {
-			model.addAttribute("passMatch", passMatch);
 			//암호화 후
 			String pripw=passEncoder.encode(pw);
 			service.updatePW(id,pripw);
