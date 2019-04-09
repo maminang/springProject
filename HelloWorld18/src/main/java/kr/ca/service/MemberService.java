@@ -25,5 +25,10 @@ public interface MemberService {
 	void pointCharge(String id, int point);
 
 	List<ChargeHistoryDTO> getChargeHistory(String id);
+
+	MemberDTO selectMemberDTO(String id);
+
+	void updatePW(String id, String pw);
+
 	
 }

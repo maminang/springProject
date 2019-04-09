@@ -77,4 +77,17 @@ public class MemberServiceImpl implements MemberService {
 		return dao.getChargeHistory(id);
 	}
 
+	@Override
+	public MemberDTO selectMemberDTO(String id) {
+		// TODO Auto-generated method stub
+		return dao.selectMemberDTO(id);
+	}
+
+	@Override
+	public void updatePW(String id, String pw) {
+		// TODO Auto-generated method stub
+		dao.updatePW(id,pw);
+	}
+
+
 }

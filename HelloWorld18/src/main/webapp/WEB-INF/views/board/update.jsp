@@ -41,7 +41,7 @@
 
 		<div class="form-group">
 			<label for="pw" class="col-lg-2 ">pw</label>
-			<a href="#">비밀번호 수정하기</a>
+			<a href="/member/updatePWUI?id=${dto.id}">비밀번호 수정하기</a>
 		</div>
 
 		<div class="form-group">

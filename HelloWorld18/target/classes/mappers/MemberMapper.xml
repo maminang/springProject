@@ -9,10 +9,6 @@
 	(#{id},#{pw},#{name},#{postNum},#{address},#{DTL_ADRES},#{email},#{phone},#{birth})
 	</insert>
 	
-<!-- 	<select id="login" resultType="LoginDTO"> -->
-<!-- 	SELECT id, pw from tbl_member WHERE id=#{id} and pw=#{pw} -->
-<!-- 	</select> -->
-	
 	<select id="login" resultType="LoginDTO">
 	SELECT id, pw FROM tbl_member where id = #{id}
 	</select>
@@ -53,4 +49,10 @@
 	<select id="getChargeHistory" resultType="ChargeHistoryDTO">
 		select * from tbl_charge_history where id = #{id} order by chargedate desc
 	</select>
+	
+	<update id="updatePW">
+	UPDATE tbl_member SET pw=#{pw} WHERE id=#{id}
+	</update>
+	
+	
 </mapper>

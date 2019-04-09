@@ -55,15 +55,11 @@ public class MemberController {
 	@RequestMapping(value = "/loginpost", method = RequestMethod.POST)
 	public void loginPost(LoginDTO dto, HttpSession session) throws Exception {
 		LoginDTO mdto = service.login(dto);
-		
 		boolean passMatch=passEncoder.matches(dto.getPw(),mdto.getPw());
+		System.out.println("passMatch:::::::::::::::::::::"+passMatch);
 		if (dto != null && passMatch) {
 			session.setAttribute("login", mdto);
 		}else {
-			session.setAttribute("login", null);
-		if (dto != null) {
-			session.setAttribute("login", mdto);
-		}
 		return;
 	}
 	}
@@ -143,7 +139,7 @@ public class MemberController {
 
 //회원정보 수정
 		@RequestMapping("/updateui")
-		public String updateui(Model model, String id,LoginDTO ldto) {
+		public String updateui(Model model, String id) {
 			MemberDTO dto= service.updateui(id);
 			model.addAttribute("dto",dto);
 			return "board/update";
@@ -201,4 +197,31 @@ public class MemberController {
 		}
 		return entity;
 	}
+	
+//비밀번호 수정
+	
+	@RequestMapping("/updatePWUI")
+	public String updatePWUI(Model model, String id, MemberDTO dto) {
+		dto=service.selectMemberDTO(id);
+		model.addAttribute("dto",dto);
+		return "board/updatePW";
+		
+	}
+
+	@RequestMapping("/updatePW")
+	public String updatePW(LoginDTO dto,String id,String pw,String oripw,HttpSession session,Model model) {
+		
+		LoginDTO mdto = service.login(dto);
+		boolean passMatch=passEncoder.matches(oripw,mdto.getPw());
+		if (passMatch) {
+			model.addAttribute("passMatch", passMatch);
+			//암호화 후
+			String pripw=passEncoder.encode(pw);
+			service.updatePW(id,pripw);
+			return "redirect:/member/mypage";
+		}
+		return "board/updatePW";
+	}
+	
+	
 }

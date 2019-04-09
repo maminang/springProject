@@ -28,5 +28,9 @@ public interface MemberDAO {
 
 	List<ChargeHistoryDTO> getChargeHistory(String id);
 
+	void updatePW(String id, String pw);
+
+
+
 	
 }

@@ -85,6 +85,16 @@ public class MemberDAOImpl implements MemberDAO {
 		return session.selectOne(NS+".selectMemberDTO", id);
 	}
 
+	@Override
+	public void updatePW(String id, String pw) {
+		// TODO Auto-generated method stub
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("id", id);
+		map.put("pw", pw);
+		session.update(NS+".updatePW", map);
+	}
+
+
 	
 	
 	
