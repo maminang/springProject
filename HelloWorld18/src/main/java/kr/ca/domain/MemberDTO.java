@@ -17,7 +17,7 @@ public class MemberDTO implements Serializable {
 	private String birth;
 	private int point;
 	private String signUpDate;
-	private int postNum;
+	private String postNum;
 	private String DTL_ADRES;
 	
 	public MemberDTO() {
@@ -25,7 +25,7 @@ public class MemberDTO implements Serializable {
 	}
 
 	public MemberDTO(String id, String pw, String name, String email, String address, String phone, String birth,
-			int point, String signUpDate, int postNum, String dTL_ADRES) {
+			int point, String signUpDate, String postNum, String dTL_ADRES) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -50,11 +50,11 @@ public class MemberDTO implements Serializable {
 		DTL_ADRES = dTL_ADRES;
 	}
 
-	public int getPostNum() {
+	public String getPostNum() {
 		return postNum;
 	}
 
-	public void setPostNum(int postNum) {
+	public void setPostNum(String postNum) {
 		this.postNum = postNum;
 	}
 

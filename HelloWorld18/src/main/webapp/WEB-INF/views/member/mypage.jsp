@@ -24,6 +24,7 @@
 	<jsp:include page="../headerBar.jsp" />
 
 	<div class="container">
+	
 		<form action="member/mypage" method="post">
 			<div class="row" align="center">
 				<h3>${mDto.id}님환영합니다</h3>

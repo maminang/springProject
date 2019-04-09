@@ -80,6 +80,11 @@
 					<textarea class="form-control" rows="10" name="prdct_dscrp"></textarea>
 				</div>
 				
+				<div class="form-group">
+					<label>전성분</label>
+					<textarea class="form-control" rows="10" name="INGRD"></textarea>
+				</div>
+				
 				<div id="detail">
 					<button id="addDetailForm" class="btn">디테일추가</button>
 

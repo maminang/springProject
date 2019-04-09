@@ -53,13 +53,13 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/loginpost", method = RequestMethod.POST)
-	public void loginPost(LoginDTO dto, HttpSession session) throws Exception {
+	public void loginPost(LoginDTO dto, HttpSession session,Model model) throws Exception {
 		LoginDTO mdto = service.login(dto);
 		boolean passMatch=passEncoder.matches(dto.getPw(),mdto.getPw());
-		System.out.println("passMatch:::::::::::::::::::::"+passMatch);
 		if (dto != null && passMatch) {
 			session.setAttribute("login", mdto);
 		}else {
+			session.setAttribute("login", null);
 		return;
 	}
 	}

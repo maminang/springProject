@@ -11,8 +11,11 @@ create table tbl_product (
 	eng_name varchar2(100) not null,
 	kr_name varchar2(100) not null,
 	prdct_dscrp varchar2(1500),
-	category varchar2(100) not null
+	category varchar2(100) not null,
+	INGRD varchar2(3000)
 )
+
+alter table tbl_product add INGRD varchar2(3000);
 
 alter table tbl_product drop column price
 

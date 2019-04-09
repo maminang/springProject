@@ -9,8 +9,8 @@
 		select max(pno) from tbl_product
 	</select>
 	<insert id="write">insert into tbl_product
-		(pno,eng_name,kr_name,prdct_dscrp,category) values
-		(#{pno},#{eng_name},#{kr_name},#{prdct_dscrp},#{category})
+		(pno,eng_name,kr_name,prdct_dscrp,category,INGRD) values
+		(#{pno},#{eng_name},#{kr_name},#{prdct_dscrp},#{category},#{INGRD})
 	</insert>
 	<insert id="writeDetail">
 		insert into tbl_product_detail (pno,volume,price)

@@ -23,9 +23,14 @@ birth date not null,
 point number default 0,
 signUpDate date default sysdate,
 manager number default 0,
-postNum number,
+postNum varchar2(15),
 DTL_ADRES varchar2(50)
 )
+
+ALTER TABLE tbl_member
+  DROP COLUMN postNum
+  
+alter table tbl_member add postNum varchar2(15)
 
 insert into tbl_member (id,pw,name,email,address,phone,birth) values ('NamepeN', 'qlalfqjsgh', '임하민', 'maminang@gmail.com','서울특별시 성북구 장위동 111-111 중앙빌라 111호', '010-2334-4290', '1996-09-06')
 insert into tbl_member (id,pw,name,email,address,phone,birth) values ('maminang', 'qlalfqjsgh', '임하민', 'maminang@gmail.com','서울특별시 성북구 장월로 11길 11-1 중앙빌라 112호', '010-2334-4290', '2019-03-28')
@@ -39,6 +44,7 @@ alter table tbl_member modify phone varchar2(50)
 alter table tbl_member add postNum number
 alter table tbl_member add DTL_ADRES varchar2(50)
 alter table tbl_member modify pw varchar2(100); 
+alter table tbl_member modify postNum varchar2(15); 
 
 delete tbl_member
 
