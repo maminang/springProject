@@ -17,38 +17,42 @@
 </head>
 <body>
 	<jsp:include page="headerBar.jsp" />
-
 	<div class="container">
 		<div class="row">
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>제품</th>
+						<th>용량</th>
 						<th>가격</th>
 						<th>수량</th>
 						<th>합계</th>
+						<th></th>
 					</tr>
 				</thead>
-
 				<tbody>
-					<c:forEach items="${list}" var="list">
-						<tr>
-							<c:if test="${list.pno > 0 }">
+					<c:forEach items="${list}" var="list" varStatus="status">
+						<c:if test="${list.pno != 0 }">
+							<tr>
 								<td>${list.pno}</td>
-								<td>가격 아직 안함</td>
+								<td>${list.volume }</td>
+								<td>${list.price }</td>
 								<td>${list.amount}</td>
-								<td>가격 * ${list.amount }</td>
-							</c:if>
-						</tr>
+								<td>${list.amount*list.price}</td>
+								<td>
+									<form method="post">
+										<input type="number" value="1" min="1" max="${list.amount }"
+											name="amount" required autofocus> <input
+											hidden="hidden" value="${list.pno }" name="pno"> <input
+											type="hidden" value="${list.volume }" name="volume">
+										<button class="X">X</button>
+									</form>
+								</td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
-		<div class="row">
-			<form action="/order/checkout">
-				<input type="submit" class="btn" value="주문하기">
-				<input type="hidden" value="${login.id}" name="id">
-			</form>
 		</div>
 	</div>
 
@@ -56,11 +60,33 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 
+			$(".X").click(function() {
+				$("form").attr("action", "/shoppingCart/deleteShoppingCart");
+				$("form").attr("method", "GET");
+				$("Form").submit();
+			});
+			
+			var mergeItem="";
+			var mergeCount=0;
+			var mergeRowNum=0;
+			
+			$('tr','table').each(function(row) {
+				if(row>2) {
+					var thisTr=$(this);
+					var item = $(':first-child',thisTr).html();
+					
+					if(mergeItem != item) {
+						mergeCount=1;
+						mergeItem=item;
+						mergeRowNum=Number(row);
+					} else {
+						mergeCount=Number(mergeCount) + 1;
+						$("tr:eq("+mergeRowNum+")>td:first-child").attr("rowspan", mergeCount);
+						$('td:first-child',thisTr).remove();
+					}
+				}
+			
 		});
-
-		function order() {
-
-		}
 	</script>
 
 </body>
