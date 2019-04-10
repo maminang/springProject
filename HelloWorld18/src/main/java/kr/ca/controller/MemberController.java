@@ -55,13 +55,18 @@ public class MemberController {
 	@RequestMapping(value = "/loginpost", method = RequestMethod.POST)
 	public void loginPost(LoginDTO dto, HttpSession session,Model model) throws Exception {
 		LoginDTO mdto = service.login(dto);
+		System.out.println("mdto::::::::::::::::"+mdto.getPw());
+		System.out.println("dto::::::::::::::::"+dto.getPw());
 		boolean passMatch=passEncoder.matches(dto.getPw(),mdto.getPw());
+		System.out.println("passMatch:::::::::::::::::"+passMatch);
+		System.out.println("dto.getPw():::::::::::::::"+dto.getPw());
+		System.out.println("mdto.getPw()::::::::::::::"+mdto.getPw());
 		if (dto != null && passMatch) {
 			session.setAttribute("login", mdto);
 		}else {
-			session.setAttribute("login", null);
-		return;
-	}
+	         session.setAttribute("login", null);
+	         return;
+	      }
 	}
 //로그아웃	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -204,15 +209,22 @@ public class MemberController {
 	public String updatePWUI(Model model, String id, MemberDTO dto) {
 		dto=service.selectMemberDTO(id);
 		model.addAttribute("dto",dto);
+		System.out.println("asfaf:::::::::::::::"+dto);
 		return "board/updatePW";
 		
 	}
 
 	@RequestMapping("/updatePW")
 	public String updatePW(LoginDTO dto,String id,String pw,String oripw,HttpSession session,Model model) {
-		
+		System.out.println(oripw);
+		System.out.println("id:::::::::::::::"+id);
+		System.out.println("pw::::::::::::::::"+pw);
 		LoginDTO mdto = service.login(dto);
+		System.out.println("mdto::::::::::::::::"+mdto);
+		
 		boolean passMatch=passEncoder.matches(oripw,mdto.getPw());
+		System.out.println("oripw::::::::::::"+oripw);
+		System.out.println("mdto.getPw()::::::::::::"+mdto.getPw());
 		model.addAttribute("passMatch", passMatch);
 		if (passMatch) {
 			//암호화 후

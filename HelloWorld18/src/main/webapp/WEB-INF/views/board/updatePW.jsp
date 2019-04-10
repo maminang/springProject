@@ -35,7 +35,9 @@
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 <!--// modal -->
-	<form action="/member/updatePW?id=${dto.id}&pw=${dto.pw}">
+	<form action="/member/updatePW?id=${dto.id}">
+				${dto }
+                <input type="hidden" value="${dto.pw }" class="form-control" id="pw" name="pw"  placeholder="pw" maxlength="30">
                 <input type="hidden" value="${dto.id }" class="form-control" id="id" name="id"  placeholder="id" maxlength="30">
 			<div class="form-group" id="OridivPassword">
                 <label for="inputPassword" class="col-lg-2 control-label">기존 패스워드 입력</label>
@@ -162,6 +164,7 @@
                  divPasswordCheck.removeClass("has-error");
                  divPasswordCheck.addClass("has-success");
              }
+           
 	});
 		 
 	});
