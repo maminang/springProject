@@ -21,15 +21,15 @@ public class ProductDAOImpl implements ProductDAO {
 	private final String NS = "kr.ca.mapper.product";
 
 	@Override
-	public void write(ProductDTO dto) {
+	public void write(ProductDTO dto, int[] volume, int[] price) {
 		dto.setPno(getPno());
 		session.insert(NS + ".write", dto);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pno", dto.getPno());
-		for (int i = 0; i < dto.getVolume().length; i++) {
-			map.put("volume", dto.getVolume()[i]);
-			map.put("price", dto.getPrice()[i]);
+		for (int i = 0; i < volume.length; i++) {
+			map.put("volume", volume[i]);
+			map.put("price", price[i]);
 			session.insert(NS+".writeDetail", map);
 		}
 	}
@@ -116,10 +116,34 @@ public class ProductDAOImpl implements ProductDAO {
 		return session.selectOne(NS+".selectProduct", pno);
 	}
 
+//	select * Product id로 검색
 	@Override
-	public List<ProductDetailDTO> selectProductDetail(int pno) {
-		return session.selectList(NS+".selectProductDetail", pno);
+	public ProductDTO selectProduct(ProductDTO dto) {
+
+		return session.selectOne(NS + ".selectProduct", dto);
 	}
 
-	
+//	select * ProductDetail id로 검색
+	@Override
+	public List<ProductDetailDTO> selectProductDetail(int pno) {
+
+		return session.selectList(NS + ".selectProductDetail", pno);
+	}
+
+	@Override
+	public ProductDetailDTO selectOneProductDetail(int pno, int volume) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pno", pno);
+		map.put("volume", volume);
+		
+		return session.selectOne(NS + ".selectOneProductDetail", map);
+	}
+
+	@Override
+	public int selectCountProductDetail() {
+		 
+		return session.selectOne(NS+".selectCountProductDetail");
+	}
+
 }

@@ -9,7 +9,7 @@ public interface ProductService {
 
 	List<ProductDTO> searchProduct(String keyword);
 
-	void write(ProductDTO dto);
+	void write(ProductDTO dto, int[] volume, int[] price);
 
 	List<ProductDTO> getNewProducts();
 

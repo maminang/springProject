@@ -37,6 +37,7 @@
 	
 	<beans:bean id="loginInterceptor" class="kr.ca.interceptor.LoginInterceptor"></beans:bean>
 	<beans:bean id="AuthInterceptor" class="kr.ca.interceptor.AuthInterceptor"></beans:bean>
+	
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/loginpost"/>

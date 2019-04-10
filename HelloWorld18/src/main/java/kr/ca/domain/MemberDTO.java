@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class MemberDTO implements Serializable {
 
 	/**
-	 * 
-	 */
+	* 
+	*/
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String pw;
@@ -19,7 +19,7 @@ public class MemberDTO implements Serializable {
 	private String signUpDate;
 	private String postNum;
 	private String DTL_ADRES;
-	
+
 	public MemberDTO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -40,8 +40,6 @@ public class MemberDTO implements Serializable {
 		DTL_ADRES = dTL_ADRES;
 	}
 
-	
-	
 	public String getDTL_ADRES() {
 		return DTL_ADRES;
 	}
@@ -134,7 +132,6 @@ public class MemberDTO implements Serializable {
 		return serialVersionUID;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", address=" + address
@@ -151,24 +148,19 @@ public class MemberDTO implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MemberDTO other = (MemberDTO) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
-	
-	
-	
-	
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      MemberDTO other = (MemberDTO) obj;
+      if (id == null) {
+         if (other.id != null)
+            return false;
+      } else if (!id.equals(other.id))
+         return false;
+      return true;
+   }
 }
