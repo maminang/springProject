@@ -82,7 +82,7 @@ img {
 		</div>
 		<div class="col-sm-2">
 			<div class="row">주문요약</div>
-			<br> 반품,교환정책 <br>
+			<br>반품,교환정책<br>
 		</div>
 		<div class="col-sm-1"></div>
 	</div>
