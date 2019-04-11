@@ -15,19 +15,31 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 <title>Insert title here</title>
+<style type="text/css">
+.Recently {
+	border: 2px solid red;
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	position: fixed;
+	top: 40%;
+	right: 50px;
+}
+</style>
 </head>
 <body>
 
 
-	<!--<jsp:include page="headerBar.jsp" />-->
-	<div class="container">
+
+	<div class="Recently">
 		<div class="row">
-			
+			<c:forEach items="${list }" var="list">
+				${list.pno }
+			</c:forEach>
 		</div>
 	</div>
-	
 
-	<!--<jsp:include page="footerBar.jsp" />-->
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 

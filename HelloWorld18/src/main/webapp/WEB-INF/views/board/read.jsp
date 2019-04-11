@@ -53,12 +53,13 @@
 	height: 300px;
 	width: 300px;
 }
+
 </style>
 </head>
 <body>
 	<jsp:include page="../headerBar.jsp" />
-	${pd.pno}
-	${pdd }
+	<jsp:include page="../RecentlyProduct.jsp" />
+	${pd.pno} ${pdd }
 	<div class="box">
 		<div class="leftbox">
 
@@ -131,10 +132,10 @@
 						<option>${pdd[1].price } ${pdd[1].volume }ml</option>
 					</select>
 				</div>
-				수량 : <input type="number" value="1" name="amount" min="1" required autofocus>
-				<input value="NamepeN" name="id" type="hidden"> 
-				<input value="${pd.pno }" name="pno" type="hidden">
-				<a id="cart" class="btn btn-success" >장바구니에 담기</a>
+				수량 : <input type="number" value="1" name="amount" min="1" required
+					autofocus> <input value="NamepeN" name="id" type="hidden">
+				<input value="${pd.pno }" name="pno" type="hidden"> <a
+					id="cart" class="btn btn-success">장바구니에 담기</a>
 			</form>
 			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<hr>
@@ -211,7 +212,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+
 			//장바구니에 담기	
 			$("#cart").click(function() {
 				$("form").attr("action", "/shoppingCart/insertShoppingCart");
