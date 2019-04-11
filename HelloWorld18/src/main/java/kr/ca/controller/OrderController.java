@@ -1,15 +1,19 @@
 package kr.ca.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ca.domain.LoginDTO;
+import kr.ca.domain.MemberDTO;
 import kr.ca.domain.OrderDTO;
 import kr.ca.domain.OrderDetailDTO;
 import kr.ca.service.OrderService;
@@ -21,11 +25,12 @@ public class OrderController {
 	private OrderService service;
 
 	@RequestMapping("checkout")
-	public String checkOut(Model model, HttpServletRequest request) {
+	public String checkOut(HttpServletRequest request) {
 		OrderDTO order = new OrderDTO();
-
+		HttpSession session = request.getSession();
 		try {
-			Object oLogin = request.getSession().getAttribute("login");
+			Object oLogin = session.getAttribute("login");
+
 			// 회원 주문
 			if (oLogin != null) {
 				LoginDTO login = (LoginDTO) oLogin;
@@ -33,14 +38,14 @@ public class OrderController {
 			}
 			// 비회원 주문(미구현!)
 			else {
-				getNonMemberOrder();
+				setNonMemberOrder(order);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		model.addAttribute("order", order);
-		return "checkout";
+		session.setAttribute("order", order);
+
+		return "order/checkout";
 	}
 
 	private void setMemberOrder(String id, OrderDTO order) {
@@ -49,9 +54,52 @@ public class OrderController {
 		service.setOrderMemberInfo(id, order);
 	}
 
-	private List<OrderDetailDTO> getNonMemberOrder() {
-		List<OrderDetailDTO> detailList = null;
-		// getcookies로 쿠키받아서 DetailList를 만들고 넣어주면 됨
-		return detailList;
+	private void setNonMemberOrder(OrderDTO order) {
+	}
+
+	@RequestMapping("review")
+	public String review(String shipping_memo, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		Object oOrder = session.getAttribute("order");
+		OrderDTO order = (OrderDTO) oOrder;
+
+		if (shipping_memo != null) {
+			order.setShipping_memo(shipping_memo);
+		}
+		session.setAttribute("order", order);
+
+		return "order/review";
+	}
+
+	@RequestMapping("payment")
+	public String payment(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		Object oLogin = session.getAttribute("login");
+		if (oLogin != null) {
+			LoginDTO login = (LoginDTO) oLogin;
+			MemberDTO mdto = service.getPoint(login.getId());
+			session.setAttribute("point", mdto.getPoint());
+		}
+
+		Object oOrder = session.getAttribute("order");
+		OrderDTO order = (OrderDTO) oOrder;
+		session.setAttribute("order", order);
+		return "order/payment";
+	}
+
+	@ResponseBody
+	@RequestMapping("checkPoint/{id}/{total_price}")
+	public boolean checkPoint(@PathVariable("id") String id, @PathVariable("total_price") int total_price) {
+		return service.checkPoint(id, total_price);
+	}
+	
+	@RequestMapping("complete")
+	public String complete(HttpSession session) {
+		Object oOrder = session.getAttribute("order");
+		OrderDTO order = (OrderDTO) oOrder;
+		service.complete(order);
+		return "";
 	}
 }

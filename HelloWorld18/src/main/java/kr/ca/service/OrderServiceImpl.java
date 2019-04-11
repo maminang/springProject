@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.ca.dao.MemberDAO;
 import kr.ca.dao.OrderDAO;
 import kr.ca.dao.ProductDAO;
+import kr.ca.domain.MemberDTO;
 import kr.ca.domain.OrderDTO;
 import kr.ca.domain.OrderDetailDTO;
 import kr.ca.domain.ProductDTO;
@@ -21,6 +23,8 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDAO dao;
 	@Inject
 	private ProductDAO pdao;
+	@Inject
+	private MemberDAO mdao;
 
 	@Override
 	public List<OrderDetailDTO> getDetailList(String id) {
@@ -36,5 +40,20 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void setOrderMemberInfo(String id, OrderDTO order) {
 		dao.setOrderMemberInfo(id,order);
+	}
+	
+	@Override
+	public MemberDTO getPoint(String id) {
+		return mdao.selectMemberDTO(id);
+	}
+
+	@Override
+	public boolean checkPoint(String id, int total_price) {
+		return dao.checkPoint(id,total_price);
+	}
+
+	@Override
+	public void complete(OrderDTO order) {
+		dao.complete(order);
 	}
 }

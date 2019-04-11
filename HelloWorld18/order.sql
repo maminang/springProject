@@ -7,7 +7,7 @@ create table tbl_order (
 	phone varchar2(50),
 	total_price number not null,
 	order_date date default sysdate,
-	shipping_memo varchar2(180) not null,
+	shipping_memo varchar2(180),
 	payment_status varchar2(5) not null
 )
 
@@ -23,3 +23,9 @@ create table tbl_order_detail (
 )
 
 drop table tbl_order_detail
+
+select * from tbl_order
+select * from tbl_order_detail
+
+delete from tbl_order
+delete from tbl_order_detail

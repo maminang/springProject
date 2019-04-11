@@ -11,4 +11,8 @@ public interface OrderDAO {
 
 	void setOrderMemberInfo(String id, OrderDTO order);
 
+	boolean checkPoint(String id, int total_price);
+
+	void complete(OrderDTO order);
+
 }

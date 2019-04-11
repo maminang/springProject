@@ -127,6 +127,9 @@ public class OrderDTO implements Serializable {
 
 	public void setDetailList(List<OrderDetailDTO> detailList) {
 		this.detailList = detailList;
+		for (OrderDetailDTO oddto : detailList) {
+			total_price += oddto.getPrice() * oddto.getAmount();
+		}
 	}
 
 	@Override

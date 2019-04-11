@@ -5,11 +5,39 @@
 <mapper namespace="kr.co.mapper.OrderMapper">
 
 	<select id="getDetailList" resultType="OrderDetailDTO">
-		select * from tbl_shopping_cart where id = #{id}
+		select * from
+		tbl_shopping_cart where id = #{id}
 	</select>
-	
+
 	<select id="setOrderMemberInfo" resultType="MemberDTO">
-		select * from tbl_member where id = #{id}
+		select * from
+		tbl_member where id = #{id}
+	</select>
+
+	<select id="checkPoint" resultType="Integer">
+		select point from tbl_member
+		where id = #{id}
+	</select>
+
+	<select id="getOno" resultType="Integer">
+		select max(ono) from tbl_order
 	</select>
 	
+	<select id="getOdno" resultType="Integer">
+		select max(odno) from tbl_order_detail
+	</select>
+
+	<insert id="complete">
+		insert into tbl_order
+		(ono,name,address,postnum,dtl_adres,phone,total_price,shipping_memo,payment_status)
+		values
+		(#{ono},#{name},#{address},#{postNum},#{dtl_adres},#{phone},#{total_price},#{shipping_memo},#{payment_status})
+	</insert>
+
+	<insert id="completeDetail">
+		insert into tbl_order_detail
+		(odno,ono,pno,volume,price,amount) values
+		(#{odno},#{ono},#{pno},#{volume},#{price},#{amount})
+	</insert>
+
 </mapper>

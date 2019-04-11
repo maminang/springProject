@@ -48,7 +48,7 @@
  <!-- Terms of Service -->
                 <label for="provision" class="col-lg-2 control-label">회원가입약관</label>
                 <div class="col-lg-10" id="provision">
-                    <textarea class="form-control" rows="8" style="resize:none">약관동의sdfsdfsdfdsf </textarea>
+                    <textarea class="form-control" rows="8" style="resize:none">약관동의 </textarea>
                     <div class="radio">
                         <label>
                             <input type="radio" id="provisionYn" name="provisionYn" value="Y" autofocus="autofocus" checked>
