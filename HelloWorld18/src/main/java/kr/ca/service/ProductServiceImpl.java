@@ -1,6 +1,8 @@
 package kr.ca.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +18,8 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDAO dao;
 
 	@Override
-	public void write(ProductDTO dto) {
-		dao.write(dto);
+	public void write(ProductDTO dto, int[] volume, int[] price) {
+		dao.write(dto, volume, price);
 		String[] images = dto.getImages();
 		dao.addImages(images, dto.getPno());
 	}

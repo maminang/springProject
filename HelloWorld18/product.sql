@@ -81,6 +81,3 @@ select * from tbl_product where category = 'citrus'
 
 
 
-
-
-

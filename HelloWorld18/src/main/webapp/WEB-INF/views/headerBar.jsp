@@ -32,7 +32,7 @@
 				</c:if>
 				<li><a href="/member/signup" class="glyphicon glyphicon-pencil">회원가입</a></li>
 				<li><a href="/member/mypage" class="glyphicon glyphicon-user">마이페이지</a></li>
-				<li><a href="#" class="glyphicon glyphicon-shopping-cart">장바구니</a></li>
+				<li><a href="/shoppingCart/listShoppingCart/" class="glyphicon glyphicon-shopping-cart">장바구니</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a

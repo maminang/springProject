@@ -29,6 +29,7 @@
 		</div>
 		<div class="row">
 			<table class="table table-hover">
+			
 				<c:forEach items="${list}" var="vo">
 					<div class="col-sm-4" style="border: 1px solid black">
 						<a href="/product/read?pno=${vo.pno}"> ${vo.eng_name} <br> <img
@@ -37,6 +38,7 @@
 						</a>
 					</div>
 				</c:forEach>
+				
 			</table>
 		</div>
 		

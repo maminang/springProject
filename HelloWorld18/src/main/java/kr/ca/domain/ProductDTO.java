@@ -12,8 +12,8 @@ public class ProductDTO implements Serializable {
 	private String eng_name;
 	private String kr_name;
 	private String prdct_dscrp;
-	private int[] volume;
-	private int[] price;
+	private int volume;
+	private int price;
 	private String category;
 	private String[] images;
 	private int amount;
@@ -23,7 +23,7 @@ public class ProductDTO implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProductDTO(int pno, String eng_name, String kr_name, String prdct_dscrp, int[] volume, int[] price,
+	public ProductDTO(int pno, String eng_name, String kr_name, String prdct_dscrp, int volume, int price,
 			String category, String[] images, int amount, String iNGRD) {
 		super();
 		this.pno = pno;
@@ -78,19 +78,19 @@ public class ProductDTO implements Serializable {
 		this.prdct_dscrp = prdct_dscrp;
 	}
 
-	public int[] getVolume() {
+	public int getVolume() {
 		return volume;
 	}
 
-	public void setVolume(int[] volume) {
+	public void setVolume(int volume) {
 		this.volume = volume;
 	}
 
-	public int[] getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(int[] price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -143,11 +143,8 @@ public class ProductDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "ProductDTO [pno=" + pno + ", eng_name=" + eng_name + ", kr_name=" + kr_name + ", prdct_dscrp="
-				+ prdct_dscrp + ", volume=" + Arrays.toString(volume) + ", price=" + Arrays.toString(price)
-				+ ", category=" + category + ", images=" + Arrays.toString(images) + ", amount=" + amount + ", INGRD="
-				+ INGRD + "]";
+				+ prdct_dscrp + ", volume=" + volume + ", price=" + price + ", category=" + category + ", images="
+				+ Arrays.toString(images) + ", amount=" + amount + ", INGRD=" + INGRD + "]";
 	}
-
-	
 
 }

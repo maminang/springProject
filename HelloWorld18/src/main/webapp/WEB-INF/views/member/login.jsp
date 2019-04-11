@@ -22,7 +22,6 @@
 	<div class="container">
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
-		${passMatch}
 				<form method="post" action="/member/loginpost">
 					<h3 style="text-align: center;">로그인</h3>
 					<div class="form-group">

@@ -7,7 +7,7 @@ import kr.ca.domain.ProductDetailDTO;
 
 public interface ProductDAO {
 
-	void write(ProductDTO dto);
+	void write(ProductDTO dto, int[] volume, int[] price);
 
 	void addImages(String[] images, int pno);
 
@@ -24,7 +24,13 @@ public interface ProductDAO {
 	List<ProductDTO> getListByCategory(String category);
 
 	ProductDTO selectProduct(int pno);
+	
+	ProductDTO selectProduct(ProductDTO dto);
 
 	List<ProductDetailDTO> selectProductDetail(int pno);
+
+	int selectCountProductDetail();
+
+	ProductDetailDTO selectOneProductDetail(int pno, int i);
 
 }
