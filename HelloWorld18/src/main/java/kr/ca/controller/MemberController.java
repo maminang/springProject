@@ -55,14 +55,13 @@ public class MemberController {
 	@RequestMapping(value = "/loginpost", method = RequestMethod.POST)
 	public void loginPost(LoginDTO dto, HttpSession session, Model model) throws Exception {
 		LoginDTO mdto = service.login(dto);
-		boolean passMatch = passEncoder.matches(dto.getPw(), mdto.getPw());
-
+		boolean passMatch=passEncoder.matches(dto.getPw(),mdto.getPw());
 		if (dto != null && passMatch) {
 			session.setAttribute("login", mdto);
-		} else {
-			session.setAttribute("login", null);
-			return;
-		}
+		}else {
+	         session.setAttribute("login", null);
+	         return;
+	      }
 	}
 
 //로그아웃	
@@ -204,25 +203,35 @@ public class MemberController {
 
 	@RequestMapping("/updatePWUI")
 	public String updatePWUI(Model model, String id, MemberDTO dto) {
-		dto = service.selectMemberDTO(id);
-		model.addAttribute("dto", dto);
+		dto=service.selectMemberDTO(id);
+		model.addAttribute("dto",dto);
 		return "board/updatePW";
 
 	}
 
 	@RequestMapping("/updatePW")
-	public String updatePW(LoginDTO dto, String id, String pw, String oripw, HttpSession session, Model model) {
-
-		LoginDTO mdto = service.login(dto);
-		boolean passMatch = passEncoder.matches(oripw, mdto.getPw());
-		model.addAttribute("passMatch", passMatch);
-		if (passMatch) {
+	public String updatePW(LoginDTO dto,String id,String pw,String oripw,HttpSession session,Model model) {
+		LoginDTO ldto = service.login(dto);
+		
+		model.addAttribute("dto", ldto);
 			// 암호화 후
 			String pripw = passEncoder.encode(pw);
 			service.updatePW(id, pripw);
 			return "redirect:/member/mypage";
-		}
-		return "board/updatePW";
 	}
+	@ResponseBody
+	@RequestMapping("/pwcheck")
+	public Boolean pwcheck(String oripw,String id) {
+		Boolean entity = null;
+		LoginDTO dto=new LoginDTO(id,oripw);
+		LoginDTO ldto = service.login(dto);
+		boolean passMatch=passEncoder.matches(oripw,ldto.getPw());
+		
+		entity = passMatch;
+		return entity;
 
+	}
+	
+	
+	
 }

@@ -35,12 +35,21 @@
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 <!--// modal -->
-	<form action="/member/updatePW?id=${dto.id}&pw=${dto.pw}">
-                <input type="hidden" value="${dto.id }" class="form-control" id="id" name="id"  placeholder="id" maxlength="30">
-			<div class="form-group" id="OridivPassword">
+	<form action="/member/updatePW?id=${dto.id}">
+				${dto.id }<br>
+				${dto.pw }
+				${passMatch}
+<%--                 <input type="hidden" value="${dto.pw }" class="form-control" id="pw" name="pw"  placeholder="pw" maxlength="30"> --%>
+<%--                 <input type="hidden" value="${dto}" class="form-control" id="id" name="id"  placeholder="id" maxlength="30"> --%>
+                <input type="hidden" value="${dto.id}" class="form-control" id="id" name="id"  placeholder="id" maxlength="30">
+<%--                 <input type="hidden" value="${dto.pw}" class="form-control" id="pw1" name="pw1"  placeholder="pw1" maxlength="30"> --%>
+			<div class="form-group" id="oripassword">
                 <label for="inputPassword" class="col-lg-2 control-label">기존 패스워드 입력</label>
-                <div class="col-lg-10">
-                    <input type="password" class="form-control" id="oripassword" name="oripw"  placeholder="패스워드" maxlength="30">
+                <div class="col-lg-10  input-group">
+                    <input type="password" class="form-control" id="oripw" name="oripw"  placeholder="패스워드" maxlength="30">
+                	<span class="input-group-btn">
+				<button type="button"id="pwcheck" class="btn btn-info">기존 패스워드 확인</button>
+			</span>
                 </div>
             </div>
 	 		<div class="form-group" id="divPassword">
@@ -65,6 +74,7 @@
 		
 		 var modalContents = $(".modal-contents");
          var modal = $("#defaultModal");
+         var pwck;
          
 		$('#password').keyup(function(event){
             
@@ -81,10 +91,10 @@
 		 $('#passwordCheck').keyup(function(event){
              
              var passwordCheck = $('#passwordCheck').val();
-             var password = $('#password').val();
+             var pw = $('#pw').val();
              var divPasswordCheck = $('#divPasswordCheck');
               
-             if((passwordCheck=="") || (password!=passwordCheck)){
+             if((passwordCheck=="") || (pw!=passwordCheck)){
                  divPasswordCheck.removeClass("has-success");
                  divPasswordCheck.addClass("has-error");
              }else{
@@ -94,20 +104,18 @@
          });
 		 
 		 $( "form" ).submit(function( event ) {
-             
              var divPassword = $('#divPassword');
              var divPasswordCheck = $('#divPasswordCheck');
              var oripassword = $('#oripassword');
-             var pm = "	${passMatch}";
-             
+             //alert(pm);
            //기존 패스워드
-             if($('#oripassword').val()==""){
+             if($('#oripw').val()==""){
                  modalContents.text("기존 패스워드를 입력하여 주시기 바랍니다.");
                  modal.modal('show');
                   
                  oripassword.removeClass("has-success");
                  oripassword.addClass("has-error");
-                 $('#oripassword').focus();
+                 $('#oripw').focus();
                  return false;
              }else{
             	 oripassword.removeClass("has-error");
@@ -141,13 +149,15 @@
                  divPasswordCheck.removeClass("has-error");
                  divPasswordCheck.addClass("has-success");
              }
-              
+             
              //기존 패스워드 비교
-             if(pm==false){
+              if(!pwck){
                  modalContents.text("기존 패스워드가 일치하지 않습니다.");
-                 modal.modal('show');
+                 modal.modal('show'); 
+//                  alert("안맞음");
                  return false;
-             }
+             } 
+              
              
            //패스워드 비교
              if($('#pw').val()!=$('#passwordCheck').val() || $('#passwordCheck').val()==""){
@@ -162,7 +172,30 @@
                  divPasswordCheck.removeClass("has-error");
                  divPasswordCheck.addClass("has-success");
              }
+           
 	});
+		 $("#pwcheck").click(function(event) {
+			 var id = ${dto.id}
+			 var oripw = $('#oripw').val();
+			 
+		 $.ajax({
+                 async: true,
+                 type : 'POST',
+                 data : {id:id,oripw:oripw},
+                 url : "/member/pwcheck",
+                 success : function(data) {
+                	 pwck = data
+                	 if (!pwck) {
+                		 modalContents.text("기존 패스워드가 일치하지 않습니다.");
+                         modal.modal('show');
+                         return false;
+					}else {
+						modalContents.text("기존 패스워드가 일치합니다.");
+                        modal.modal('show');
+					}
+                 }
+                 })
+         });
 		 
 	});
 </script>	

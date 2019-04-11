@@ -36,23 +36,23 @@
 
 .leftbox {
 	width: 300px;
-	border: 1px dashed red;
+/* 	border: 1px dashed red; */
 	text-align: center;
 	display: inline-block;
 }
 
 .rightbox {
 	width: 300px;
-	border: 1px dashed red;
+/* 	border: 1px dashed red; */
 	text-align: center;
 	display: inline-block;
 }
 
-#img {
-	border: 1px dashed blue;
-	height: 300px;
-	width: 300px;
-}
+/* #img { */
+/* 	border: 1px dashed blue; */
+/* 	height: 300px; */
+/* 	width: 300px; */
+/* } */
 </style>
 </head>
 <body>
