@@ -16,21 +16,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<jsp:include page="../headerBar.jsp"/>
 	<div class="container">
 		<div class="row">
-		
 		</div>
 	</div>
 	
 <script type="text/javascript">
 	$(document).ready(function(){
-		if (${dto==null}) {
+		if (${login==null}) {
+			alert("비밀번호 확인 후 다시 로그인해주세요")
 			self.location="/member/login";
+		} else {
+			self.location="/"
 		}
-		
-		
-		
 	});
 </script>	
 </body>

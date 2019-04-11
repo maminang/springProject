@@ -8,13 +8,13 @@ public class ShoppingCartDTO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private String id;
 	private int pno;
 	private int amount;
 	private int volume;
 	private int price;
-	
+
 	public ShoppingCartDTO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -74,10 +74,4 @@ public class ShoppingCartDTO implements Serializable {
 				+ price + "]";
 	}
 
-	
-
-	
-	
-	
-	
 }

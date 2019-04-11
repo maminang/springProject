@@ -3,16 +3,14 @@ package kr.ca.domain;
 import java.io.Serializable;
 
 public class ProductDetailDTO implements Serializable {
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -7668022281098830850L;
 	private int pno;
 	private int volume;
 	private int price;
-	
+
 	public ProductDetailDTO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -49,10 +47,36 @@ public class ProductDetailDTO implements Serializable {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + pno;
+		result = prime * result + price;
+		result = prime * result + volume;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductDetailDTO other = (ProductDetailDTO) obj;
+		if (pno != other.pno)
+			return false;
+		if (price != other.price)
+			return false;
+		if (volume != other.volume)
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return "ProductDetailDTO [pno=" + pno + ", volume=" + volume + ", price=" + price + "]";
 	}
-	
-	
 
 }

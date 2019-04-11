@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -42,10 +43,8 @@
 								<td>
 									<form method="post">
 										<input type="number" value="1" min="1" max="${list.amount }"
-											name="amount" required autofocus> 
-										<input
-											hidden="hidden" value="${list.pno }" name="pno"> 
-										<input
+											name="amount" required autofocus> <input
+											hidden="hidden" value="${list.pno }" name="pno"> <input
 											type="hidden" value="${list.volume }" name="volume">
 										<button class="X">X</button>
 									</form>
@@ -54,6 +53,16 @@
 						</c:if>
 					</c:forEach>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><a href="/order/checkout" class="btn btn-info">주문하기</a></td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 	</div>
@@ -61,13 +70,11 @@
 	<jsp:include page="footerBar.jsp" />
 	<script type="text/javascript">
 		$(document).ready(function() {
-
 			$(".X").click(function() {
 				$("form").attr("action", "/shoppingCart/deleteShoppingCart");
 				$("form").attr("method", "GET");
 				$("Form").submit();
 			});
-
 		});
 	</script>
 

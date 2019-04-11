@@ -1,6 +1,9 @@
 package kr.ca.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -42,17 +45,18 @@ public class ShoppingCartController {
 		if (login != null) {
 			dto.setId(login.toString());
 			List<ShoppingCartDTO> list = service.listShoppingCart(dto);
-			System.out.println(list);
 			model.addAttribute("list", list);
 			/* 로그인 안했을 때(비회원) */
 		} else {
 
 			Cookie[] cookies = request.getCookies();
 			List<ShoppingCartDTO> cList = new ArrayList<ShoppingCartDTO>();
+
 			for (int i = 0; i < cookies.length; i++) {
 				String[] avp = cookies[i].getValue().split("_");
 				/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
-				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
+				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")
+						|| cookies[i].getValue().equalsIgnoreCase("pno")) {
 					cList.add(new ShoppingCartDTO(dto.getId(), 0, 0, 0, 0));
 					continue;
 				}
@@ -71,14 +75,24 @@ public class ShoppingCartController {
 				int pno = Integer.valueOf(sPno);
 				String sVolume = pnoV[1];
 				int volume = Integer.valueOf(sVolume);
-
 				ShoppingCartDTO sDto = new ShoppingCartDTO();
 				sDto.setId(dto.getId());
 				sDto.setPno(pno);
 				sDto.setAmount(cookieAmount);
 				sDto.setVolume(volume);
 				sDto.setPrice(cookiePrice);
-				cList.add(i, sDto);
+				cList.add(sDto);
+				for (int j = 0; j < cList.size(); j++) {
+					if (cList.get(j).getPno() == 0) {
+						cList.remove(j);
+					}
+				}
+				Collections.sort(cList, new Comparator<ShoppingCartDTO>() {
+					@Override
+					public int compare(ShoppingCartDTO o1, ShoppingCartDTO o2) {
+						return o1.getPno() - o2.getPno() + o1.getVolume() - o2.getVolume();
+					}
+				});
 				model.addAttribute("list", cList);
 			}
 		}
@@ -174,7 +188,7 @@ public class ShoppingCartController {
 				}
 			}
 		}
-		return "board/read";
+		return "product/read";
 	}
 
 //	장바구니에서 업데이트&삭제
@@ -211,13 +225,16 @@ public class ShoppingCartController {
 
 			/* 쿠키 생성 */
 			Cookie pnoVolume = new Cookie(sPno + "_" + dto.getVolume(), sAmount + "_" + dto.getPrice());
+			/* 쿠키 설정 */
+			pnoVolume.setPath("/");
 			/* 배열에 담기 */
 			Cookie[] cookies = request.getCookies();
 			for (int i = 0; i < cookies.length; i++) {
 
 				String[] avp = cookies[i].getValue().split("_");
 				/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
-				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
+				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")
+						|| cookies[i].getValue().equalsIgnoreCase("pno")) {
 					continue;
 				}
 				if (cookies[i].getName().equals(sPno + "_" + dto.getVolume())) {
@@ -246,78 +263,6 @@ public class ShoppingCartController {
 
 		return new RedirectView("listShoppingCart");
 
-	}
-
-//	read.jsp로 가기
-	@RequestMapping("/read")
-	public String read(ProductDTO pd, Model model, HttpServletRequest request, HttpServletResponse response,
-			HttpSession session, int pno) {
-
-		Object login = session.getAttribute("login");
-
-		pd = productDAO.selectProduct(pd);
-		List<ProductDetailDTO> pdd = productDAO.selectProductDetail(pd.getPno());
-		model.addAttribute("pd", pd);
-		model.addAttribute("pdd", pdd);
-
-		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		
-		
-		
-		if (login == null) {
-
-			/* 쿠키 생성 */
-			Cookie recentlyProduct = new Cookie(String.valueOf(pno), "pno");
-			/* 쿠키 유지 시간 설정 */
-			recentlyProduct.setMaxAge(7 * 24 * 60 * 60);
-			/* 쿠키 패스 설정인데 자동으로 설정됨 */
-			recentlyProduct.setPath("/");
-			/* 쿠키 추가 */
-			response.addCookie(recentlyProduct);
-			/* 배열에 담기 */
-			Cookie[] cookies = request.getCookies();
-			
-			List<Object> s = new ArrayList<Object>();
-			int a = 0;
-			for (int i = 0; i < cookies.length; i++) {
-				/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
-				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID") || cookies[i].getName().contains("_")) {
-					continue;
-				}
-
-				recentlyProduct = cookies[i];
-
-				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID") || cookies[i].getName().contains("_")) {
-					continue;
-				} else {
-					s.add(recentlyProduct.getName());
-					ProductDTO dto = new ProductDTO(Integer.valueOf(recentlyProduct.getName()), null, null, null, 0, 0, null, null);
-					list.add(dto);
-				}
-				if (s.size() >= 3) {
-					if (cookies[a].getName().equalsIgnoreCase("JSESSIONID")) {
-						a++;
-						System.out.println("cookies[a].getName() : " + cookies[a].getName());
-						continue;
-					}
-					if (cookies[a].getName().contains("_")) {
-						a++;
-						System.out.println("cookies[a].getName() : " + cookies[a].getName());
-						continue;
-					}
-					recentlyProduct = new Cookie(cookies[a].getName(), "pno");
-					recentlyProduct.setMaxAge(0);
-					recentlyProduct.setPath("/");
-					response.addCookie(recentlyProduct);
-					
-				}
-			}
-			session.setAttribute("list", list);
-			System.out.println(list);
-			System.out.println("s : " + s);
-		}
-
-		return "board/read";
 	}
 
 

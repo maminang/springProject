@@ -18,6 +18,7 @@
 <body>
 <jsp:include page="../headerBar.jsp" />
 	
+
 	<div class="container">
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
@@ -25,15 +26,16 @@
 					<h3 style="text-align: center;">로그인</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디"
-							name="id" maxlength="20">
+							name="id" maxlength="15">
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호"
-							name="pw" maxlength="20">
+							name="pw" maxlength="15">
 					</div>
 					<div class="form-group">
 					<button type="submit" class="btn" id="loginBtn" value="로그인">로그인</button>
 					<button type="submit" class="btn" id="signinBtn" value="회원가입">회원가입</button>
+					<button type="submit" class="btn" id="findPW" value="비밀번호 찾기">비밀번호 찾기</button>
 					</div>
 				</form>
 		</div>
@@ -42,8 +44,15 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		
 		$("#signinBtn").click(function(){
 			$("form").attr("action","signup");
+			$("form").attr("method","get");
+			$("form").submit();
+		});
+		
+		$("#findPW").click(function(){
+			$("form").attr("action","findPW");
 			$("form").attr("method","get");
 			$("form").submit();
 		});

@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class MemberDTO implements Serializable {
 
 	/**
-	 * 
-	 */
+	* 
+	*/
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String pw;
@@ -17,13 +17,15 @@ public class MemberDTO implements Serializable {
 	private String birth;
 	private int point;
 	private String signUpDate;
-	
+	private String postNum;
+	private String DTL_ADRES;
+
 	public MemberDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public MemberDTO(String id, String pw, String name, String email, String address, String phone, String birth,
-			int point, String signUpDate) {
+			int point, String signUpDate, String postNum, String dTL_ADRES) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -34,6 +36,24 @@ public class MemberDTO implements Serializable {
 		this.birth = birth;
 		this.point = point;
 		this.signUpDate = signUpDate;
+		this.postNum = postNum;
+		DTL_ADRES = dTL_ADRES;
+	}
+
+	public String getDTL_ADRES() {
+		return DTL_ADRES;
+	}
+
+	public void setDTL_ADRES(String dTL_ADRES) {
+		DTL_ADRES = dTL_ADRES;
+	}
+
+	public String getPostNum() {
+		return postNum;
+	}
+
+	public void setPostNum(String postNum) {
+		this.postNum = postNum;
 	}
 
 	public String getId() {
@@ -114,8 +134,9 @@ public class MemberDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MemberDTO [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address + ", phone="
-				+ phone + ", birth=" + birth + ", point=" + point + ", signUpDate=" + signUpDate + "]";
+		return "MemberDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", address=" + address
+				+ ", phone=" + phone + ", birth=" + birth + ", point=" + point + ", signUpDate=" + signUpDate
+				+ ", postNum=" + postNum + ", DTL_ADRES=" + DTL_ADRES + "]";
 	}
 
 	@Override
@@ -127,24 +148,19 @@ public class MemberDTO implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MemberDTO other = (MemberDTO) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
-	
-	
-	
-	
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      MemberDTO other = (MemberDTO) obj;
+      if (id == null) {
+         if (other.id != null)
+            return false;
+      } else if (!id.equals(other.id))
+         return false;
+      return true;
+   }
 }

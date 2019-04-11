@@ -24,7 +24,6 @@ public class CSController {
 	@RequestMapping(value = "csCenter", method = RequestMethod.GET)
 	public String csList(Criteria cri, Model model) {
 		
-		
 		int amount=service.getAmount();
 		
 		PageMaker pm=new PageMaker(amount,cri);
@@ -33,11 +32,9 @@ public class CSController {
 		
 		model.addAttribute("pm",pm);
 		model.addAttribute("cslist",cslist);
-		System.out.println(pm);
-		System.out.println(cslist);
+		
 		try {
 			cslist = service.csList();
-			System.out.println("cslist에 데이터 잘 넣었나?"+cslist);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -16,13 +16,15 @@ public class ProductDTO implements Serializable {
 	private int price;
 	private String category;
 	private String[] images;
+	private int amount;
+	private String INGRD;
 
 	public ProductDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public ProductDTO(int pno, String eng_name, String kr_name, String prdct_dscrp, int volume, int price,
-			String category, String[] images) {
+			String category, String[] images, int amount, String iNGRD) {
 		super();
 		this.pno = pno;
 		this.eng_name = eng_name;
@@ -32,6 +34,16 @@ public class ProductDTO implements Serializable {
 		this.price = price;
 		this.category = category;
 		this.images = images;
+		this.amount = amount;
+		INGRD = iNGRD;
+	}
+
+	public String getINGRD() {
+		return INGRD;
+	}
+
+	public void setINGRD(String iNGRD) {
+		INGRD = iNGRD;
 	}
 
 	public int getPno() {
@@ -98,6 +110,14 @@ public class ProductDTO implements Serializable {
 		this.images = images;
 	}
 
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -124,7 +144,7 @@ public class ProductDTO implements Serializable {
 	public String toString() {
 		return "ProductDTO [pno=" + pno + ", eng_name=" + eng_name + ", kr_name=" + kr_name + ", prdct_dscrp="
 				+ prdct_dscrp + ", volume=" + volume + ", price=" + price + ", category=" + category + ", images="
-				+ Arrays.toString(images) + "]";
+				+ Arrays.toString(images) + ", amount=" + amount + ", INGRD=" + INGRD + "]";
 	}
-	
+
 }

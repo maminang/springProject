@@ -6,32 +6,24 @@ volume 용량
 price 가격
 category 카테고리
 
-select * from v$resource_limit where resource_name = 'processes'
-alter system set processes=200 scope=spfile;
-
-
-select count(volume) from tbl_product_detail
-where pno = 2 and volume = 30
-
-update tbl_product_detail set volume = 30 where volume = 2345
-delete tbl_product_detail where price = 234
-
 create table tbl_product (
 	pno number primary key,
 	eng_name varchar2(100) not null,
 	kr_name varchar2(100) not null,
-	prdct_dscrp varchar2(600),
-	volume number not null,
-	price number not null,
-	category varchar2(100) not null
+	prdct_dscrp varchar2(1500),
+	category varchar2(100) not null,
+	INGRD varchar2(3000)
 )
+
+alter table tbl_product add INGRD varchar2(3000);
+
+alter table tbl_product drop column price
 
 select * from tbl_product
 
-select * from tbl_shopping_Cart
-select * from TBL_PRODUCT_DETAIL
-
 drop table tbl_product
+
+delete tbl_product
 
 insert into tbl_product values (
 1,
@@ -52,3 +44,40 @@ insert into tbl_product values (
 186000,
 'citrus'
 )
+
+--검색쿼리
+select * from tbl_product where eng_name like '%그레이프%' or kr_name like '%그레이프%' or category like '%그레이프%'
+
+select * from tbl_product where category = 'citrus'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

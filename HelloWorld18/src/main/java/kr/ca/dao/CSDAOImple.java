@@ -26,7 +26,6 @@ public class CSDAOImple implements CSDAO{
 	public List<CSDTO> csList() {
 		// TODO Auto-generated method stub
 		
-		System.out.println("csdaoimple cslist");
 		return session.selectList(NS+".csList");
 		
 	}
@@ -35,7 +34,6 @@ public class CSDAOImple implements CSDAO{
 	@Override
 	public int getAmount() {
 		
-		System.out.println("csdaoimple getamount");
 		return session.selectOne(NS+".getAmount");
 	}
 	
@@ -43,9 +41,7 @@ public class CSDAOImple implements CSDAO{
 	public List<CSDTO> listPage(Criteria cri){
 		
 		RowBounds rb = new RowBounds(cri.getStartNum()-1, cri.getPerPage()); /* 1번부터 시작해서 10개 */
-		
-		System.out.println("csdaoimple listpage");
-		System.out.println("rb값 출력"+rb);
+	
 		
 		return session.selectList(NS+".csList", 0, rb);
 		//파라미터값 cri.getStartNum()-1로 하지 않으면 맨 마지막에 쓴 글이 표시되지 않는다.
