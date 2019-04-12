@@ -84,7 +84,7 @@
 				</tr>
 			</c:forEach>
 			<!-- 		<img alt="#" src="img"> -->
-			<a>주문List</a> | <a href="#">배송조회</a><br>
+			<a href="/order/list">주문List</a> | <a href="#">배송조회</a><br>
 			주문List주문List주문List주문List주문List주문List주문List주문List주문List주문List
 
 			<!-- ::::::::::::::::::::::::::::::::::::::::::::::::내가 한 Q&A:::::::::::::::::::::::::::::::::::: -->

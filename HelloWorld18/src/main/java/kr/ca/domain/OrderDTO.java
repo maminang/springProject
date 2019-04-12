@@ -9,6 +9,7 @@ public class OrderDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = -1367988235698090543L;
 	private int ono;
+	private String id;
 	private String name;
 	private String address;
 	private String postNum;
@@ -24,11 +25,12 @@ public class OrderDTO implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderDTO(int ono, String name, String address, String postNum, String dtl_adres, String phone,
+	public OrderDTO(int ono, String id, String name, String address, String postNum, String dtl_adres, String phone,
 			int total_price, String order_date, String shipping_memo, String payment_status,
 			List<OrderDetailDTO> detailList) {
 		super();
 		this.ono = ono;
+		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.postNum = postNum;
@@ -47,6 +49,14 @@ public class OrderDTO implements Serializable {
 
 	public void setOno(int ono) {
 		this.ono = ono;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -127,9 +137,9 @@ public class OrderDTO implements Serializable {
 
 	public void setDetailList(List<OrderDetailDTO> detailList) {
 		this.detailList = detailList;
-		for (OrderDetailDTO oddto : detailList) {
-			total_price += oddto.getPrice() * oddto.getAmount();
-		}
+		if (total_price == 0)
+			for (OrderDetailDTO oddto : detailList)
+				total_price += oddto.getPrice();
 	}
 
 	@Override
@@ -156,10 +166,10 @@ public class OrderDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderDTO [ono=" + ono + ", name=" + name + ", address=" + address + ", postNum=" + postNum
-				+ ", dtl_adres=" + dtl_adres + ", phone=" + phone + ", total_price=" + total_price + ", order_date="
-				+ order_date + ", shipping_memo=" + shipping_memo + ", payment_status=" + payment_status
-				+ ", detailList=" + detailList + "]";
+		return "OrderDTO [ono=" + ono + ", id=" + id + ", name=" + name + ", address=" + address + ", postNum="
+				+ postNum + ", dtl_adres=" + dtl_adres + ", phone=" + phone + ", total_price=" + total_price
+				+ ", order_date=" + order_date + ", shipping_memo=" + shipping_memo + ", payment_status="
+				+ payment_status + ", detailList=" + detailList + "]";
 	}
 
 }

@@ -1,13 +1,12 @@
 package kr.ca.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,20 +24,16 @@ public class OrderController {
 	private OrderService service;
 
 	@RequestMapping("checkout")
-	public String checkOut(HttpServletRequest request) {
+	public String checkOut(HttpSession session) {
 		OrderDTO order = new OrderDTO();
-		HttpSession session = request.getSession();
 		try {
 			Object oLogin = session.getAttribute("login");
 
 			// 회원 주문
 			if (oLogin != null) {
 				LoginDTO login = (LoginDTO) oLogin;
-				setMemberOrder(login.getId(), order);
-			}
-			// 비회원 주문(미구현!)
-			else {
-				setNonMemberOrder(order);
+				order.setId(login.getId());
+				setMemberOrder(order);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,19 +43,14 @@ public class OrderController {
 		return "order/checkout";
 	}
 
-	private void setMemberOrder(String id, OrderDTO order) {
-		List<OrderDetailDTO> detailList = service.getDetailList(id);
+	private void setMemberOrder(OrderDTO order) {
+		List<OrderDetailDTO> detailList = service.getDetailList(order.getId());
 		order.setDetailList(detailList);
-		service.setOrderMemberInfo(id, order);
-	}
-
-	private void setNonMemberOrder(OrderDTO order) {
+		service.setOrderMemberInfo(order);
 	}
 
 	@RequestMapping("review")
-	public String review(String shipping_memo, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-
+	public String review(String shipping_memo, HttpSession session) {
 		Object oOrder = session.getAttribute("order");
 		OrderDTO order = (OrderDTO) oOrder;
 
@@ -73,18 +63,11 @@ public class OrderController {
 	}
 
 	@RequestMapping("payment")
-	public String payment(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-
-		Object oLogin = session.getAttribute("login");
-		if (oLogin != null) {
-			LoginDTO login = (LoginDTO) oLogin;
-			MemberDTO mdto = service.getPoint(login.getId());
-			session.setAttribute("point", mdto.getPoint());
-		}
-
+	public String payment(HttpSession session, Model model) {
 		Object oOrder = session.getAttribute("order");
 		OrderDTO order = (OrderDTO) oOrder;
+		MemberDTO mdto = service.getPoint(order.getId());
+		model.addAttribute("point", mdto.getPoint());
 		session.setAttribute("order", order);
 		return "order/payment";
 	}
@@ -94,12 +77,29 @@ public class OrderController {
 	public boolean checkPoint(@PathVariable("id") String id, @PathVariable("total_price") int total_price) {
 		return service.checkPoint(id, total_price);
 	}
-	
+
 	@RequestMapping("complete")
 	public String complete(HttpSession session) {
 		Object oOrder = session.getAttribute("order");
 		OrderDTO order = (OrderDTO) oOrder;
-		service.complete(order);
-		return "";
+
+		service.complete(order, order.getId());
+
+		return "redirect:/order/list";
+	}
+
+	@RequestMapping("list")
+	public void list(HttpSession session, Model model) {
+		Object oLogin = session.getAttribute("login");
+		LoginDTO login = (LoginDTO) oLogin;
+
+		List<OrderDTO> list = service.list(login.getId());
+		model.addAttribute("list", list);
+	}
+
+	@RequestMapping("readOrder")
+	public void readOrder(Model model ,int ono) {
+		OrderDTO order = service.readOrder(ono);
+		model.addAttribute("order", order);
 	}
 }

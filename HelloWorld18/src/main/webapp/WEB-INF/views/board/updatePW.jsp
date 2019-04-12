@@ -175,7 +175,7 @@
            
 	});
 		 $("#pwcheck").click(function(event) {
-			 var id = ${dto.id}
+			 var id = "${dto.id}"
 			 var oripw = $('#oripw').val();
 			 
 		 $.ajax({

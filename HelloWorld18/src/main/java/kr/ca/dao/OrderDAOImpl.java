@@ -27,8 +27,8 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public void setOrderMemberInfo(String id, OrderDTO order) {
-		MemberDTO mdto = session.selectOne(NS + ".setOrderMemberInfo", id);
+	public void setOrderMemberInfo(OrderDTO order) {
+		MemberDTO mdto = session.selectOne(NS + ".setOrderMemberInfo", order.getId());
 		order.setName(mdto.getName());
 		order.setAddress(mdto.getAddress());
 		order.setPostNum(mdto.getPostNum());
@@ -50,9 +50,9 @@ public class OrderDAOImpl implements OrderDAO {
 			order.setShipping_memo(" ");
 		}
 		order.setPayment_status("true");
-		
+
 		session.insert(NS + ".complete", order);
-		
+
 		List<OrderDetailDTO> detailList = order.getDetailList();
 		for (OrderDetailDTO oddto : detailList) {
 			int odno = getOdno();
@@ -80,6 +80,35 @@ public class OrderDAOImpl implements OrderDAO {
 			odno = 1;
 
 		return (int) odno;
+	}
+
+	@Override
+	public void resetShoppingCart(String id) {
+		session.delete(NS + ".resetShoppingCart", id);
+	}
+
+	@Override
+	public void pointSpending(String id, int total_price) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("total_price", total_price);
+		session.update(NS + ".pointSpending", map);
+	}
+
+	@Override
+	public List<OrderDTO> list(String id) {
+		return session.selectList(NS + ".list", id);
+	}
+
+	@Override
+	public OrderDTO readOrder(int ono) {
+		return session.selectOne(NS + ".readOrder", ono);
+	}
+
+	@Override
+	public void setDetailList(OrderDTO order) {
+		List<OrderDetailDTO> detailList = session.selectList(NS + ".setDetailList", order.getOno());
+		order.setDetailList(detailList);
 	}
 
 }

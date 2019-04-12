@@ -1,5 +1,6 @@
 create table tbl_order (
 	ono number primary key,
+	id varchar2(30) not null,
 	name varchar2(30) not null,
 	address varchar2(200) not null,
 	postNum varchar2(15) not null,

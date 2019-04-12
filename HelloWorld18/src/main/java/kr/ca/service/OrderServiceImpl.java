@@ -38,10 +38,10 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void setOrderMemberInfo(String id, OrderDTO order) {
-		dao.setOrderMemberInfo(id,order);
+	public void setOrderMemberInfo(OrderDTO order) {
+		dao.setOrderMemberInfo(order);
 	}
-	
+
 	@Override
 	public MemberDTO getPoint(String id) {
 		return mdao.selectMemberDTO(id);
@@ -49,11 +49,31 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public boolean checkPoint(String id, int total_price) {
-		return dao.checkPoint(id,total_price);
+		return dao.checkPoint(id, total_price);
 	}
 
 	@Override
-	public void complete(OrderDTO order) {
+	public void complete(OrderDTO order, String id) {
 		dao.complete(order);
+		dao.pointSpending(id, order.getTotal_price());
+		dao.resetShoppingCart(id);
 	}
+
+	@Override
+	public List<OrderDTO> list(String id) {
+		return dao.list(id);
+	}
+
+	@Override
+	public OrderDTO readOrder(int ono) {
+		OrderDTO order = dao.readOrder(ono);
+		dao.setDetailList(order);
+		for (OrderDetailDTO oddto : order.getDetailList()) {
+			ProductDTO pdto = pdao.selectProduct(oddto.getPno());
+			pdao.getImages(pdto);
+			oddto.setPdto(pdto);
+		}
+		return order;
+	}
+
 }

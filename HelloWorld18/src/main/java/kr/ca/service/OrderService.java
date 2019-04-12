@@ -10,12 +10,16 @@ public interface OrderService {
 
 	List<OrderDetailDTO> getDetailList(String id);
 
-	void setOrderMemberInfo(String id, OrderDTO order);
+	void setOrderMemberInfo(OrderDTO order);
 
 	MemberDTO getPoint(String id);
 
 	boolean checkPoint(String id, int total_price);
 
-	void complete(OrderDTO order);
+	void complete(OrderDTO order, String id);
+
+	List<OrderDTO> list(String id);
+
+	OrderDTO readOrder(int ono);
 
 }
