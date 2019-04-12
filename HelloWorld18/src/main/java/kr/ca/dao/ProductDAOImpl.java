@@ -19,7 +19,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Inject
 	private SqlSession session;
 	private final String NS = "kr.ca.mapper.product";
-
+	
 	@Override
 	public void write(ProductDTO dto, int[] volume, int[] price) {
 		dto.setPno(getPno());
@@ -119,8 +119,9 @@ public class ProductDAOImpl implements ProductDAO {
 //	select * Product id로 검색
 	@Override
 	public ProductDTO selectProduct(ProductDTO dto) {
-
-		return session.selectOne(NS + ".selectProduct", dto);
+		ProductDTO newDTO = session.selectOne(NS + ".selectProduct", dto);
+		getImages(newDTO);
+		return newDTO;
 	}
 
 //	select * ProductDetail id로 검색

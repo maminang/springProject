@@ -10,8 +10,10 @@ create table tbl_product_images (
 
 drop table tbl_product_images
 
-select * from tbl_product_images
+select * from tbl_product_images where pno = 19
 
 update tbl_product_images set fullname = 'cc5f6b7e-888a-4f33-9a9a-a6428d3b2936_capture.png' where pino = 16
 
 delete tbl_product_images
+
+select fullname from tbl_product_images where pno=19
