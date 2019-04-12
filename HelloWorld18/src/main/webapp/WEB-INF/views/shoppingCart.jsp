@@ -18,6 +18,7 @@
 </head>
 <body>
 	<jsp:include page="headerBar.jsp" />
+	<jsp:include page="RecentlyProduct.jsp" />
 	<div class="container">
 		<div class="row">
 			<table class="table table-hover">

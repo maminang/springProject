@@ -18,12 +18,18 @@
 <style type="text/css">
 .Recently {
 	border: 2px solid red;
-	width: 100px;
-	height: 100px;
+	width: auto;
+	height: auto;
 	text-align: center;
 	position: fixed;
-	top: 40%;
-	right: 50px;
+	top: auto;
+	right: 100px;
+}
+
+.img {
+	width: 100px;
+	height: auto;
+	text-align: center;
 }
 </style>
 </head>
@@ -33,8 +39,13 @@
 
 	<div class="Recently">
 		<div class="row">
-			<c:forEach items="${list }" var="list">
-				${list.pno }
+			<c:forEach items="${list }" var="list" varStatus="status">
+				<a onclick="location.href='/+-product/read?pno=${list.pno}'">
+					<img class="img img-thumbnail" alt="${list.images[0] }"
+					src="/displayFile?fileName=${list.images[0]}"><br>
+				</a>
+				${list.pno }<br>
+				${list.eng_name }<br>
 			</c:forEach>
 		</div>
 	</div>
@@ -42,7 +53,9 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-
+			$.getJSON("/product/recentlyProduct", function(data) {
+				alert(data)
+			})
 		});
 	</script>
 </body>

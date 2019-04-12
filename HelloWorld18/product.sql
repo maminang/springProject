@@ -23,7 +23,7 @@ select * from tbl_product
 
 drop table tbl_product
 
-delete tbl_product
+delete tbl_product where pno = 8
 
 insert into tbl_product values (
 1,
