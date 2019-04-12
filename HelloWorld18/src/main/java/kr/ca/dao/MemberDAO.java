@@ -23,14 +23,13 @@ public interface MemberDAO {
 	void newPW(LoginDTO dto);
 
 	MemberDTO selectMemberDTO(String id);
-	
+
 	void pointCharge(String id, int point);
 
 	List<ChargeHistoryDTO> getChargeHistory(String id);
 
 	void updatePW(String id, String pw);
 
+	int getManager(String id);
 
-
-	
 }

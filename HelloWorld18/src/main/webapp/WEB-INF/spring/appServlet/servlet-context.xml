@@ -32,28 +32,39 @@
 	</beans:bean>
 
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\Users\Administrator\git\springProject\HelloWorld18\src\main\webapp\resources\img"></beans:constructor-arg>
+		<beans:constructor-arg
+			value="C:\Users\Administrator\git\springProject\HelloWorld18\src\main\webapp\resources\img"></beans:constructor-arg>
 	</beans:bean>
-	
-	<beans:bean id="loginInterceptor" class="kr.ca.interceptor.LoginInterceptor"></beans:bean>
-	<beans:bean id="AuthInterceptor" class="kr.ca.interceptor.AuthInterceptor"></beans:bean>
-	
+
+	<beans:bean id="loginInterceptor"
+		class="kr.ca.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="AuthInterceptor"
+		class="kr.ca.interceptor.AuthInterceptor"></beans:bean>
+
 	<interceptors>
 		<interceptor>
-			<mapping path="/member/loginpost"/>
-			<beans:ref bean="loginInterceptor"/>
+			<mapping path="/member/loginpost" />
+			<beans:ref bean="loginInterceptor" />
 		</interceptor>
-		
+
 		<interceptor>
-			<mapping path="/member/mypage"/>
-			<mapping path="/member/pointCharge"/>
-			<beans:ref bean="AuthInterceptor"/>
+			<mapping path="/member/mypage" />
+			<mapping path="/member/pointCharge" />
+			<mapping path="/order/readOrder" />
+			<mapping path="/order/list" />
+			<mapping path="/order/complete" />
+			<mapping path="/order/payment" />
+			<mapping path="/order/review" />
+			<mapping path="/order/checkout" />
+			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
-		
-		
+
+
 	</interceptors>
-	
-	<context:component-scan base-package="kr.ca.controller"/>
-	<context:component-scan base-package="kr.ca.interceptor" />
-	
+
+	<context:component-scan
+		base-package="kr.ca.controller" />
+	<context:component-scan
+		base-package="kr.ca.interceptor" />
+
 </beans:beans>

@@ -51,6 +51,6 @@ delete tbl_member
 	UPDATE tbl_member SET email='aaa@aaa',name='aa'
 	WHERE id='aaa'
 
-
+update tbl_member set manager = 1 where id = 'NamepeN' 
 
 

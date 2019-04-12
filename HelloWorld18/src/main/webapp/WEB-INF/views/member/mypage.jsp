@@ -24,12 +24,15 @@
 	<jsp:include page="../headerBar.jsp" />
 
 	<div class="container">
-	
+
 		<form action="member/mypage" method="post">
 			<div class="row" align="center">
 				<h3>${mDto.id}님환영합니다</h3>
 				<a href="/member/updateui?id=${mDto.id}"> 회원정보 수정</a> <a
 					href="/member/pointCharge">포인트 충전</a>
+				<c:if test="${manager == 1}">
+					<a href="/member/manage">관리자 페이지</a>
+				</c:if>
 				<h1>p. ##</h1>
 				<br> <br>
 			</div>

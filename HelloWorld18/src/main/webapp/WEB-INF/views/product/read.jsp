@@ -36,18 +36,21 @@
 
 .leftbox {
 	width: 300px;
-/* 	border: 1px dashed red; */
+	/* 	border: 1px dashed red; */
 	text-align: center;
 	display: inline-block;
 }
 
 .rightbox {
 	width: 300px;
-/* 	border: 1px dashed red; */
+	/* 	border: 1px dashed red; */
 	text-align: center;
 	display: inline-block;
 }
 
+.glyphicon glyphicon-star{
+	
+}
 /* #img { */
 /* 	border: 1px dashed blue; */
 /* 	height: 300px; */
@@ -155,10 +158,38 @@
 			<!-- 			공유하기 modal -->
 
 			<!-- 			리뷰 작성하기 -->
-			<a href="#">리뷰 작성하기</a>
+			<button class="btn" id="reply">리뷰 작성하기</button>
 			<!-- 			리뷰 작성하기 -->
 
 		</div>
+		<!-- replies -->
+		<div class="row">
+			<div id="myCollapsible" class="collapse">
+				<div class="form-group">
+					<label for="replyer">작성자</label> <input class="form-control"
+						id="replyer">
+				</div>
+				<div class="form-group">
+					<label for="replyText">내용</label> <input class="form-control"
+						id="replyText">
+				</div>
+				<div>
+					<label for="score">별점</label>
+					<div class="glyphicon glyphicon-star-empty" style="color: yellow" onclick="changeScore(1)"></div>
+					<div class="glyphicon glyphicon-star-empty" style="color: yellow" onclick="changeScore(2)"></div>
+					<div class="glyphicon glyphicon-star-empty" style="color: yellow" onclick="changeScore(3)"></div>
+					<div class="glyphicon glyphicon-star-empty" style="color: yellow" onclick="changeScore(4)"></div>
+					<div class="glyphicon glyphicon-star-empty" style="color: yellow" onclick="changeScore(5)"></div>
+				</div>
+				<div class="form-group">
+					<button id="replyInsertBtn" class="btn btn-success">등록</button>
+					<button id="replyResetBtn" class="btn btn-default">초기화</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="replies" class="row"></div>
+		<!-- replies -->
 	</div>
 
 
@@ -200,8 +231,42 @@
 	</div>
 	<!-- 	공유하기 Modal -->
 
+	<!-- Replies Modal -->
+	<div class="row">
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal">&times;</button>
+					<p id="modal_pno"></p>
+				</div>
+				<div class="modal-body">
+					<input type="text" class="form-control" id="modal_replyText">
+				</div>
+				<div class="modal-footer">
+					<button id="modal-update" data-dismiss="modal" class="btn btn-xs">수정</button>
+					<button id="modal-delete" data-dismiss="modal" class="btn btn-xs">삭제</button>
+					<button id="modal-close" data-dismiss="modal" class="btn btn-xs">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Replies Modal -->
+
 	<jsp:include page="../footerBar.jsp" />
 
+	<script id="source" type="text/x-handlebars-template">
+   {{#each.}}
+   <div class="panel panel-info">
+      <div class="panel-heading">
+         <span>pno: {{pno}}, 작성자: {{replyer}}</span> <span class="pull-right">{{updateDate}}</span>
+      </div>
+      <div class="panel-body">
+         <p>{{replyText}}</p>
+         <button class="btn btn-xs btn-warning callModal" data-pno="{{pno}}" data-replyText="{{replyText}}">수정/삭제</button>
+      </div>
+   </div>
+   {{/each}}
+   </script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 
@@ -212,8 +277,60 @@
 				$("form").submit();
 				alert("장바구니에 담겼습니다");
 			});
+			
+			$("#replyInsertBtn").click(function() {
+	            var replyer = $("#replyer").val();
+	            var replyText = $("#replyText").val();
+	            var pno = ${pd.pno};
+	            
+	            
+	            $.ajax({
+	               type : 'post',
+	               url : '/review',
+	               headers : {
+	                  "Content-Type" : "application/json",
+	                  "X-HTTP-Method-Override" : "POST"
+	               },
+	               data : JSON.stringify({
+	                  replyer : replyer,
+	                  replyText : replyText,
+	                  pno : pno
+	               }),
+	               dataType : "text",
+	               success : function(result) {
+	                  $("#replyer").val("");
+	                  $("#replyText").val("");
+	                  $("#myCollapsible").collapse("toggle");
+	                  getList(rno, page);
+	               },
+	               error : function(request, status, error) {
+	                  alert("fail");
+	                  alert("code:" + request.status + "\n"
+	                        + "msg:" + request.reponseText
+	                        + "\n" + "error:" + error)
+	               },
+	               complete : function() {
+	               }
+	            })
+	         });
+	         
+	         $("#reply").click(function() {
+	            $("#myCollapsible").collapse("toggle");
+	         });
+	         
+	         $("#replies").on("click", ".callModal", function() {
+	            var pno = $(this).attr("data-pno");
+	            var replyText = $(this).attr("data-replyText");
+	            $("#modal_pno").text(pno);
+	            $("#modal_replyText").val(replyText);
+	            $("#myModal").modal("show");
+	         });
 
 		});
+		
+		function changeScore(score) {
+			alert("별점 변경"+score)
+		}
 	</script>
 </body>
 </html>

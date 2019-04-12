@@ -89,5 +89,10 @@ public class MemberServiceImpl implements MemberService {
 		dao.updatePW(id,pw);
 	}
 
+	@Override
+	public int getManager(String id) {
+		return dao.getManager(id);
+	}
+
 
 }
