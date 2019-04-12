@@ -35,7 +35,6 @@
 <div class="row footerDiv"><p class="footerText">{{copyright}}</p></div>
 </script>
 <script type="text/javascript">
-	getMenu();
 	getFooterInfo()
 
 	function getFooterInfo() {
