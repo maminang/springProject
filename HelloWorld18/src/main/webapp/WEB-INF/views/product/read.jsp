@@ -48,9 +48,6 @@
 	display: inline-block;
 }
 
-.glyphicon glyphicon-star{
-	
-}
 /* #img { */
 /* 	border: 1px dashed blue; */
 /* 	height: 300px; */
@@ -135,7 +132,6 @@
 			<!-- Button trigger modal 모달 모달모달-->
 
 			장바구니에 용량이랑 가격도 넣어야함
-			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<form>
 				<div>
 					<select name="vp">
@@ -149,46 +145,26 @@
 				<input value="${pd.pno }" name="pno" type="hidden"> <a
 					id="cart" class="btn btn-success">장바구니에 담기</a>
 			</form>
-			<!-- 			값 넣어주는 곳인데 나중에 고쳐야함 -->
 			<hr>
-
-			<!-- 			공유하기 modal -->
-			<a type="button" data-toggle="modal"
-				data-target=".bs-example-modal-sm">공유하기</a> <br>
-			<!-- 			공유하기 modal -->
-
-			<!-- 			리뷰 작성하기 -->
-			<button class="btn" id="reply">리뷰 작성하기</button>
-			<!-- 			리뷰 작성하기 -->
-
-		</div>
-		<!-- replies -->
-		<div class="row">
-			<div id="myCollapsible" class="collapse">
-				<div class="form-group">
-					<label for="replyer">작성자</label> <input class="form-control"
-						id="replyer">
-				</div>
-				<div class="form-group">
-					<label for="replyText">내용</label> <input class="form-control"
-						id="replyText">
-				</div>
-				<div>
-					<label for="score">별점</label>
-					<div class="glyphicon glyphicon-star-empty" style="color: yellow" onclick="changeScore(1)"></div>
-					<div class="glyphicon glyphicon-star-empty" style="color: yellow" onclick="changeScore(2)"></div>
-					<div class="glyphicon glyphicon-star-empty" style="color: yellow" onclick="changeScore(3)"></div>
-					<div class="glyphicon glyphicon-star-empty" style="color: yellow" onclick="changeScore(4)"></div>
-					<div class="glyphicon glyphicon-star-empty" style="color: yellow" onclick="changeScore(5)"></div>
-				</div>
-				<div class="form-group">
-					<button id="replyInsertBtn" class="btn btn-success">등록</button>
-					<button id="replyResetBtn" class="btn btn-default">초기화</button>
-				</div>
+			
+			<!-- 공유하기 modal btn -->
+			<div class="row">
+				<a class="btn" type="button" data-toggle="modal" data-target=".bs-example-modal-sm">공유하기</a>
 			</div>
+			<!-- 			공유하기 modal -->
+
+			<!-- 리뷰 작성하기 btn -->
+			<div class="row">
+				<a class="btn" type="button" data-toggle="modal" data-target="#replyInsertModal">리뷰작성</a>
+			</div>
+			<!-- 리뷰 작성하기 btn -->
+
 		</div>
 
-		<div id="replies" class="row"></div>
+		<!-- replies -->
+		<div id="replies" class="row">
+		</div>
+
 		<!-- replies -->
 	</div>
 
@@ -231,44 +207,118 @@
 	</div>
 	<!-- 	공유하기 Modal -->
 
-	<!-- Replies Modal -->
+	<!-- ReplyInsert Modal -->
 	<div class="row">
-		<div class="modal fade" id="myModal">
-			<div class="modal-dialog">
-				<div class="modal-header">
-					<button class="close" data-dismiss="modal">&times;</button>
-					<p id="modal_pno"></p>
-				</div>
-				<div class="modal-body">
-					<input type="text" class="form-control" id="modal_replyText">
-				</div>
-				<div class="modal-footer">
-					<button id="modal-update" data-dismiss="modal" class="btn btn-xs">수정</button>
-					<button id="modal-delete" data-dismiss="modal" class="btn btn-xs">삭제</button>
-					<button id="modal-close" data-dismiss="modal" class="btn btn-xs">닫기</button>
+		<div class="modal fade" id="replyInsertModal" role="dialog"
+			aria-labelledby="replyInsertModalLabel">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="replyInsertModalLabel">댓글 작성</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label" for="title">제목</label> <input
+								class="form-control" id="title">
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="id">작성자</label> <input
+								class="form-control" id="id" value="${login.id}"
+								readonly="readonly">
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="content">내용</label> <input
+								class="form-control" id="content">
+						</div>
+						<div id="scoreDiv" class="form-group">
+							<label class="control-label" for="score">별점</label> <span
+								class="glyphicon glyphicon-star"></span> <span
+								class="glyphicon glyphicon-star"></span> <span
+								class="glyphicon glyphicon-star"></span> <span
+								class="glyphicon glyphicon-star"></span> <span
+								class="glyphicon glyphicon-star"></span> <input type="hidden"
+								id="score" value=5>
+						</div>
+						<div class="form-group">
+							<label for="age_group">연령대</label> <select class="form-control"
+								id="age_group">
+								<option value="18 ~ 24">18 ~ 24</option>
+								<option value="25 ~ 34">25 ~ 34</option>
+								<option value="35 ~ 44">35 ~ 44</option>
+								<option value="45 ~ 54">45 ~ 54</option>
+								<option value="55 ~ 64">55 ~ 64</option>
+								<option value="65 ~ ">65 ~</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="form-group">
+							<button id="replyInsertBtn" class="btn btn-success">등록</button>
+							<button id="replyResetBtn" class="btn btn-default">초기화</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Replies Modal -->
+	<!-- ReplyInsert Modal -->
 
 	<jsp:include page="../footerBar.jsp" />
 
-	<script id="source" type="text/x-handlebars-template">
-   {{#each.}}
-   <div class="panel panel-info">
-      <div class="panel-heading">
-         <span>pno: {{pno}}, 작성자: {{replyer}}</span> <span class="pull-right">{{updateDate}}</span>
-      </div>
-      <div class="panel-body">
-         <p>{{replyText}}</p>
-         <button class="btn btn-xs btn-warning callModal" data-pno="{{pno}}" data-replyText="{{replyText}}">수정/삭제</button>
-      </div>
-   </div>
-   {{/each}}
+	<!-- reviewListSource -->
+	<script id="reviewListSource" type="text/x-handlebars-template">
+		{{#each.}}
+			<div class="panel panel-info">                                                                                           
+				<div class="panel-heading">                                                                                          
+					<span>{{title}}</span> 
+					<span class="pull-right">작성자: {{id}}</span><br>                                            
+					<span class="pull-right">연령대: {{age_group}}</span>
+				</div>                                                                                                               
+				<div class="panel-body">                                                                                             
+					<p>{{content}}</p>
+					별점{{{score score}}}                                
+					<form action="/review/delete" method="post">
+						<input type="hidden" name="rno" value="{{rno}}">
+						<input type="hidden" name="pno" value="{{pno}}">
+						<input type="submit" class="btn btn-xs btn-warning" value="삭제">
+					</form> 
+				</div>                                                                                                               
+			</div>
+		{{/each}}
    </script>
+
+	<script type="text/javascript"
+		src="/scripts/amcharts/amcharts.js?v=<%=System.currentTimeMillis()%>"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			var pno = ${pd.pno};
+            
+            getReviewList(pno)
+            
+            function getReviewList(pno) {
+				$.getJSON("/review/"+pno, function(data) {
+
+					var source = $("#reviewListSource").html();
+					var template = Handlebars.compile(source)
+
+					$("#replies").html(template(data));
+				});
+			}
+            
+            Handlebars.registerHelper('score', function(score, options) {
+            	var out = "";
+				for (var i = 0; i < score; i++) {
+					out += "<span class='glyphicon glyphicon-star'></span>"
+				}
+				for (var i = score; i < 5; i++) {
+					out += "<span class='glyphicon glyphicon-star-empty'></span>"
+				}
+				return out;
+			})
 
 			//장바구니에 담기	
 			$("#cart").click(function() {
@@ -278,59 +328,71 @@
 				alert("장바구니에 담겼습니다");
 			});
 			
+			// replyInsert
 			$("#replyInsertBtn").click(function() {
-	            var replyer = $("#replyer").val();
-	            var replyText = $("#replyText").val();
-	            var pno = ${pd.pno};
-	            
+				var loginCk = ${empty login};
+				
+				if (loginCk) {
+					if (confirm("로그인을 해야 리뷰를 입력할수 있습니다. 로그인 화면으로 가시겠습니까?")) {
+						location.href = "/member/login";
+					}
+					return;
+				}
+				
+	            var id = $("#id").val();
+	            var content = $("#content").val();
+	            var score = $("#score").val();
+	            var title = $("#title").val();
+	            var age_group = $("#age_group").val();
 	            
 	            $.ajax({
-	               type : 'post',
-	               url : '/review',
-	               headers : {
-	                  "Content-Type" : "application/json",
-	                  "X-HTTP-Method-Override" : "POST"
-	               },
-	               data : JSON.stringify({
-	                  replyer : replyer,
-	                  replyText : replyText,
-	                  pno : pno
-	               }),
-	               dataType : "text",
-	               success : function(result) {
-	                  $("#replyer").val("");
-	                  $("#replyText").val("");
-	                  $("#myCollapsible").collapse("toggle");
-	                  getList(rno, page);
-	               },
-	               error : function(request, status, error) {
-	                  alert("fail");
-	                  alert("code:" + request.status + "\n"
+	            	type : 'post',
+	                url : '/review',
+	                headers : {
+	                   "Content-Type" : "application/json",
+	                   "X-HTTP-Method-Override" : "POST"
+	                },
+	                data : JSON.stringify({
+	                   id : id,
+	                   content : content,
+	                   pno : pno,
+	                   score : score,
+	                   title : title,
+	                   age_group : age_group
+	                }),
+	                dataType : "text",
+	                success : function(result) {
+	                   $("#title").val("");
+	                   $("#content").val("");
+	                   $("#replyInsertModal").modal("hide");
+	                   getReviewList(pno);
+	                },
+	                error : function(request, status, error) {
+	                   alert("fail");
+	                   alert("code:" + request.status + "\n"
 	                        + "msg:" + request.reponseText
 	                        + "\n" + "error:" + error)
-	               },
-	               complete : function() {
-	               }
-	            })
-	         });
-	         
-	         $("#reply").click(function() {
-	            $("#myCollapsible").collapse("toggle");
-	         });
-	         
-	         $("#replies").on("click", ".callModal", function() {
-	            var pno = $(this).attr("data-pno");
-	            var replyText = $(this).attr("data-replyText");
-	            $("#modal_pno").text(pno);
-	            $("#modal_replyText").val(replyText);
-	            $("#myModal").modal("show");
-	         });
-
+	                }
+				});
+			});
+			
+			// dynamic score button
+	        var scoreClick = $("#scoreDiv span")
+	        scoreClick.mouseover(function() {
+				var index = $(this).index();
+				scoreClick.slice(0,index).attr('class','glyphicon glyphicon-star')
+				scoreClick.slice(index, 5).attr('class','glyphicon glyphicon-star-empty')
+			})
+			scoreClick.mouseout(function() {
+				var index = $("#score").val();
+				scoreClick.slice(0,index).attr('class','glyphicon glyphicon-star')
+				scoreClick.slice(index, 5).attr('class','glyphicon glyphicon-star-empty')
+			})
+	 		scoreClick.click(function() {
+				var index = $(this).index();
+				$("#score").val(index);
+			})
 		});
-		
-		function changeScore(score) {
-			alert("별점 변경"+score)
-		}
 	</script>
 </body>
 </html>
