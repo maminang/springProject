@@ -42,9 +42,8 @@
 	</select>
 
 	<!-- 베스트 셀러 리스트 뽑아오기 -->
-	<select id="getBestSeller" resultType="ProductDTO">
-		select * from tbl_sold
-		order by amount_sold desc
+	<select id="getBestSeller" resultType="Integer">
+			select pno, count(pno) amount from tbl_order_detail group by pno order by amount desc
 	</select>
 
 	<!-- 신제품들 리스트 뽑아오기 -->
@@ -52,34 +51,43 @@
 		select * from tbl_product
 		order by pno desc
 	</select>
-	
+
 	<select id="getListByCategory" resultType="ProductDTO">
-		select * from tbl_product where category = #{category}
+		select * from
+		tbl_product where category = #{category}
 	</select>
-	
+
 	<!-- product pno로 검색 -->
 	<select id="selectProduct" resultType="kr.ca.domain.ProductDTO">
-		select * from tbl_product where pno = #{pno}
+		select * from tbl_product
+		where pno = #{pno}
 	</select>
+
 	<!-- productDetail pno로 검색 -->
 	<select id="selectProductDetail"
 		resultType="kr.ca.domain.ProductDetailDTO">
 		select * from tbl_product_detail where pno = #{pno}
 	</select>
-	
-<!-- 	productDetail pno, volume으로 하나만 검색 -->
+
+	<!-- productDetail pno, volume으로 하나만 검색 -->
 	<select id="selectOneProductDetail"
 		resultType="kr.ca.domain.ProductDetailDTO">
-		select * from tbl_product_detail where pno = #{pno} and volume = #{volume}
+		select * from tbl_product_detail where pno = #{pno} and
+		volume = #{volume}
 	</select>
-	
+
 	<select id="selectCountProductDetail" resultType="Integer">
-		select count(volume) from tbl_product_detail
+		select
+		count(volume) from tbl_product_detail
 	</select>
-	
+
 	<select id="selectShoppingCart"
 		resultType="kr.ca.domain.ShoppingCartDTO">
 		select * from tbl_shopping_cart where id = #{id}
+	</select>
+	
+	<select id="selectByPno" resultType="ProductDTO">
+		select * from tbl_product where pno = #{pno}
 	</select>
 
 </mapper>

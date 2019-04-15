@@ -61,5 +61,11 @@ public class ProductController {
 		model.addAttribute("list", service.getNewProducts());
 		return "product/list";
 	}
+	
+	@RequestMapping("bestSeller")
+	public String bestSeller(Model model) {
+		model.addAttribute("list", service.getBestSellers());
+		return "product/list";
+	}
 
 }

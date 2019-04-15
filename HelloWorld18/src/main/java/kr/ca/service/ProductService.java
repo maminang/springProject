@@ -19,4 +19,6 @@ public interface ProductService {
 
 	List<ProductDetailDTO> selectProductDetail(int pno);
 
+	List<ProductDTO> getBestSellers();
+
 }

@@ -1,5 +1,6 @@
 package kr.ca.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,13 +25,13 @@ public class ProductDAOImpl implements ProductDAO {
 	public void write(ProductDTO dto, int[] volume, int[] price) {
 		dto.setPno(getPno());
 		session.insert(NS + ".write", dto);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pno", dto.getPno());
 		for (int i = 0; i < volume.length; i++) {
 			map.put("volume", volume[i]);
 			map.put("price", price[i]);
-			session.insert(NS+".writeDetail", map);
+			session.insert(NS + ".writeDetail", map);
 		}
 	}
 
@@ -47,7 +48,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void addImages(String[] images, int pno) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		for (String image : images) {
 			map.put("fullName", image);
 			map.put("pno", pno);
@@ -81,7 +82,7 @@ public class ProductDAOImpl implements ProductDAO {
 		String[] images = imageList.toArray(new String[imageList.size()]);
 		dto.setImages(images);
 	}
-	
+
 	@Override
 	public void getImages(List<ProductDTO> list) {
 		for (ProductDTO dto : list) {
@@ -94,26 +95,32 @@ public class ProductDAOImpl implements ProductDAO {
 //  베스트 셀러 6개 리스트 뽑아오기
 	@Override
 	public List<ProductDTO> getBestSellers() {
+		List<ProductDTO> list = new ArrayList<ProductDTO>();
+		
 		RowBounds rb = new RowBounds(0, 6);
-		return session.selectList(NS + ".getBestSeller", null, rb);
+		List<Integer> pnoList = session.selectList(NS + ".getBestSeller", null, rb);
+		
+		for (Integer pno : pnoList) {
+			list.add(session.selectOne(NS+".selectByPno", pno));
+		}
+		return list;
 	}
 
 //  신제품 6개 리스트 뽑아오기
 	@Override
 	public List<ProductDTO> getNewProducts() {
-		RowBounds rb = new RowBounds(0, 6);
-		return session.selectList(NS + ".getNewProducts", null, rb);
+		return session.selectList(NS + ".getNewProducts");
 	}
 
 //  카테고리로 리스트 뽑아오기
 	@Override
 	public List<ProductDTO> getListByCategory(String category) {
-		return session.selectList(NS+".getListByCategory", category);
+		return session.selectList(NS + ".getListByCategory", category);
 	}
 
 	@Override
 	public ProductDTO selectProduct(int pno) {
-		return session.selectOne(NS+".selectProduct", pno);
+		return session.selectOne(NS + ".selectProduct", pno);
 	}
 
 //	select * Product id로 검색
@@ -132,18 +139,18 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public ProductDetailDTO selectOneProductDetail(int pno, int volume) {
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pno", pno);
 		map.put("volume", volume);
-		
+
 		return session.selectOne(NS + ".selectOneProductDetail", map);
 	}
 
 	@Override
 	public int selectCountProductDetail() {
-		 
-		return session.selectOne(NS+".selectCountProductDetail");
+
+		return session.selectOne(NS + ".selectCountProductDetail");
 	}
 
 }

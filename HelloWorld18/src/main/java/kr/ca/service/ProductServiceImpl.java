@@ -57,6 +57,13 @@ public class ProductServiceImpl implements ProductService {
 		return dao.selectProductDetail(pno);
 	}
 
+	@Override
+	public List<ProductDTO> getBestSellers() {
+		List<ProductDTO> list = dao.getBestSellers();
+		dao.getImages(list);
+		return list;
+	}
+
 	
 
 }
