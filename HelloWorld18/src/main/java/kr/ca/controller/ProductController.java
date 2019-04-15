@@ -59,6 +59,7 @@ public class ProductController {
 	@RequestMapping("newProduct")
 	public String newProduct(Model model) {
 		model.addAttribute("list", service.getNewProducts());
+		
 		return "product/list";
 	}
 
