@@ -30,5 +30,7 @@ public interface MemberService {
 
 	void updatePW(String id, String pw);
 
+	int getManager(String id);
+
 	
 }

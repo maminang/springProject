@@ -54,5 +54,7 @@
 	UPDATE tbl_member SET pw=#{pw} WHERE id=#{id}
 	</update>
 	
-	
+	<select id="getManager" resultType="Integer">
+		select manager from tbl_member where id = #{id}
+	</select>
 </mapper>

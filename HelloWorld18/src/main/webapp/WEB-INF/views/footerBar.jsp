@@ -36,7 +36,6 @@
 </script>
 <script type="text/javascript">
 	getFooterInfo()
-
 	function getFooterInfo() {
 		$.getJSON("/footerInfo", function(data) {
 			var source = $("#footerSource").html();

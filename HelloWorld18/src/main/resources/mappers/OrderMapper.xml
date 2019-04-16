@@ -5,11 +5,64 @@
 <mapper namespace="kr.co.mapper.OrderMapper">
 
 	<select id="getDetailList" resultType="OrderDetailDTO">
-		select * from tbl_shopping_cart where id = #{id}
+		select * from
+		tbl_shopping_cart where id = #{id}
 	</select>
-	
+
 	<select id="setOrderMemberInfo" resultType="MemberDTO">
-		select * from tbl_member where id = #{id}
+		select * from
+		tbl_member where id = #{id}
 	</select>
-	
+
+	<select id="checkPoint" resultType="Integer">
+		select point from tbl_member
+		where id = #{id}
+	</select>
+
+	<select id="getOno" resultType="Integer">
+		select max(ono) from tbl_order
+	</select>
+
+	<select id="getOdno" resultType="Integer">
+		select max(odno) from
+		tbl_order_detail
+	</select>
+
+	<insert id="complete">
+		insert into tbl_order
+		(ono,id,name,address,postnum,dtl_adres,phone,total_price,shipping_memo,payment_status)
+		values
+		(#{ono},#{id},#{name},#{address},#{postNum},#{dtl_adres},#{phone},#{total_price},#{shipping_memo},#{payment_status})
+	</insert>
+
+	<insert id="completeDetail">
+		insert into tbl_order_detail
+		(odno,ono,pno,volume,price,amount) values
+		(#{odno},#{ono},#{pno},#{volume},#{price},#{amount})
+	</insert>
+
+	<delete id="resetShoppingCart">
+		delete from tbl_shopping_cart where id = #{id}
+	</delete>
+
+	<update id="pointSpending">
+		update tbl_member set point =
+		point-#{total_price}
+		where id = #{id}
+	</update>
+
+	<select id="list" resultType="OrderDTO">
+		select * from tbl_order where id =
+		#{id}
+	</select>
+
+	<select id="readOrder" resultType="OrderDTO">
+		select * from tbl_order where
+		ono = #{ono}
+	</select>
+
+	<select id="setDetailList" resultType="OrderDetailDTO">
+		select * from
+		tbl_order_detail where ono = #{ono}
+	</select>
 </mapper>

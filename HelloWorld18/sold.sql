@@ -6,6 +6,6 @@ create table tbl_sold (
 	amount_sold number default 0
 )
 
-select * from tbl_
+drop table tbl_sold
 
-insert into 
+select * from tbl_sold

@@ -17,11 +17,15 @@ import kr.ca.domain.ProductDTO;
 public class ProductTest {
 	@Inject
 	private ProductDAO dao;
-	
-	
+
 	@Test
 	public void testSearch() {
 		List<ProductDTO> list = dao.searchProduct("코롱");
 		System.out.println(list);
+	}
+
+	@Test
+	public void testBestSeller() {
+		System.out.println(dao.getBestSellers());
 	}
 }

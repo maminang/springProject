@@ -55,13 +55,13 @@ public class MemberController {
 	@RequestMapping(value = "/loginpost", method = RequestMethod.POST)
 	public void loginPost(LoginDTO dto, HttpSession session, Model model) throws Exception {
 		LoginDTO mdto = service.login(dto);
-		boolean passMatch=passEncoder.matches(dto.getPw(),mdto.getPw());
+		boolean passMatch = passEncoder.matches(dto.getPw(), mdto.getPw());
 		if (dto != null && passMatch) {
 			session.setAttribute("login", mdto);
-		}else {
-	         session.setAttribute("login", null);
-	         return;
-	      }
+		} else {
+			session.setAttribute("login", null);
+			return;
+		}
 	}
 
 //로그아웃	
@@ -136,6 +136,9 @@ public class MemberController {
 		LoginDTO login = (LoginDTO) session.getAttribute("login");
 		MemberDTO mDto = service.mypage(login);
 		model.addAttribute("mDto", mDto);
+		
+		int manager = service.getManager(login.getId());
+		model.addAttribute("manager", manager);
 	}
 
 //회원정보 수정
@@ -203,35 +206,38 @@ public class MemberController {
 
 	@RequestMapping("/updatePWUI")
 	public String updatePWUI(Model model, String id, MemberDTO dto) {
-		dto=service.selectMemberDTO(id);
-		model.addAttribute("dto",dto);
+		dto = service.selectMemberDTO(id);
+		model.addAttribute("dto", dto);
 		return "board/updatePW";
 
 	}
 
 	@RequestMapping("/updatePW")
-	public String updatePW(LoginDTO dto,String id,String pw,String oripw,HttpSession session,Model model) {
+	public String updatePW(LoginDTO dto, String id, String pw, String oripw, HttpSession session, Model model) {
 		LoginDTO ldto = service.login(dto);
-		
+
 		model.addAttribute("dto", ldto);
-			// 암호화 후
-			String pripw = passEncoder.encode(pw);
-			service.updatePW(id, pripw);
-			return "redirect:/member/mypage";
+		// 암호화 후
+		String pripw = passEncoder.encode(pw);
+		service.updatePW(id, pripw);
+		return "redirect:/member/mypage";
 	}
+
 	@ResponseBody
 	@RequestMapping("/pwcheck")
-	public Boolean pwcheck(String oripw,String id) {
+	public Boolean pwcheck(String oripw, String id) {
 		Boolean entity = null;
-		LoginDTO dto=new LoginDTO(id,oripw);
+		LoginDTO dto = new LoginDTO(id, oripw);
 		LoginDTO ldto = service.login(dto);
-		boolean passMatch=passEncoder.matches(oripw,ldto.getPw());
-		
+		boolean passMatch = passEncoder.matches(oripw, ldto.getPw());
+
 		entity = passMatch;
 		return entity;
 
 	}
-	
-	
-	
+// 관리자
+	@RequestMapping("manage")
+	public String manage() {
+		return "/admin/index";
+	}
 }
