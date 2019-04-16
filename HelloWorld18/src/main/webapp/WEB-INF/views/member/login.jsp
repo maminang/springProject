@@ -62,6 +62,6 @@
 		
 	});
 </script>	
-<jsp:include page="../footerBar.jsp" />
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

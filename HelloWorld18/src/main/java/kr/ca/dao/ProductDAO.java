@@ -33,4 +33,6 @@ public interface ProductDAO {
 
 	ProductDetailDTO selectOneProductDetail(int pno, int i);
 
+	List<ProductDTO> allProduct();
+
 }

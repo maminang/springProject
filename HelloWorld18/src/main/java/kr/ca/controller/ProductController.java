@@ -27,10 +27,10 @@ public class ProductController {
 
 	@RequestMapping(value = "write", method = RequestMethod.POST)
 	public String write(ProductDTO dto, int[] volume, int[] price, String[] images) {
-		service.write(dto , volume, price);
+		service.write(dto, volume, price);
 		return "product/read";
 	}
-	
+
 	@RequestMapping("/read")
 	public String read(int pno, Model model) {
 
@@ -61,11 +61,16 @@ public class ProductController {
 		model.addAttribute("list", service.getNewProducts());
 		return "product/list";
 	}
-	
+
 	@RequestMapping("bestSeller")
 	public String bestSeller(Model model) {
 		model.addAttribute("list", service.getBestSellers());
 		return "product/list";
 	}
 
+	@RequestMapping("list")
+	public String allProduct(Model model) {
+		model.addAttribute("list", service.allProduct());
+		return "product/list";
+	}
 }

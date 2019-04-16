@@ -89,5 +89,9 @@
 	<select id="selectByPno" resultType="ProductDTO">
 		select * from tbl_product where pno = #{pno}
 	</select>
+	
+	<select id="allProduct" resultType="ProductDTO">
+		select * from tbl_product
+	</select>
 
 </mapper>

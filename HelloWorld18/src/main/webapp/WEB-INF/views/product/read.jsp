@@ -267,7 +267,7 @@
 	</div>
 	<!-- ReplyInsert Modal -->
 
-	<jsp:include page="../footerBar.jsp" />
+	<jsp:include page="../footer.jsp" />
 
 	<!-- reviewListSource -->
 	<script id="reviewListSource" type="text/x-handlebars-template">

@@ -109,7 +109,8 @@ public class ProductDAOImpl implements ProductDAO {
 //  신제품 6개 리스트 뽑아오기
 	@Override
 	public List<ProductDTO> getNewProducts() {
-		return session.selectList(NS + ".getNewProducts");
+		RowBounds rb= new RowBounds(0, 12);
+		return session.selectList(NS + ".getNewProducts", null, rb);
 	}
 
 //  카테고리로 리스트 뽑아오기
@@ -151,6 +152,12 @@ public class ProductDAOImpl implements ProductDAO {
 	public int selectCountProductDetail() {
 
 		return session.selectOne(NS + ".selectCountProductDetail");
+	}
+
+	@Override
+	public List<ProductDTO> allProduct() {
+		
+		return session.selectList(NS+".allProduct");
 	}
 
 }

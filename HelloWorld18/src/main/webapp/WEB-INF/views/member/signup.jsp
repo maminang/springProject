@@ -531,7 +531,7 @@
         </script>
         </div>
  <!-- :::::::::::::::::::::::::::::::::::: 푸터 :::::::::::::::::::::::::::::::::::::: -->
-        <jsp:include page="../footerBar.jsp" />
+        <jsp:include page="../footer.jsp" />
 
 	
 

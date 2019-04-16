@@ -21,4 +21,6 @@ public interface ProductService {
 
 	List<ProductDTO> getBestSellers();
 
+	List<ProductDTO> allProduct();
+
 }
