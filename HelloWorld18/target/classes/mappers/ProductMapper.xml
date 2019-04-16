@@ -4,56 +4,65 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ca.mapper.product">
 
+	<!-- 제품등록시에 쓰는 쿼리 -->
 	<select id="getPno" resultType="Integer">
 		select max(pno) from tbl_product
 	</select>
-	<insert id="insert">insert into tbl_product
-		(pno,eng_name,kr_name,prdct_dscrp,volume,price,category) values
-		(#{pno},#{eng_name},#{kr_name},#{prdct_dscrp},#{volume},#{price},#{category})
+	<insert id="write">insert into tbl_product
+		(pno,eng_name,kr_name,prdct_dscrp,category) values
+		(#{pno},#{eng_name},#{kr_name},#{prdct_dscrp},#{category})
 	</insert>
-	
-	<select id="getPino" resultType="Integer">
-		select max(pino) from tbl_product_images
-	</select>
-	<insert id="addImages">
-		insert into tbl_product_images (pno,pino,fullname) values(#{pno},#{pino},#{fullName})
-	</insert>
-	
-	<select id="selectShoppingCart"
-		resultType="kr.ca.domain.ShoppingCartDTO">
-		select * from tbl_shopping_cart where id = #{id}
-	</select>
-	<insert id="insert">insert into tbl_product
-		(pno,eng_name,kr_name,prdct_dscrp,volume,price,category) values
-		(#{pno},#{eng_name},#{kr_name},#{prdct_dscrp},#{volume},#{price},#{category})
+	<insert id="writeDetail">
+		insert into tbl_product_detail (pno,volume,price)
+		values (#{pno},#{volume},#{price})
 	</insert>
 
-	
+	<!-- 제품 이미지 등록시에 쓰는 쿼리 -->
 	<select id="getPino" resultType="Integer">
-		select max(pino) from tbl_product_images
+		select max(pino) from
+		tbl_product_images
 	</select>
 	<insert id="addImages">
-		insert into tbl_product_images (pno,pino,fullname) values(#{pno},#{pino},#{fullName})
-	</insert>
-	
-	<select id="selectShoppingCart"
-		resultType="kr.ca.domain.ShoppingCartDTO">
-		select * from tbl_shopping_cart where id = #{id}
-	</select>
-<!-- 	check amount -->
-	<select id="checkAmount" resultType="Integer">
-		select amount from
-		tbl_shopping_cart where id=#{id} and pno=#{pno}
-	</select>
-	
-<!-- 	oAmount가 Null이 아닐때 -->
-	<insert id="insertShoppingCart">
-		update tbl_shopping_cart set amount = amount+#{amount} where id=#{id} and pno=#{pno}
+		insert into tbl_product_images (pno,pino,fullname)
+		values(#{pno},#{pino},#{fullName})
 	</insert>
 
-<!-- 	sAmount가 Null일때 -->
-	<insert id="insertShoppingCartNull">
-		insert into tbl_shopping_cart values (#{id}, #{pno}, #{amount})
-	</insert>
+	<!-- 검색쿼리 -->
+	<select id="searchProduct" resultType="ProductDTO">
+		select * from tbl_product
+		where upper(eng_name) like '%'||upper(#{keyword})||'%' or
+		upper(kr_name) like '%'||upper(#{keyword})||'%' or upper(category)
+		like '%'||upper(#{keyword})||'%'
+	</select>
+
+	<!-- 제품리스트에 이미지 넣어주기 -->
+	<select id="getImages" resultType="String">
+		select fullname from
+		tbl_product_images where pno=#{pno}
+	</select>
+
+	<!-- 베스트 셀러 리스트 뽑아오기 -->
+	<select id="getBestSeller" resultType="ProductDTO">
+		select * from tbl_sold
+		order by amount_sold desc
+	</select>
+
+	<!-- 신제품들 리스트 뽑아오기 -->
+	<select id="getNewProducts" resultType="ProductDTO">
+		select * from tbl_product
+		order by pno desc
+	</select>
+	
+	<select id="getListByCategory" resultType="ProductDTO">
+		select * from tbl_product where category = #{category}
+	</select>
+	
+	<select id="selectProduct" resultType="ProductDTO">
+		select * from tbl_product where pno=#{pno}
+	</select>
+	
+	<select id="selectProductDetail" resultType="ProductDTO">
+		select * from tbl_product_detail where pno=#{pno}
+	</select>
 
 </mapper>

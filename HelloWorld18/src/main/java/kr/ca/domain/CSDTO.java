@@ -10,28 +10,28 @@ public class CSDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int idnbr;
+	private int bno;
 	private String quser;
 	private String qpassword;
 	private String qtitle;
 	private String qcontent;
 	private String qtype;
-	private String[] qfile;
+	private String qfile;
 	private String qphone;
 	private String email;
-	private int openStatus;
+	private int qstatus;
 	private String qanswer;
     
 	public CSDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getIdnbr() {
-		return idnbr;
+	public int getBno() {
+		return bno;
 	}
 
-	public void setIdnbr(int idnbr) {
-		this.idnbr = idnbr;
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 
 	public String getQuser() {
@@ -74,11 +74,11 @@ public class CSDTO implements Serializable{
 		this.qtype = qtype;
 	}
 
-	public String[] getQfile() {
+	public String getQfile() {
 		return qfile;
 	}
 
-	public void setQfile(String[] qfile) {
+	public void setQfile(String qfile) {
 		this.qfile = qfile;
 	}
 
@@ -98,12 +98,12 @@ public class CSDTO implements Serializable{
 		this.email = email;
 	}
 
-	public int getOpenStatus() {
-		return openStatus;
+	public int getQstatus() {
+		return qstatus;
 	}
 
-	public void setOpenStatus(int openStatus) {
-		this.openStatus = openStatus;
+	public void setQstatus(int qstatus) {
+		this.qstatus = qstatus;
 	}
 
 	public String getQanswer() {
@@ -122,7 +122,7 @@ public class CSDTO implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idnbr;
+		result = prime * result + bno;
 		return result;
 	}
 
@@ -135,17 +135,19 @@ public class CSDTO implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		CSDTO other = (CSDTO) obj;
-		if (idnbr != other.idnbr)
+		if (bno != other.bno)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "CSDTO [idnbr=" + idnbr + ", quser=" + quser + ", qpassword=" + qpassword + ", qtitle=" + qtitle
-				+ ", qcontent=" + qcontent + ", qtype=" + qtype + ", qfile=" + Arrays.toString(qfile) + ", qphone="
-				+ qphone + ", email=" + email + ", openStatus=" + openStatus + ", qanswer=" + qanswer + "]";
+		return "CSDTO [bno=" + bno + ", quser=" + quser + ", qpassword=" + qpassword + ", qtitle=" + qtitle
+				+ ", qcontent=" + qcontent + ", qtype=" + qtype + ", qfile=" + qfile + ", qphone="
+				+ qphone + ", email=" + email + ", qstatus=" + qstatus + ", qanswer=" + qanswer + "]";
 	}
+	
+	
 
 	
 	

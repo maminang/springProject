@@ -1,10 +1,10 @@
 package kr.ca.domain;
 
-
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-
+import kr.ca.domain.SearchCriteria;
+import kr.ca.domain.Criteria;
 
 public class PageMaker {
 	private int amount;
@@ -95,12 +95,14 @@ public class PageMaker {
 	}
 	
 	
-	/*
-	 * public String makeSearch(int page) { UriComponents uc =
-	 * UriComponentsBuilder.newInstance() .queryParam("page", page)
-	 * .queryParam("perPage", cri.getPerPage()) .queryParam("searchType",
-	 * ((SearchCriteria)cri).getSearchType()) .queryParam("keyword",
-	 * ((SearchCriteria)cri).getKeyword()) .build(); return uc.toUriString(); }
-	 */
+	public String makeSearch(int page) {
+		UriComponents uc = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPage", cri.getPerPage())
+				.queryParam("searchType", ((SearchCriteria)cri).getSearchType())
+				.queryParam("keyword", ((SearchCriteria)cri).getKeyword())
+				.build();
+		return uc.toUriString();
+	}
 	
 }

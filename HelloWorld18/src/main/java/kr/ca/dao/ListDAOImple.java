@@ -14,7 +14,7 @@ public class ListDAOImple implements ListDAO{
 
 	@Inject
 	private SqlSession session;
-	private final String NS="kr.co.mapper.ListMapper";
+	private final String NS="kr.ca.mapper.ListMapper";
 	
 	@Override
 	public List<ProductDTO> citrusList() {

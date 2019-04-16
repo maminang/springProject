@@ -10,11 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.RedirectView;
 
 import kr.ca.domain.CookieDTO;
-import kr.ca.domain.LoginDTO;
-import kr.ca.domain.MemberDTO;
 import kr.ca.domain.ShoppingCartDTO;
 import kr.ca.service.ShoppingCartService;
 

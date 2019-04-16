@@ -2,83 +2,171 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.mapper.CSMapper">
-	<select id="csList" resultType="kr.ca.domain.CSDTO">
-		select * from tbl_faq order by
-		idNbr desc
-	</select>
+<mapper namespace="kr.ca.mapper.CSMapper">
 
-	<select id="createBno" resultType="Integer">
-		select max(idNbr) from tbl_faq
-	</select>
 
-	<select id="getAmount" resultType="Integer">
-		select count(idNbr) from
-		tbl_faq
+	<!-- 리스트 -->
+	<select id="list" resultType="kr.ca.domain.CSDTO">
+		select * from tbl_faq
+		order by bno desc
 	</select>
 
 
+	<!-- 글쓰기 -->
 	<insert id="insert">
-		insert into tbl_faq (idnbr, quser, qpassword, qtitle,
-		qcontent, qtype, qfile, qphone, email, openStatus, qanswer)
-		values(#{idnbr}, #{quser}, #{qpassword}, #{qtitle}, #{qcontent},
-		#{qtype}, #{qfile}, #{qphone}, #{email}, #{openStatus}, null)
+		insert into tbl_faq (bno, quser, qpassword, qtitle,
+		qcontent, qtype, qfile, qphone, email, qstatus, qanswer)
+		values(#{bno}, #{quser}, #{qpassword}, #{qtitle}, #{qcontent},
+		#{qtype}, #{qfile}, #{qphone}, #{email}, #{qstatus}, 0)
 	</insert>
 
-	<select id="createIdnbr" resultType="Integer">
-		select max(idnbr) from
-		tbl_faq
+
+	<!-- 글읽기 -->
+	<select id="read" resultType="kr.ca.domain.CSDTO">
+		select * from tbl_faq
+		where bno=#{bno}
 	</select>
 
 
+	<!-- 첨부파일 삭제 -->
+	<delete id="deleteAllAttach">
+		delete from tbl_attach
+		where bno=#{bno}
+	</delete>
+
+	<delete id="deleteAttach">
+		delete from tbl_csattach
+		where bno=#{bno} and fullName=#{fileName}
+	</delete>
 
 
-	<select id="listSearch" resultType="BoardVO">
+	<select id="getId" resultType="Integer">
+		select max(id) from tbl_attach
+	</select>
 
-<![CDATA[  
+	<!-- 첨부파일 -->
+	<insert id="addAttach">
+		insert into tbl_attach
+		(id, fullName, bno)
+		values
+		(#{id}, #{fullName}, #{bno})
+	</insert>
+	<!-- <select id="list" resultType="kr.ca.domain.CSDTO"> select * from tbl_board 
+		where bno=#{bno} order by bno desc </select> -->
 
-  select * 
-
-  from tbl_board 
-
-  where bno > 0 
-
-]]>
+	<!-- 조회수 기능. 미구현 상태. 구현하려면 db구조부터 수정해야함. <update id="incrViewCnt"> update 
+		tbl_faq set viewcnt=viewcnt+1 where bno = #{bno} </update> -->
 
 
+	<select id="createBno" resultType="Integer">
+		select max(bno) from tbl_faq
+	</select>
 
-		<include refid="search"></include>
 
-  
-
-<![CDATA[    
-
-  order by bno desc
-
-  limit #{pageStart}, #{perPageNum}
-
-]]>
+	<select id="answerui" resultType="kr.ca.domain.CSDTO">
+		select * from tbl_faq where
+		bno=#{bno}
 
 	</select>
 
 
-
-	<select id="listSearchCount" resultType="int">
-
-<![CDATA[  
-
-  select count(bno) 
-
-  from tbl_board 
-
-  where bno > 0 
-
-]]>
-
-		<include refid="search"></include>
-
-
+	<select id="updateUI" resultType="kr.ca.domain.CSDTO">
+		select * from tbl_faq where
+		bno=#{bno}
 
 	</select>
+	
+	<select id="deleteui" resultType="kr.ca.domain.CSDTO">
+		select * from tbl_faq where
+		bno=#{bno}
+
+	</select>
+
+	<update id="update">
+		update tbl_faq
+		set
+		quser=#{quser},
+		qtitle=#{qtitle},
+		qcontent=#{qcontent},
+		qphone=#{qphone},
+		email=#{email}
+		where bno=#{bno}
+	</update>
+
+	<update id="answer">
+		update tbl_faq
+		set
+		qanswer=#{qanswer}
+		where bno=#{bno}
+	</update>
+
+	<delete id="delete">
+		delete from tbl_faq
+		where bno=#{bno}
+	</delete>
+
+	<select id="getAmount" resultType="Integer">
+		select count(bno) from tbl_faq
+	</select>
+
+	<update id="updateViewCnt">
+		update tbl_faq
+		set viewCnt=viewCnt+1
+		where bno=#{bno}
+	</update>
+
+
+
+	<!-- <select id="search" resultType="kr.ca.domain.BoardVO"> select * from 
+		tbl_board where ${searchType} like '%'||#{keyword}||'%' order by bno desc 
+		</select> -->
+
+	<!-- 일반적으로 말바티스에 자료 넣을 때 #{}을 사용한다. 그럼 ${}는??? #{} - 작은따옴표가 자동으로 포함된다 PreparedStratement 
+		${} - 작은 따옴표가 없다. Statement, SQL Injection 해킹 취약함. -->
+
+	<!-- Mybatis의 동적 쿼리 이용해서 작성해야한다. -->
+
+	<sql id="searchIf">
+		<if test="searchType !=null">
+			<if test="searchType =='writer'.toString()">
+				where
+				upper(writer) like
+				'%'||upper(#{keyword})||'%'
+			</if>
+			<if test="searchType =='title'.toString()">
+				where
+				lower(title) like
+				'%'||lower(#{keyword})||'%'
+			</if>
+			<if test="searchType =='content'.toString()">
+				where
+				lower(content) like
+				'%'||lower(#{keyword})||'%'
+			</if>
+		</if>
+	</sql>
+
+
+
+	<select id="search" resultType="kr.ca.domain.CSDTO">
+	<![CDATA[
+		select * from tbl_faq 
+		]]>
+		<include refid="searchIf"></include>
+		<![CDATA[ 
+		order by bno desc
+		
+		]]>
+	</select>
+
+	<!-- <![CDATa = 텍스트로 인식 / 쿼리 문이 길어지면 사용 -->
+
+
+	<select resultType="Integer" id="getSearchAmount">
+		select count(bno) from tbl_faq
+		<include refid="searchIf"></include>
+	</select>
+
+
 
 </mapper>

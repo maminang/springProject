@@ -38,13 +38,13 @@ public class MemberController {
 //로그아웃	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(LoginDTO dto, HttpSession session) throws Exception {
-		System.out.println("로그아웃");
+		
 		Object login=session.getAttribute("login");
-		System.out.println("::::::::::::1"+login);
+		
 		if(login!=null) {
 			session.removeAttribute("login");
 		}
-		System.out.println("::::::::::2"+login);
+		
 		return "/main";
 		
 	}

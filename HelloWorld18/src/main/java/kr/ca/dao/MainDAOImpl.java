@@ -15,7 +15,7 @@ public class MainDAOImpl implements MainDAO {
 	
 	@Inject
 	private SqlSession session;
-	private final String NS = "kr.co.mapper.main";
+	private final String NS = "kr.ca.mapper.main";
 
 	@Override
 	public List<MenuDTO> getMenu() {
