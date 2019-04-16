@@ -8,6 +8,16 @@ create table tbl_menu (
 
 drop table tbl_menu
 
+<<<<<<< HEAD
+insert into TBL_MENU values(1,'All Product', '/product/list')
+insert into TBL_MENU values(2,'베스트셀러', '/product/bestSeller')
+insert into TBL_MENU values(3,'시트러스', '/product/list/citrus')
+insert into TBL_MENU values(4,'플로랄', '/product/list/floral')
+insert into TBL_MENU values(5,'프루티', '/product/list/fruity')
+insert into TBL_MENU values(6,'스파이시', '/product/list/spicy')
+insert into TBL_MENU values(7,'라이트 플로랄', '/product/list/lightFloral')
+insert into TBL_MENU values(8,'우디', '/product/list/woody')
+=======
 insert into TBL_MENU values(1,'All Product', '/product/AllProduct')
 insert into TBL_MENU values(2,'New Product', '/product/newProduct')
 insert into TBL_MENU values(3,'Best Seller', '/product/bestSeller')
@@ -31,8 +41,9 @@ DELETE FROM TBL_MENU WHERE order_no=9;
 DELETE FROM TBL_MENU WHERE order_no=10;
 
 insert into TBL_MENU values(1,'newProduct', '/product/newProduct')
+>>>>>>> refs/remotes/origin/eunju
 
 select * from TBL_MENU
-delete TBL_MENU where order_no = 2
+delete TBL_MENU where order_no = 1
 
 update tbl_menu (1)

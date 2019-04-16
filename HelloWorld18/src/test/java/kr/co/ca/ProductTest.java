@@ -28,4 +28,14 @@ public class ProductTest {
 	public void testBestSeller() {
 		System.out.println(dao.getBestSellers());
 	}
+	
+	@Test
+	public void testAllProduct() {
+		System.out.println(dao.allProduct());
+	}
+	
+	@Test
+	public void testNewProduct() {
+		System.out.println(dao.getNewProducts());
+	}
 }

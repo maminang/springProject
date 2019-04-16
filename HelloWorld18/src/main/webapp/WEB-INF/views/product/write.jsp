@@ -107,7 +107,7 @@
 		</div>
 
 	</div>
-	<jsp:include page="../footerBar.jsp" />
+	<jsp:include page="../footer.jsp" />
 
 
 	<%-- 여기까지가 뷰 --%>

@@ -65,7 +65,11 @@
 
 </head>
 <body class="animsition">
-
+	<!-- header -->
+	<jsp:include page="../header.jsp"/>
+	<br>	
+	<br>	
+	<br>	
 	<!-- Cart -->
 	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
@@ -187,7 +191,6 @@
 								${vo.eng_name}<br> ${vo.kr_name}
 							</a>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -195,6 +198,7 @@
 		</div>
 	</div>
 </div>
+<jsp:include page="../footer.jsp"/>
 
 	<!--===============================================================================================-->
 	<script src="../resources/vendor/jquery/jquery-3.2.1.min.js"></script>

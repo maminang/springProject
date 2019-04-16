@@ -316,7 +316,7 @@
 	</div>
 	<!-- ReplyInsert Modal -->
 
-	<jsp:include page="../footerBar.jsp" />
+	<jsp:include page="../footer.jsp" />
 
 	<script id="source" type="text/x-handlebars-template">
 	{{#each.}}

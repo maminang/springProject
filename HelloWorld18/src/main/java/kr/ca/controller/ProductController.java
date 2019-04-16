@@ -25,11 +25,12 @@ public class ProductController {
       return "product/write";
    }
 
-   @RequestMapping(value = "write", method = RequestMethod.POST)
-   public String write(ProductDTO dto, int[] volume, int[] price, String[] images) {
-      service.write(dto, volume, price);
-      return "product/read";
-   }
+
+	@RequestMapping(value = "write", method = RequestMethod.POST)
+	public String write(ProductDTO dto, int[] volume, int[] price, String[] images) {
+		service.write(dto, volume, price);
+		return "product/read";
+	}
 
    @RequestMapping("/read")
    public String read(int pno, Model model) {
@@ -49,28 +50,26 @@ public class ProductController {
       return "product/list";
    }
 
+	@RequestMapping("newProduct")
+	public String newProduct(Model model) {
+		model.addAttribute("list", service.getNewProducts());
+		return "product/list";
+	}
+
+	@RequestMapping("bestSeller")
+	public String bestSeller(Model model) {
+		model.addAttribute("list", service.getBestSellers());
+		return "product/list";
+	}
    @RequestMapping("search")
    public String searchProduct(String keyword, Model model) {
       List<ProductDTO> searchList = service.searchProduct(keyword);
       model.addAttribute("list", searchList);
       return "product/list";
    }
-
-   @RequestMapping("newProduct")
-   public String newProduct(Model model) {
-      model.addAttribute("list", service.getNewProducts());
-      return "product/list";
-   }
-
-   @RequestMapping("bestSeller")
-   public String bestSeller(Model model) {
-      model.addAttribute("list", service.getBestSellers());
-      return "product/list";
-   }
-
-   @RequestMapping("list")
-   public String allProduct(Model model) {
-      model.addAttribute("list", service.allProduct());
-      return "product/list";
-   }
+	@RequestMapping("list")
+	public String allProduct(Model model) {
+		model.addAttribute("list", service.allProduct());
+		return "product/list";
+	}
 }

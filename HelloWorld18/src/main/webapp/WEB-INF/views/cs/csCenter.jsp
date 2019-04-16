@@ -260,7 +260,7 @@
 
  
 
-		<jsp:include page="../footerBar.jsp" />
+		<jsp:include page="../footer.jsp" />
 
 		<script type="text/javascript">
 

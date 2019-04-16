@@ -67,7 +67,7 @@
 		</div>
 	</div>
 
-	<jsp:include page="footerBar.jsp" />
+	<jsp:include page="footer.jsp" />
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".X").click(function() {
