@@ -177,7 +177,7 @@
 						<img src='/displayFile?fileName=${vo.images[0]}' alt="왜안나옴">
 						<a href='/product/read?pno=${vo.pno}' class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 								View
-							</a>
+						</a>
 						</a>
 					</div>
 					<div align="center" class="block2-txt flex-w flex-t p-t-14">
