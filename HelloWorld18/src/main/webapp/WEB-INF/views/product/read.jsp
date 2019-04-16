@@ -103,7 +103,6 @@
 							</c:if>
 						</c:forEach>
 					</div>
-
 					<!-- Controls -->
 					<a class="left carousel-control" href="#carousel-example-generic"
 						role="button" data-slide="prev"> <span

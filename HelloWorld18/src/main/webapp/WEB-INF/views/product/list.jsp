@@ -25,7 +25,7 @@
 	<jsp:include page="../headerBar.jsp" />
 	<div class="container">
 		<div class="row">
-			<a class="btn btn-info" href="/board/write">글쓰기</a>
+			<a class="btn btn-info" href="/product/write">글쓰기</a>
 		</div>
 		<div class="row">
 			<table class="table table-hover">

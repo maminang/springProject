@@ -19,11 +19,21 @@ alter table tbl_product add INGRD varchar2(3000);
 
 alter table tbl_product drop column price
 
-select * from tbl_product
+select * from tbl_product order by pno asc
+select * from tbl_product_detail order by pno desc
+select * from tbl_product_images order by pno desc
+select * from tbl_order order by pno desc
+select * from tbl_order_detail order by pno desc
+select * from tbl_review order by pno desc
+select * from tbl_shopping_cart order by pno desc
+update tbl_product set category = 'cologneIntense' where pno = 22
 
 drop table tbl_product
 
-delete tbl_product
+delete tbl_product where pno = 24
+delete tbl_product_detail where pno = 24
+delete tbl_product_images where pno = 24
+
 
 insert into tbl_product values (
 1,

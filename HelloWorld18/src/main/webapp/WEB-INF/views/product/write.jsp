@@ -56,6 +56,7 @@
 						<option value="spicy">스파이시</option>
 						<option value="lightFloral">라이트 플로랄</option>
 						<option value="woody">우디</option>
+						<option value="cologneIntense">코롱 인텐스</option>
 					</select>
 				</div>
 				<div class="form-group">
