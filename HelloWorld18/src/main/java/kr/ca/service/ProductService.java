@@ -7,20 +7,20 @@ import kr.ca.domain.ProductDetailDTO;
 
 public interface ProductService {
 
-	List<ProductDTO> searchProduct(String keyword);
+   List<ProductDTO> searchProduct(String keyword);
 
-	void write(ProductDTO dto, int[] volume, int[] price);
+   void write(ProductDTO dto, int[] volume, int[] price);
 
-	List<ProductDTO> getNewProducts();
+   List<ProductDTO> getNewProducts();
 
-	List<ProductDTO> getListByCategory(String category);
+   List<ProductDTO> getListByCategory(String category);
 
-	ProductDTO selectProduct(int pno);
+   ProductDTO selectProduct(int pno);
 
-	List<ProductDetailDTO> selectProductDetail(int pno);
+   List<ProductDetailDTO> selectProductDetail(int pno);
 
-	List<ProductDTO> getBestSellers();
+   List<ProductDTO> getBestSellers();
 
-	List<ProductDTO> allProduct();
+   List<ProductDTO> allProduct();
 
 }

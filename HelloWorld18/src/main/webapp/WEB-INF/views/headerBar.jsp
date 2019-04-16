@@ -79,6 +79,8 @@
 	{{/each}}
 </script>
 <script type="text/javascript">
+	$(document).ready(function() {
+	});
 	getMenu();
 	function getMenu() {
 		$.getJSON("/menu", function(data) {

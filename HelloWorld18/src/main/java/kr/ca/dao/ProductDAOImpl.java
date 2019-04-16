@@ -96,12 +96,12 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public List<ProductDTO> getBestSellers() {
 		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		
+
 		RowBounds rb = new RowBounds(0, 6);
 		List<Integer> pnoList = session.selectList(NS + ".getBestSeller", null, rb);
-		
+
 		for (Integer pno : pnoList) {
-			list.add(session.selectOne(NS+".selectByPno", pno));
+			list.add(session.selectOne(NS + ".selectByPno", pno));
 		}
 		return list;
 	}
@@ -109,7 +109,7 @@ public class ProductDAOImpl implements ProductDAO {
 //  신제품 6개 리스트 뽑아오기
 	@Override
 	public List<ProductDTO> getNewProducts() {
-		RowBounds rb= new RowBounds(0, 12);
+		RowBounds rb = new RowBounds(0, 12);
 		return session.selectList(NS + ".getNewProducts", null, rb);
 	}
 
@@ -124,14 +124,14 @@ public class ProductDAOImpl implements ProductDAO {
 		return session.selectOne(NS + ".selectProduct", pno);
 	}
 
-//	select * Product id로 검색
+//   select * Product id로 검색
 	@Override
 	public ProductDTO selectProduct(ProductDTO dto) {
 
 		return session.selectOne(NS + ".selectProduct", dto);
 	}
 
-//	select * ProductDetail id로 검색
+//   select * ProductDetail id로 검색
 	@Override
 	public List<ProductDetailDTO> selectProductDetail(int pno) {
 
@@ -156,8 +156,8 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<ProductDTO> allProduct() {
-		
-		return session.selectList(NS+".allProduct");
+
+		return session.selectList(NS + ".allProduct");
 	}
 
 }

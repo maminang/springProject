@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.ca.dao.ProductDAO;
 import kr.ca.domain.ProductDTO;
 import kr.ca.service.ProductService;
 

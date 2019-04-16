@@ -17,13 +17,14 @@ import kr.ca.service.ProductService;
 @RequestMapping("product")
 public class ProductController {
 
-	@Autowired
-	private ProductService service;
+   @Autowired
+   private ProductService service;
 
-	@RequestMapping(value = "write", method = RequestMethod.GET)
-	public String writeUI() {
-		return "product/write";
-	}
+   @RequestMapping(value = "write", method = RequestMethod.GET)
+   public String writeUI() {
+      return "product/write";
+   }
+
 
 	@RequestMapping(value = "write", method = RequestMethod.POST)
 	public String write(ProductDTO dto, int[] volume, int[] price, String[] images) {
@@ -31,30 +32,23 @@ public class ProductController {
 		return "product/read";
 	}
 
-	@RequestMapping("/read")
-	public String read(int pno, Model model) {
+   @RequestMapping("/read")
+   public String read(int pno, Model model) {
 
-		ProductDTO pd = service.selectProduct(pno);
-		model.addAttribute("pd", pd);
-		List<ProductDetailDTO> pdd = service.selectProductDetail(pd.getPno());
-		model.addAttribute("pdd", pdd);
+      ProductDTO pd = service.selectProduct(pno);
+      model.addAttribute("pd", pd);
+      List<ProductDetailDTO> pdd = service.selectProductDetail(pd.getPno());
+      model.addAttribute("pdd", pdd);
 
-		return "product/read";
-	}
+      return "product/read";
+   }
 
-	@RequestMapping("list/{category}")
-	public String listByCategory(Model model, @PathVariable String category) {
-		List<ProductDTO> list = service.getListByCategory(category);
-		model.addAttribute("list", list);
-		return "product/list";
-	}
-
-	@RequestMapping("search")
-	public String searchProduct(String keyword, Model model) {
-		List<ProductDTO> searchList = service.searchProduct(keyword);
-		model.addAttribute("list", searchList);
-		return "product/list";
-	}
+   @RequestMapping("list/{category}")
+   public String listByCategory(Model model, @PathVariable String category) {
+      List<ProductDTO> list = service.getListByCategory(category);
+      model.addAttribute("list", list);
+      return "product/list";
+   }
 
 	@RequestMapping("newProduct")
 	public String newProduct(Model model) {
@@ -67,7 +61,12 @@ public class ProductController {
 		model.addAttribute("list", service.getBestSellers());
 		return "product/list";
 	}
-
+   @RequestMapping("search")
+   public String searchProduct(String keyword, Model model) {
+      List<ProductDTO> searchList = service.searchProduct(keyword);
+      model.addAttribute("list", searchList);
+      return "product/list";
+   }
 	@RequestMapping("list")
 	public String allProduct(Model model) {
 		model.addAttribute("list", service.allProduct());

@@ -119,7 +119,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				var source = $("#menuSource").html();
 				var template = Handlebars.compile(source)
 
-				$("#categories").html(template(data)).css();
+				$("#categories").html(template(data));
 			})
 		}
 	</script>
