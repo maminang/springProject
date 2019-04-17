@@ -38,11 +38,9 @@ public interface CSService {
 
 	void delete(CSDTO vo);
 
-	// 첨부파일
-	List<String> getAttach(Integer bno);
+	
 
-	// 첨부파일 삭제
-	void deleteAttach(String fileName, int bno);
+	
 
 	CSDTO answerui(int bno);
 

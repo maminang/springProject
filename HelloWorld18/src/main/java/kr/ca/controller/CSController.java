@@ -51,46 +51,7 @@ public class CSController {
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 
-	// 파일 삭제
-	@ResponseBody
-	@RequestMapping(value = "/deletefile", method = RequestMethod.POST)
-	public ResponseEntity<String> deleteFile(String fileName, int bno) {
 
-		service.deleteAttach(fileName, bno);
-
-		ResponseEntity<String> entity = null;
-
-		fileName = fileName.replace('/', File.separatorChar);
-
-		try {
-
-			String formatType = fileName.substring(fileName.lastIndexOf(".") + 1);
-			MediaType mType = MediaUtils.getMediaType(formatType);
-			if (mType != null) {
-				String prefix = fileName.substring(0, 12);
-				String suffix = fileName.substring(14);
-				File f1 = new File(uploadPath + prefix + suffix);
-				f1.delete();
-			}
-
-			File f2 = new File(uploadPath + fileName);
-			f2.delete();
-
-			entity = new ResponseEntity<String>(HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-		}
-
-		return entity;
-	}
-
-	// 파일 첨부
-	@RequestMapping("/getAttach/{bno}")
-	@ResponseBody
-	public List<String> getAttach(@PathVariable("bno") Integer bno) {
-		return service.getAttach(bno);
-	}
 
 //	@RequestMapping("/list")
 //	public String list (Model model) {
@@ -128,7 +89,7 @@ public class CSController {
 		String dir=dirFront+dirName+fileName;
 		dir=dir.replaceAll("/","테스트");
 
-		System.out.println("@@@ 업로드한 이미지의 절대경로" +dirFront+""+ dirName + "" + fileName);
+		
 		vo.setQfile(dir);
 
 		service.insert(vo);
@@ -269,18 +230,12 @@ public class CSController {
 		return "redirect:/board/search";
 	}
 
-	/*
-	 * get방식이면 모델로 바인딩할 수 있지만 post방식이면 RedirectAttributes로 값을 보내야 한다. 디스패쳐방식,
-	 * 리다이렉트방식????
-	 */
+	
 
 	public void getIpAdress() {
 		try {
 			InetAddress ip = InetAddress.getLocalHost();
-			System.out.println("Host Name = [" + ip.getHostName() + "]");
-			System.out.println("Host Address = [" + ip.getHostAddress() + "]");
 		} catch (Exception e) {
-			System.out.println(e);
 		}
 		
 	}

@@ -105,26 +105,15 @@
 
 				<div class="form-group">
 					<!-- <label for="open">질문 비공개 </label>  -->
-					<br> <input type="checkbox"
-						name="qstatus" value="1" type=hidden> <br>
+					<input
+						name="qstatus" value="1" type=hidden>
 				</div>
 
 				<div class="form-group">
-					<br> <input name="qfile" type=hidden> <br>
+					<input name="qfile" type=hidden>
 				</div>
 				
 				
-
-			<div class="form-group">
-				<label>업로드할 파일을 드랍시키세요.(10MB 이하의 이미지파일 하나만 올릴 수 있습니다.)</label>
-				<div class="fileDrop"></div>
-			</div>
-
-				<ul class="uploadedList clearfix">
-
-				</ul>
-
-
 
 
 				<div class="form-group">

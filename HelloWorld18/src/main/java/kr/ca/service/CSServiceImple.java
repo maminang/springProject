@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.ca.dao.CSDAO;
-import kr.ca.dao.ReplyDAO;
 import kr.ca.domain.CSDTO;
 import kr.ca.domain.Criteria;
 import kr.ca.domain.SearchCriteria;
@@ -19,9 +18,7 @@ public class CSServiceImple implements CSService {
 	@Inject
 	private CSDAO dao;
 
-	@Inject
-	private ReplyDAO rdao;
-
+	
 	// 리스트 보여주기
 	@Override
 	public List<CSDTO> csList() {
@@ -130,24 +127,16 @@ public class CSServiceImple implements CSService {
 	@Override
 	public void delete(int bno) {
 		// TODO Auto-generated method stub
-		rdao.deleteByBno(bno);
+		
 		dao.deleteAllAttach(bno);
 		dao.delete(bno);
 		// 원글을 지우기 전에 bno를 참조하는 댓글들을 전부 지움. 코드 순서 중요 dao.delete(bno)보다 위에 위치해야 한다.
 
 	}
 
-	@Override
-	public List<String> getAttach(Integer bno) {
+	
 
-		return rdao.getAttach(bno);
-	}
-
-	@Override
-	public void deleteAttach(String fileName, int bno) {
-		// TODO Auto-generated method stub
-		dao.deleteAttach(fileName, bno);
-	}
+	
 
 	@Override
 	public void insert(CSDTO vo) {
@@ -163,9 +152,8 @@ public class CSServiceImple implements CSService {
 		dao.addAttach(files, vo.getBno());
 
 	}
-	/*
-	 * 파일 for(int i=0;i<files.length;i++) { dao.addAttach(files[i],vo.getBno()); }
-	 */
+
+	
 
 	
 
