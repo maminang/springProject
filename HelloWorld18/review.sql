@@ -11,7 +11,6 @@ create table tbl_review (
 	rno number primary key,
 	score number(1) not null,
 	id varchar2(30) references tbl_member(id),
-	title varchar2(120) not null,
 	content varchar2(500) not null,
 	age_group varchar2(15) not null
 )

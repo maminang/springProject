@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ca.mapper.review">
+	<select id="crtRno" resultType="Integer">
+		select max(rno) from tbl_review
+	</select>
+	
+	<insert id="insert">
+		insert into tbl_review (pno,rno,score,id,content,age_group) values (#{pno},#{rno},#{score},#{id},#{content},#{age_group})
+	</insert>
+	
+	<select id="getReviewList" resultType="ReviewDTO">
+		select * from tbl_review where pno = #{pno}
+	</select>
+	
+	<delete id="delete">
+		delete from tbl_review where rno = #{rno}
+	</delete>
+</mapper>

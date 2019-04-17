@@ -16,11 +16,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-
-<!-- header -->
-
- <jsp:include page="../headerBar.jsp" />
        
 <!-- body -->
         <div class="container">
@@ -244,10 +239,16 @@ DEmoNeyo 주식회사(이하 ‘회사’)는 다음과 같은 원칙에 의하�
             
             <div class="form-group" id="divAddress">
                 <label for="divAddress" class="col-lg-2 control-label">주소</label>
-                <input name="postNum" type="text" id="postNum" placeholder="우편번호">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input name="address" type="text" id="address" placeholder="주소"><br>
-				<input name="DTL_ADRES" type="text" id="DTL_ADRES" placeholder="상세주소"><br>
+            	<div class="col-lg-10">
+            		<div class="input-group">
+	                	<input name="postNum" type="text" id="postNum" placeholder="우편번호" class="form-control">
+	                	<span class="input-group-btn">
+							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn">
+						</span>
+					</div>
+					<input name="address" type="text" id="address" placeholder="주소" class="form-control"><br>
+					<input name="DTL_ADRES" type="text" id="DTL_ADRES" placeholder="상세주소" class="form-control"><br>
+				</div>
             </div>
             
             <div class="form-group" id="divBirth">
@@ -653,12 +654,5 @@ DEmoNeyo 주식회사(이하 ‘회사’)는 다음과 같은 원칙에 의하�
             
         </script>
         </div>
- <!-- :::::::::::::::::::::::::::::::::::: 푸터 :::::::::::::::::::::::::::::::::::::: -->
-        <jsp:include page="../footer.jsp" />
-
-	
-
-	
-
- </body>
+</body>
 </html>

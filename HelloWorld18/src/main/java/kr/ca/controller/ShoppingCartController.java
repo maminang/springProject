@@ -34,15 +34,22 @@ public class ShoppingCartController {
 
 //	장바구니 리스트
 	@RequestMapping("listShoppingCart")
-	public String listShoppingCart(ShoppingCartDTO dto, HttpServletRequest request, HttpSession session,
-			Model model) {
+	public String listShoppingCart(ShoppingCartDTO dto, HttpServletRequest request, HttpSession session, Model model) {
 
 		Object login = session.getAttribute("login");
-
+		ProductDTO pdto = new ProductDTO();
+		List<ProductDTO> pd = new ArrayList<ProductDTO>();
+		
 		/* 로그인 했을 때(회원) */
 		if (login != null) {
 			dto.setId(login.toString());
 			List<ShoppingCartDTO> list = service.listShoppingCart(dto);
+			for (int i = 0; i < list.size(); i++) {
+				pdto = productDAO.selectProduct(list.get(i).getPno());
+				productDAO.getImages(pdto);
+				pd.add(pdto);
+			}
+			model.addAttribute("pd", pd);
 			model.addAttribute("list", list);
 			/* 로그인 안했을 때(비회원) */
 		} else {
@@ -79,6 +86,13 @@ public class ShoppingCartController {
 				sDto.setVolume(volume);
 				sDto.setPrice(cookiePrice);
 				cList.add(i, sDto);
+
+				
+				pdto = productDAO.selectProduct(cList.get(i).getPno());
+				productDAO.getImages(pdto);
+				pd.add(pdto);
+				model.addAttribute("pd", pd);
+
 				model.addAttribute("list", cList);
 			}
 		}
@@ -213,7 +227,7 @@ public class ShoppingCartController {
 			/* 배열에 담기 */
 			Cookie[] cookies = request.getCookies();
 			for (int i = 0; i < cookies.length; i++) {
-				
+
 				String[] avp = cookies[i].getValue().split("_");
 				/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
 				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
@@ -230,7 +244,6 @@ public class ShoppingCartController {
 
 					/* 기존 value에 amount를 더해주기 (장바구니에서 삭제하면 -를 넣으면 됨) */
 					pnoVolume.setValue(String.valueOf(cookieAmount) + "_" + cookiePrice);
-
 
 					/* 수량이 0이 되면 자동으로 쿠키 지속시간을 0으로 만들어서 삭제하기 */
 					if (cookieAmount <= 0) {

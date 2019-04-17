@@ -15,12 +15,6 @@
 
 <title>Insert title here</title>
 </head>
-<body>
-	<jsp:include page="../headerBar.jsp"/>
-	<div class="container">
-		<div class="row">
-		</div>
-	</div>
 	
 <script type="text/javascript">
 	$(document).ready(function(){

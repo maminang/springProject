@@ -15,40 +15,82 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+<style type="text/css">
+#img {
+	width: 100px;
+	height: auto;
+}
+
+.X {
+	float: left;
+}
+
+.wrap-num-product {
+	float: left;
+}
+
+#amount {
+	float: left;
+	margin-right: 20px
+}
+
+.column-1 {
+	width: 100px;
+	text-align: center;
+}
+
+.column-3 {
+	width: 100px;
+}
+
+.column-4 {
+	width: 150px;
+}
+
+.colum-5 {
+	width: 200px;
+}
+
+.a {
+	text-align: center;
+}
+</style>
 </head>
 <body>
-	<jsp:include page="headerBar.jsp" />
 	<div class="container">
 		<div class="row">
 			<table class="table table-hover">
-				<thead>
+				<thead id="thead">
 					<tr>
-						<th>제품</th>
-						<th>용량</th>
-						<th>가격</th>
-						<th>수량</th>
-						<th>합계</th>
-						<th></th>
+						<th class="a">이미지</th>
+						<th class="th">용량</th>
+						<th class="th">가격</th>
+						<th class="th">수량</th>
+						<th class="th">합계</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="list" varStatus="status">
 						<c:if test="${list.pno != 0 }">
-							<tr>
-								<td>${list.pno}</td>
-								<td>${list.volume }</td>
-								<td>${list.price }</td>
-								<td>${list.amount}</td>
-								<td>${list.amount*list.price}</td>
-								<td>
+							<tr class="table_row">
+								<td class="column-1 th"><img id="img"
+									src='/displayFile?fileName=${pd[status.index].images[0] }'
+									alt="왜안나옴"><br> ${pd[status.index].eng_name }</td>
+								<td class="column-2 th">${list.volume }</td>
+								<td class="column-3 th">${list.price }</td>
+								<td class="column-4 th">
 									<form method="post">
-										<input type="number" value="1" min="1" max="${list.amount }"
-											name="amount" required autofocus> <input
-											hidden="hidden" value="${list.pno }" name="pno"> <input
-											type="hidden" value="${list.volume }" name="volume">
+										<div class="wrap-num-product flex-w m-l-auto ">
+											<a class="a">${list.amount }</a> <input type="number"
+												value="1" min="1" max="${list.amount }" name="amount"
+												required autofocus>
+										</div>
 										<button class="X">X</button>
+										<input hidden="hidden" value="${list.pno }" name="pno">
+										<input type="hidden" value="${list.volume }" name="volume">
 									</form>
 								</td>
+								<td class="column-5 th">${list.amount*list.price}</td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -67,7 +109,6 @@
 		</div>
 	</div>
 
-	<jsp:include page="footer.jsp" />
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".X").click(function() {

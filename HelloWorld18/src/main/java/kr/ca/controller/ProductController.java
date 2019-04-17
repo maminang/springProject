@@ -2,6 +2,8 @@ package kr.ca.controller;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.ca.domain.ProductDTO;
 import kr.ca.domain.ProductDetailDTO;
+import kr.ca.domain.ReviewDTO;
 import kr.ca.service.ProductService;
+import kr.ca.service.ReviewService;
 
 @Controller
 @RequestMapping("product")
@@ -19,6 +23,8 @@ public class ProductController {
 
    @Autowired
    private ProductService service;
+   @Inject
+   private ReviewService rService;
 
    @RequestMapping(value = "write", method = RequestMethod.GET)
    public String writeUI() {
@@ -37,9 +43,13 @@ public class ProductController {
 
       ProductDTO pd = service.selectProduct(pno);
       model.addAttribute("pd", pd);
+      
       List<ProductDetailDTO> pdd = service.selectProductDetail(pd.getPno());
       model.addAttribute("pdd", pdd);
-
+      
+      List<ReviewDTO> reviewList = rService.getReviewList(pno);
+      model.addAttribute("reviewList", reviewList);
+      
       return "product/read";
    }
 

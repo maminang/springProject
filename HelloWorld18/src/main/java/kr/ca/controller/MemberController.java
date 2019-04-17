@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.ca.dao.MainDAO;
 import kr.ca.dao.MemberDAO;
 import kr.ca.domain.ChargeHistoryDTO;
 import kr.ca.domain.LoginDTO;
@@ -42,14 +43,16 @@ public class MemberController {
 	private Email email;
 	@Autowired
 	private MemberDAO dao;
+	@Inject
+	private MainDAO mdao;
 //비밀번호 찾기시 필요
 	Random r = new Random();
 	int num = r.nextInt(89999) + 10000;
 
 //로그인	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void login() {
-
+	public void login(Model model) {
+		model.addAttribute("info", mdao.getFooterInfo());
 	}
 
 	@RequestMapping(value = "/loginpost", method = RequestMethod.POST)
