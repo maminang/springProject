@@ -32,14 +32,14 @@ public class ShoppingCartController {
 	@Autowired
 	private ProductDAO productDAO;
 
-//	장바구니 리스트
+//   장바구니 리스트
 	@RequestMapping("listShoppingCart")
 	public String listShoppingCart(ShoppingCartDTO dto, HttpServletRequest request, HttpSession session, Model model) {
 
 		Object login = session.getAttribute("login");
 		ProductDTO pdto = new ProductDTO();
 		List<ProductDTO> pd = new ArrayList<ProductDTO>();
-		
+
 		/* 로그인 했을 때(회원) */
 		if (login != null) {
 			dto.setId(login.toString());
@@ -51,6 +51,11 @@ public class ShoppingCartController {
 			}
 			model.addAttribute("pd", pd);
 			model.addAttribute("list", list);
+			int total = 0;
+			for (ShoppingCartDTO scdto : list) {
+				total += scdto.getPrice() * scdto.getAmount();
+			}
+			model.addAttribute("total", total);
 			/* 로그인 안했을 때(비회원) */
 		} else {
 
@@ -87,20 +92,24 @@ public class ShoppingCartController {
 				sDto.setPrice(cookiePrice);
 				cList.add(i, sDto);
 
-				
 				pdto = productDAO.selectProduct(cList.get(i).getPno());
 				productDAO.getImages(pdto);
 				pd.add(pdto);
 				model.addAttribute("pd", pd);
 
 				model.addAttribute("list", cList);
+				int total = 0;
+				for (ShoppingCartDTO scdto : cList) {
+					total += scdto.getPrice() * scdto.getAmount();
+				}
+				model.addAttribute("total", total);
 			}
 		}
 
 		return "shoppingCart";
 	}
 
-//	장바구니에 담기
+//   장바구니에 담기
 	@RequestMapping("/insertShoppingCart")
 	public String insertShoppingCart(ShoppingCartDTO dto, ProductDTO pd, String vp, HttpServletResponse response,
 			HttpServletRequest request, HttpSession session, Model model) {
@@ -144,7 +153,7 @@ public class ShoppingCartController {
 			/* 쿠키 유지 시간 설정 */
 			pnoVolume.setMaxAge(7 * 24 * 60 * 60);
 			/* 쿠키 패스 설정인데 자동으로 설정됨 */
-//			pnoVolume.setPath("/");
+//         pnoVolume.setPath("/");
 			/* 쿠키 추가 */
 			response.addCookie(pnoVolume);
 			/* 배열에 담기 */
@@ -190,7 +199,7 @@ public class ShoppingCartController {
 		return "redirect:/shoppingCart/listShoppingCart";
 	}
 
-//	장바구니에서 업데이트&삭제
+//   장바구니에서 업데이트&삭제
 	@RequestMapping("/deleteShoppingCart")
 	public RedirectView deleteShoppingCart(ShoppingCartDTO dto, ProductDTO pd, String vp, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -261,7 +270,7 @@ public class ShoppingCartController {
 
 	}
 
-//	read.jsp로 가기
+//   read.jsp로 가기
 	@RequestMapping("/read")
 	public String read(ProductDTO pd, Model model) {
 
@@ -273,7 +282,7 @@ public class ShoppingCartController {
 		return "board/read";
 	}
 
-//	shoppingCart.jsp로 가기
+//   shoppingCart.jsp로 가기
 	@RequestMapping("/goShoppingCart")
 	public String main(ProductDTO pd, MemberDTO md, Model model) {
 

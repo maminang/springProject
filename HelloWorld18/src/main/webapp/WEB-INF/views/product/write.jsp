@@ -6,21 +6,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<script src="../../resources/js/upload.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"
-	type="text/javascript"></script>
-<!-- ckeditor -->
-<script src="https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
+	<title>Write</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->   
+   <link rel="icon" type="image/png" href="../../resources/images/icons/favicon.png"/>
+<!--===============================================================================================-->
+   <link rel="stylesheet" type="text/css" href="../../resources/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+   <link rel="stylesheet" type="text/css" href="../../resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+   <link rel="stylesheet" type="text/css" href="../../resources/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+   <link rel="stylesheet" type="text/css" href="../../resources/fonts/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+   <link rel="stylesheet" type="text/css" href="../../resources/vendor/animate/animate.css">
+<!--===============================================================================================-->   
+   <link rel="stylesheet" type="text/css" href="../../resources/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+   <link rel="stylesheet" type="text/css" href="../../resources/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+   <link rel="stylesheet" type="text/css" href="../../resources/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+   <link rel="stylesheet" type="text/css" href="../../resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+   <link rel="stylesheet" type="text/css" href="../../resources/css/util.css">
+   <link rel="stylesheet" type="text/css" href="../../resources/css/main.css">
+<!--===============================================================================================-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <style type="text/css">
 .fileDrop {
@@ -34,18 +47,32 @@
 .uploadedList li {
 	list-style-type: none;
 }
+#in {
+   width: 50%;
+   border: 1px solid black;
+   margin: auto;
+}
+ 
+.roundBox {
+   border: 0.2px solid white; 
+   width: 50%;
+   margin: auto;
+}
 </style>
 
-<title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../headerBar.jsp" />
-	<h1>상품등록</h1>
+	<jsp:include page="../header.jsp" />
+	<br>
+	<br>
+	<br>
+	<br>
+	<h1 class="text-center">상품등록</h1>
 	<hr>
 
 
 	<div class="container">
-		<div class="row">
+		<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md" id="in">
 			<form action="/product/write" method="post">
 				<!-- 카데고리 -->
 				<div class="container" align="right">
@@ -107,6 +134,9 @@
 		</div>
 
 	</div>
+	<br>
+	<br>
+	<br>
 	<jsp:include page="../footer.jsp" />
 
 

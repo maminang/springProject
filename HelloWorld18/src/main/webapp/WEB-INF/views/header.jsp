@@ -15,7 +15,7 @@
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a href="/cs/csCenter" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQ
 						</a>
 						
@@ -59,15 +59,11 @@
 							</li>
 							
 							<li>
-								<a href="#">About</a>
+								<a href="/about">About</a>
 							</li>
 							
 							<li>
-								<a href="#">Contact</a>
-							</li>							
-							
-							<li>
-								<a href="#">Customer Service</a>
+								<a href="/cs/csCenter">Customer Service</a>
 							</li>
 						</ul>
 					</div>	
@@ -130,7 +126,7 @@
 				<li>
 					<div class="right-top-bar flex-w h-full">
 					
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<a href="/cs/csCenter" class="flex-c-m p-lr-10 trans-04">
 							Help & FAQ
 						</a>
 						
@@ -168,15 +164,11 @@
 				</li>
 
 				<li>
-					<a href="#">About</a>
-				</li>
-
-				<li>
-					<a href="#">Contact</a>
+					<a href="/about">About</a>
 				</li>
 				
 				<li>
-					<a href="#">Customer Service</a>
+					<a href="/cs/csCenter">Customer Service</a>
 				</li>
 			</ul>
 		</div>

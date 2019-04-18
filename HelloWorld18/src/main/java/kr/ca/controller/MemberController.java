@@ -241,6 +241,6 @@ public class MemberController {
 // 관리자
 	@RequestMapping("manage")
 	public String manage() {
-		return "/admin/index";
+		return "member/manage";
 	}
 }
