@@ -114,8 +114,6 @@
 				</div>
 				
 				
-
-
 				<div class="form-group">
 				<button class="btn" id="a" type="submit">등록</button>
 			</div>

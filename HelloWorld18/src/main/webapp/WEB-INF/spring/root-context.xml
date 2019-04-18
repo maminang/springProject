@@ -34,6 +34,7 @@
 			name="mapperLocations"></property>
 	</bean>
 
+
 	<bean
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		id="transactionManager">
