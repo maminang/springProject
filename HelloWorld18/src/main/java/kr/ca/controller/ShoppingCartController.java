@@ -23,247 +23,261 @@ import kr.ca.service.ShoppingCartService;
 @RequestMapping("shoppingCart")
 public class ShoppingCartController {
 
-	@Autowired
-	private ShoppingCartService service;
+   @Autowired
+   private ShoppingCartService service;
 
-	@Autowired
-	private ShoppingCartDAO dao;
+   @Autowired
+   private ShoppingCartDAO dao;
 
-	@Autowired
-	private ProductDAO productDAO;
+   @Autowired
+   private ProductDAO productDAO;
 
-//	장바구니 리스트
-	@RequestMapping("listShoppingCart")
-	public String listShoppingCart(ShoppingCartDTO dto, HttpServletRequest request, HttpSession session,
-			Model model) {
+//   장바구니 리스트
+   @RequestMapping("listShoppingCart")
+   public String listShoppingCart(ShoppingCartDTO dto, HttpServletRequest request, HttpSession session, Model model) {
 
-		Object login = session.getAttribute("login");
+      Object login = session.getAttribute("login");
+      ProductDTO pdto = new ProductDTO();
+      List<ProductDTO> pd = new ArrayList<ProductDTO>();
+      
+      /* 로그인 했을 때(회원) */
+      if (login != null) {
+         dto.setId(login.toString());
+         List<ShoppingCartDTO> list = service.listShoppingCart(dto);
+         for (int i = 0; i < list.size(); i++) {
+            pdto = productDAO.selectProduct(list.get(i).getPno());
+            productDAO.getImages(pdto);
+            pd.add(pdto);
+         }
+         model.addAttribute("pd", pd);
+         model.addAttribute("list", list);
+         /* 로그인 안했을 때(비회원) */
+      } else {
 
-		/* 로그인 했을 때(회원) */
-		if (login != null) {
-			dto.setId(login.toString());
-			List<ShoppingCartDTO> list = service.listShoppingCart(dto);
-			model.addAttribute("list", list);
-			/* 로그인 안했을 때(비회원) */
-		} else {
+         Cookie[] cookies = request.getCookies();
+         List<ShoppingCartDTO> cList = new ArrayList<ShoppingCartDTO>();
+         for (int i = 0; i < cookies.length; i++) {
+            String[] avp = cookies[i].getValue().split("_");
+            /* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
+            if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
+               cList.add(new ShoppingCartDTO(dto.getId(), 0, 0, 0, 0));
+               continue;
+            }
 
-			Cookie[] cookies = request.getCookies();
-			List<ShoppingCartDTO> cList = new ArrayList<ShoppingCartDTO>();
-			for (int i = 0; i < cookies.length; i++) {
-				String[] avp = cookies[i].getValue().split("_");
-				/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
-				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
-					cList.add(new ShoppingCartDTO(dto.getId(), 0, 0, 0, 0));
-					continue;
-				}
+            /* 쿠키는 string형으로만 들어가기 때문에 연산을 위해 int형으로 변환 */
+            String sCookieAmount = avp[0];
+            int cookieAmount = Integer.valueOf(sCookieAmount);
+            cookieAmount += dto.getAmount(); // String.valueOf()안에서 연산이 안돼서 미리 해주기
 
-				/* 쿠키는 string형으로만 들어가기 때문에 연산을 위해 int형으로 변환 */
-				String sCookieAmount = avp[0];
-				int cookieAmount = Integer.valueOf(sCookieAmount);
-				cookieAmount += dto.getAmount(); // String.valueOf()안에서 연산이 안돼서 미리 해주기
+            String sCookiePrice = avp[1];
+            int cookiePrice = Integer.valueOf(sCookiePrice);
+            cookiePrice += dto.getPrice(); // String.valueOf()안에서 연산이 안돼서 미리 해주기
 
-				String sCookiePrice = avp[1];
-				int cookiePrice = Integer.valueOf(sCookiePrice);
-				cookiePrice += dto.getPrice(); // String.valueOf()안에서 연산이 안돼서 미리 해주기
+            String[] pnoV = cookies[i].getName().split("_");
+            String sPno = pnoV[0];
+            int pno = Integer.valueOf(sPno);
+            String sVolume = pnoV[1];
+            int volume = Integer.valueOf(sVolume);
 
-				String[] pnoV = cookies[i].getName().split("_");
-				String sPno = pnoV[0];
-				int pno = Integer.valueOf(sPno);
-				String sVolume = pnoV[1];
-				int volume = Integer.valueOf(sVolume);
+            ShoppingCartDTO sDto = new ShoppingCartDTO();
+            sDto.setId(dto.getId());
+            sDto.setPno(pno);
+            sDto.setAmount(cookieAmount);
+            sDto.setVolume(volume);
+            sDto.setPrice(cookiePrice);
+            cList.add(i, sDto);
 
-				ShoppingCartDTO sDto = new ShoppingCartDTO();
-				sDto.setId(dto.getId());
-				sDto.setPno(pno);
-				sDto.setAmount(cookieAmount);
-				sDto.setVolume(volume);
-				sDto.setPrice(cookiePrice);
-				cList.add(i, sDto);
-				model.addAttribute("list", cList);
-			}
-		}
+            
+            pdto = productDAO.selectProduct(cList.get(i).getPno());
+            productDAO.getImages(pdto);
+            pd.add(pdto);
+            System.out.println("pd:"+pd);
+            model.addAttribute("pd", pd);
 
-		return "shoppingCart";
-	}
+            model.addAttribute("list", cList);
+         }
+      }
 
-//	장바구니에 담기
-	@RequestMapping("/insertShoppingCart")
-	public String insertShoppingCart(ShoppingCartDTO dto, ProductDTO pd, String vp, HttpServletResponse response,
-			HttpServletRequest request, HttpSession session, Model model) {
+      return "shoppingCart";
+   }
 
-		Object login = session.getAttribute("login");
+//   장바구니에 담기
+   @RequestMapping("/insertShoppingCart")
+   public String insertShoppingCart(ShoppingCartDTO dto, ProductDTO pd, String vp, HttpServletResponse response,
+         HttpServletRequest request, HttpSession session, Model model) {
 
-		/* value, price 받아오기 */
-		String[] sVp = vp.split(" ");
-		String sVolume = sVp[1].replaceAll("[^0-9]", "");
-		int volume = Integer.valueOf(sVolume);
-		String sPrice = sVp[0].replaceAll("[^0-9]", "");
-		int price = Integer.valueOf(sPrice);
-		int pno = dto.getPno();
-		String sPno = String.valueOf(pno);
-		int amount = dto.getAmount();
-		String sAmount = String.valueOf(amount);
+      Object login = session.getAttribute("login");
 
-		/* productDTO 받아오기 */
-		pd = productDAO.selectProduct(pd);
-		pd.setPrice(price);
-		pd.setVolume(volume);
-		model.addAttribute("pd", pd);
-		/* productDetail 받아오기 */
-		List<ProductDetailDTO> pdd = productDAO.selectProductDetail(dto.getPno());
-		model.addAttribute("pdd", pdd);
+      /* value, price 받아오기 */
+      String[] sVp = vp.split(" ");
+      String sVolume = sVp[1].replaceAll("[^0-9]", "");
+      int volume = Integer.valueOf(sVolume);
+      String sPrice = sVp[0].replaceAll("[^0-9]", "");
+      int price = Integer.valueOf(sPrice);
+      int pno = dto.getPno();
+      String sPno = String.valueOf(pno);
+      int amount = dto.getAmount();
+      String sAmount = String.valueOf(amount);
 
-		/* 장바구니에 담기 (회원) */
-		if (login != null) {
-			dto.setId(login.toString());
-			dto.setVolume(Integer.valueOf(sVp[1].replaceAll("[^0-9]", "")));
-			dto.setPrice(Integer.valueOf(sVp[0].replaceAll("[^0-9]", "")));
-			service.insertShoppingCart(dto);
-		} else {
+      /* productDTO 받아오기 */
+      pd = productDAO.selectProduct(pd);
+      pd.setPrice(price);
+      pd.setVolume(volume);
+      model.addAttribute("pd", pd);
+      /* productDetail 받아오기 */
+      List<ProductDetailDTO> pdd = productDAO.selectProductDetail(dto.getPno());
+      model.addAttribute("pdd", pdd);
 
-			/* 장바구니에 담기 (비회원) */
-			/* dto에 volume과 price 넣기 */
-			dto.setVolume(volume);
-			dto.setPrice(price);
-			/* 쿠키 생성 */
-			Cookie pnoVolume = new Cookie(sPno + "_" + sVolume, sAmount + "_" + sPrice);
-			/* 쿠키 유지 시간 설정 */
-			pnoVolume.setMaxAge(7 * 24 * 60 * 60);
-			/* 쿠키 패스 설정인데 자동으로 설정됨 */
-//			pnoVolume.setPath("/");
-			/* 쿠키 추가 */
-			response.addCookie(pnoVolume);
-			/* 배열에 담기 */
-			Cookie[] cookies = request.getCookies();
+      /* 장바구니에 담기 (회원) */
+      if (login != null) {
+         dto.setId(login.toString());
+         dto.setVolume(Integer.valueOf(sVp[1].replaceAll("[^0-9]", "")));
+         dto.setPrice(Integer.valueOf(sVp[0].replaceAll("[^0-9]", "")));
+         service.insertShoppingCart(dto);
+      } else {
 
-			for (int i = 0; i < cookies.length; i++) {
-				/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
-				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
-					continue;
-				}
-				/* value 구분자로 나눠서 배열에 저장하기 */
-				String[] avp = cookies[i].getValue().split("_");
-				/* 쿠키의 이름이 pno와 같아야 추가하기 */
-				if (cookies[i].getName().equals(sPno + "_" + sVolume)) {
+         /* 장바구니에 담기 (비회원) */
+         /* dto에 volume과 price 넣기 */
+         dto.setVolume(volume);
+         dto.setPrice(price);
+         /* 쿠키 생성 */
+         Cookie pnoVolume = new Cookie(sPno + "_" + sVolume, sAmount + "_" + sPrice);
+         /* 쿠키 유지 시간 설정 */
+         pnoVolume.setMaxAge(7 * 24 * 60 * 60);
+         /* 쿠키 패스 설정인데 자동으로 설정됨 */
+//         pnoVolume.setPath("/");
+         /* 쿠키 추가 */
+         response.addCookie(pnoVolume);
+         /* 배열에 담기 */
+         Cookie[] cookies = request.getCookies();
 
-					/* 쿠키는 string형으로만 들어가기 때문에 연산을 위해 int형으로 변환 */
-					String sCookieAmount = avp[0];
-					int cookieAmount = Integer.valueOf(sCookieAmount);
-					cookieAmount += amount; // String.valueOf()안에서 연산이 안돼서 미리 해주기
+         for (int i = 0; i < cookies.length; i++) {
+            /* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
+            if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
+               continue;
+            }
+            /* value 구분자로 나눠서 배열에 저장하기 */
+            String[] avp = cookies[i].getValue().split("_");
+            /* 쿠키의 이름이 pno와 같아야 추가하기 */
+            if (cookies[i].getName().equals(sPno + "_" + sVolume)) {
 
-					String sCookiePrice = avp[1];
-					int cookiePrice = Integer.valueOf(sCookiePrice);
+               /* 쿠키는 string형으로만 들어가기 때문에 연산을 위해 int형으로 변환 */
+               String sCookieAmount = avp[0];
+               int cookieAmount = Integer.valueOf(sCookieAmount);
+               cookieAmount += amount; // String.valueOf()안에서 연산이 안돼서 미리 해주기
 
-					/* 기존 value에 amount를 더해주기 (장바구니에서 삭제하면 -를 넣으면 됨) */
-					pnoVolume.setValue(String.valueOf(cookieAmount) + "_" + cookiePrice);
+               String sCookiePrice = avp[1];
+               int cookiePrice = Integer.valueOf(sCookiePrice);
 
-					/* 장바구니에서 수량을 뺄 때 value가 -가 되면 0을 설정하기 */
-					if (cookieAmount + dto.getAmount() < 0) {
-						pnoVolume.setValue("0");
-					}
+               /* 기존 value에 amount를 더해주기 (장바구니에서 삭제하면 -를 넣으면 됨) */
+               pnoVolume.setValue(String.valueOf(cookieAmount) + "_" + cookiePrice);
 
-					/* 수량이 0이 되면 자동으로 쿠키 지속시간을 0으로 만들어서 삭제하기 */
-					if (pnoVolume.getValue().equals("0")) {
-						pnoVolume.setMaxAge(0);
-					}
+               /* 장바구니에서 수량을 뺄 때 value가 -가 되면 0을 설정하기 */
+               if (cookieAmount + dto.getAmount() < 0) {
+                  pnoVolume.setValue("0");
+               }
 
-					/* 쿠키 추가 */
-					response.addCookie(pnoVolume);
-					break;
-				}
-			}
-		}
-		return "redirect:/shoppingCart/listShoppingCart";
-	}
+               /* 수량이 0이 되면 자동으로 쿠키 지속시간을 0으로 만들어서 삭제하기 */
+               if (pnoVolume.getValue().equals("0")) {
+                  pnoVolume.setMaxAge(0);
+               }
 
-//	장바구니에서 업데이트&삭제
-	@RequestMapping("/deleteShoppingCart")
-	public RedirectView deleteShoppingCart(ShoppingCartDTO dto, ProductDTO pd, String vp, HttpSession session,
-			HttpServletRequest request, HttpServletResponse response, Model model) {
+               /* 쿠키 추가 */
+               response.addCookie(pnoVolume);
+               break;
+            }
+         }
+      }
+      return "redirect:/shoppingCart/listShoppingCart";
+   }
 
-		Object login = session.getAttribute("login");
+//   장바구니에서 업데이트&삭제
+   @RequestMapping("/deleteShoppingCart")
+   public RedirectView deleteShoppingCart(ShoppingCartDTO dto, ProductDTO pd, String vp, HttpSession session,
+         HttpServletRequest request, HttpServletResponse response, Model model) {
 
-		/* productDTO 받아오기 */
-		pd = productDAO.selectProduct(pd);
-		/* value, price 받아오기 */
-		int pno = dto.getPno();
-		String sPno = String.valueOf(pno);
-		int amount = dto.getAmount();
-		String sAmount = String.valueOf(amount);
+      Object login = session.getAttribute("login");
 
-		model.addAttribute("pd", pd);
+      /* productDTO 받아오기 */
+      pd = productDAO.selectProduct(pd);
+      /* value, price 받아오기 */
+      int pno = dto.getPno();
+      String sPno = String.valueOf(pno);
+      int amount = dto.getAmount();
+      String sAmount = String.valueOf(amount);
 
-		List<ProductDetailDTO> pdd = productDAO.selectProductDetail(dto.getPno());
-		model.addAttribute("pdd", pdd);
+      model.addAttribute("pd", pd);
 
-		/* 로그인 했을 때 */
-		if (login != null) {
-			dto.setId(login.toString());
-			ShoppingCartDTO member = dao.selectShoppingCart(dto);
-			if (dto.getAmount() >= member.getAmount()) {
-				service.deleteShoppingCart(member);
-			}
-			member.setAmount(member.getAmount() - dto.getAmount());
-			service.updateShoppingCart(member);
-			/* 로그인 안했을 때 */
-		} else {
+      List<ProductDetailDTO> pdd = productDAO.selectProductDetail(dto.getPno());
+      model.addAttribute("pdd", pdd);
 
-			/* 쿠키 생성 */
-			Cookie pnoVolume = new Cookie(sPno + "_" + dto.getVolume(), sAmount + "_" + dto.getPrice());
-			/* 배열에 담기 */
-			Cookie[] cookies = request.getCookies();
-			for (int i = 0; i < cookies.length; i++) {
-				
-				String[] avp = cookies[i].getValue().split("_");
-				/* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
-				if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
-					continue;
-				}
-				if (cookies[i].getName().equals(sPno + "_" + dto.getVolume())) {
-					/* 쿠키는 string형으로만 들어가기 때문에 연산을 위해 int형으로 변환 */
-					String sCookieAmount = avp[0];
-					int cookieAmount = Integer.valueOf(sCookieAmount);
-					cookieAmount -= amount; // String.valueOf()안에서 연산이 안돼서 미리 해주기
+      /* 로그인 했을 때 */
+      if (login != null) {
+         dto.setId(login.toString());
+         ShoppingCartDTO member = dao.selectShoppingCart(dto);
+         if (dto.getAmount() >= member.getAmount()) {
+            service.deleteShoppingCart(member);
+         }
+         member.setAmount(member.getAmount() - dto.getAmount());
+         service.updateShoppingCart(member);
+         /* 로그인 안했을 때 */
+      } else {
 
-					String sCookiePrice = avp[1];
-					int cookiePrice = Integer.valueOf(sCookiePrice);
+         /* 쿠키 생성 */
+         Cookie pnoVolume = new Cookie(sPno + "_" + dto.getVolume(), sAmount + "_" + dto.getPrice());
+         /* 배열에 담기 */
+         Cookie[] cookies = request.getCookies();
+         for (int i = 0; i < cookies.length; i++) {
 
-					/* 기존 value에 amount를 더해주기 (장바구니에서 삭제하면 -를 넣으면 됨) */
-					pnoVolume.setValue(String.valueOf(cookieAmount) + "_" + cookiePrice);
+            String[] avp = cookies[i].getValue().split("_");
+            /* 자동으로 JSESSIONID라는 쿠키가 생성되기 때문에 name이 JSESSIONID일 때 건너뛰기 */
+            if (cookies[i].getName().equalsIgnoreCase("JSESSIONID")) {
+               continue;
+            }
+            if (cookies[i].getName().equals(sPno + "_" + dto.getVolume())) {
+               /* 쿠키는 string형으로만 들어가기 때문에 연산을 위해 int형으로 변환 */
+               String sCookieAmount = avp[0];
+               int cookieAmount = Integer.valueOf(sCookieAmount);
+               cookieAmount -= amount; // String.valueOf()안에서 연산이 안돼서 미리 해주기
 
+               String sCookiePrice = avp[1];
+               int cookiePrice = Integer.valueOf(sCookiePrice);
 
-					/* 수량이 0이 되면 자동으로 쿠키 지속시간을 0으로 만들어서 삭제하기 */
-					if (cookieAmount <= 0) {
-						pnoVolume.setMaxAge(0);
-					}
-					/* 쿠키 추가 */
-					response.addCookie(pnoVolume);
-					break;
-				}
-			}
+               /* 기존 value에 amount를 더해주기 (장바구니에서 삭제하면 -를 넣으면 됨) */
+               pnoVolume.setValue(String.valueOf(cookieAmount) + "_" + cookiePrice);
 
-		}
+               /* 수량이 0이 되면 자동으로 쿠키 지속시간을 0으로 만들어서 삭제하기 */
+               if (cookieAmount <= 0) {
+                  pnoVolume.setMaxAge(0);
+               }
+               /* 쿠키 추가 */
+               response.addCookie(pnoVolume);
+               break;
+            }
+         }
 
-		return new RedirectView("listShoppingCart");
+      }
 
-	}
+      return new RedirectView("listShoppingCart");
 
-//	read.jsp로 가기
-	@RequestMapping("/read")
-	public String read(ProductDTO pd, Model model) {
+   }
 
-		pd = productDAO.selectProduct(pd);
-		List<ProductDetailDTO> pdd = productDAO.selectProductDetail(pd.getPno());
-		model.addAttribute("pd", pd);
-		model.addAttribute("pdd", pdd);
+//   read.jsp로 가기
+   @RequestMapping("/read")
+   public String read(ProductDTO pd, Model model) {
 
-		return "board/read";
-	}
+      pd = productDAO.selectProduct(pd);
+      List<ProductDetailDTO> pdd = productDAO.selectProductDetail(pd.getPno());
+      model.addAttribute("pd", pd);
+      model.addAttribute("pdd", pdd);
 
-//	shoppingCart.jsp로 가기
-	@RequestMapping("/goShoppingCart")
-	public String main(ProductDTO pd, MemberDTO md, Model model) {
+      return "board/read";
+   }
 
-		return "shoppingCart";
-	}
+//   shoppingCart.jsp로 가기
+   @RequestMapping("/goShoppingCart")
+   public String main(ProductDTO pd, MemberDTO md, Model model) {
+
+      return "shoppingCart";
+   }
 }

@@ -218,6 +218,7 @@ public class MemberController {
 
 		model.addAttribute("dto", ldto);
 		// 암호화 후
+		System.out.println(":::::::::::::::::"+pw);
 		String pripw = passEncoder.encode(pw);
 		service.updatePW(id, pripw);
 		return "redirect:/member/mypage";
