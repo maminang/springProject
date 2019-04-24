@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ca.mapper.main">
+	<select id="getMenu" resultType="kr.ca.domain.MenuDTO">
+		select * from tbl_menu order by order_no asc
+	</select>
+	<select id="getFooterInfo" resultType="kr.ca.domain.FooterInfoDTO">
+		select * from tbl_footerinfo
+	</select>
+</mapper>

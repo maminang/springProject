@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ca.mapper.ListMapper">
+	<select id="citrusList" resultType="kr.ca.domain.ProductDTO">
+		select * from tbl_product where category='citrus' order by pno desc
+	</select>
+	
+	<!-- <select id="createBno" resultType="Integer">
+		select max(idNbr) from tbl_faq
+	</select>
+	
+	<select id="getAmount" resultType="Integer">
+		select count(idNbr) from tbl_faq
+	</select> -->
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ca.mapper.member">
+
+	<insert id="insert">
+	insert into tbl_member (id,pw,name,email,address,phone,birth) values 
+	(#{id},#{pw},#{name},#{email},#{address},#{phone},#{birth})
+	</insert>
+	
+	<select id="login" resultType="LoginDTO">
+	select id, pw from tbl_member where id=#{id} and pw=#{pw}
+	</select>
+	
+	
+	<select id="mypage" resultType="MemberDTO">
+	select * from tbl_member where id=#{id} and pw=#{pw}
+	</select>
+	
+</mapper>
