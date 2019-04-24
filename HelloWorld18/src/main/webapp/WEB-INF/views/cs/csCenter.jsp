@@ -15,8 +15,36 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="../../../resources/images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/fonts/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../../../resources/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../../../resources/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/vendor/MagnificPopup/magnific-popup.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/main.css">
+<!--===============================================================================================-->
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -29,8 +57,8 @@
 <style>
 .floating {
 	position: fixed;
-	right: 50%;
-	bottom: 50px;
+	right: 70%;
+	bottom: 450px;
 	margin-right: -720px;
 	text-align: center;
 	width: 120px;
@@ -47,16 +75,27 @@
 
 <body>
 
+<!-- Header -->
+	<jsp:include page="../header.jsp"/>
 
+<br><br><br><br><br>
+	
 
 
 
 	<div class="floating">
+		<div class="row">
 
-		<a href="https://open.kakao.com/o/s5ZqXQib"> <img
-			style="width: 50px; height: 50px" src="/resources/img/kakao.jpg">
+			<a class="btn btn-info" href="/cs/insertui">질문하기</a>
 
-		</a>
+		</div>
+		<br>
+		<div class="row">
+
+			<a class="btn btn-info" href="https://open.kakao.com/o/s5ZqXQib">카카오톡</a>
+
+		</div>
+		
 
 	</div>
 
@@ -66,15 +105,9 @@
 
 
 
-	<jsp:include page="../headerBar.jsp" />
-
 	<div class="container">
 
-		<div class="row">
-
-			<a class="btn btn-info" href="/cs/insertui">질문하기</a>
-
-		</div>
+		
 
 		<!-- <table>
 			<tr>
@@ -92,8 +125,9 @@
 
 
 
-
-		<div class="row" style="text-align: center;">
+<br>
+<br>
+		<div class="row" style="text-align: center; ">
 
 			<img src="/resources/img/csCenter.jpg"> <br>
 
@@ -190,15 +224,18 @@
 
 
 
-	<div class="row text-center">
 
-		<ul class="pagination pagination-lg">
+
+	<div style="text-align: center; ">
+
+
+		<ul  >
 
 
 
 			<c:if test="${pm.beginPageNum != 1}">
 
-				<li><a href="/cs/csCenter?page=${pm.beginPageNum-1}">&laquo;</a></li>
+				<li style="display:inline;"><a href="/cs/csCenter?page=${pm.beginPageNum-1}">&laquo;</a></li>
 
 			</c:if>
 
@@ -207,7 +244,7 @@
 			<c:forEach begin="${pm.beginPageNum}" end="${pm.stopPageNum }"
 				var="idx">
 
-				<li class="${idx == pm.cri.page ? 'active' : ''}"><a
+				<li style="display:inline;"class="${idx == pm.cri.page ? 'active' : ''}"><a
 					href="/cs/csCenter${pm.makeQuery(idx)}"> ${idx}</a></li>
 
 			</c:forEach>
@@ -216,7 +253,7 @@
 
 			<c:if test="${pm.stopPageNum != pm.totalPage }">
 
-				<li><a href="/cs/csCenter?page=${pm.stopPageNum+1}">&raquo;</a></li>
+				<li style="display:inline;"><a href="/cs/csCenter?page=${pm.stopPageNum+1}">&raquo;</a></li>
 
 			</c:if>
 
@@ -225,75 +262,169 @@
 		</ul>
 
 	</div>
+	
+	<!-- Footer -->
+	<jsp:include page="../footer.jsp"/>
 
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+	
+	
 
-	<form action="/cs/search" method="get" target="_blanck">
-
-
-		<div class="row">
-			<div class="col-xs-3 col-sm-2">
-				<select class="form-control" id="ssel" name="searchType">
-					<option disabled>검색기준</option>
-					<option value="qtitle">제목</option>
-					<option value="quser">작성자</option>
-					<option value="qcontent">내용</option>
-				</select>
-			</div>
-			<div class="input-group col-xs-9 col-sm-10">
-				<span class="input-group-btn"> <input class="form-control"
-					id="keyword" name="keyword">
-
-					<button class="btn btn-success">검색</button>
-				</span>
-			</div>
-		</div>
-	</form>
-
-
-
-
-
-
-
-
-	<jsp:include page="../footerBar.jsp" />
 
 	<script type="text/javascript">
+		$(document).ready(
+				function() {
 
-			$(document).ready(function() {
-				
-				var f_target=$(this).parent("tr").next("tr").css("display","inline");
-				
-				
-				
-				
-				
-				/* $(#).click(function(event){
-					$('#h51').parent("tr").next("tr").css("display","onblock");
-					/* if($('.name_by_id2').css("display", "none")){
-						$('name_by_id2').css("display", "inline-block");
-					}else{
-						$('name_by_id2').css("display", "none");
-					} */
-				}); 
-				$(this)
-				$('#c${cs.bno}').click(function(event){
-					alert("test");	 
-					
-					/* if($('.name_by_id2').css("display", "none")){
-						$('name_by_id2').css("display", "inline-block");
-					}else{
-						$('name_by_id2').css("display", "none");
-					} */
+					var f_target = $(this).parent("tr").next("tr").css(
+							"display", "inline");
+
+					/* $(#).click(function(event){
+						$('#h51').parent("tr").next("tr").css("display","onblock");
+						/* if($('.name_by_id2').css("display", "none")){
+							$('name_by_id2').css("display", "inline-block");
+						}else{
+							$('name_by_id2').css("display", "none");
+						} */
 				});
-			
-			
+		$(this)
+		$('#c${cs.bno}').click(function(event) {
+			alert("test");
 
-		</script>
+			/* if($('.name_by_id2').css("display", "none")){
+				$('name_by_id2').css("display", "inline-block");
+			}else{
+				$('name_by_id2').css("display", "none");
+			} */
+		});
+	</script>
+	
+	
+	<!--===============================================================================================-->	
+	<script src="../../resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../../resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../../resources/vendor/bootstrap/js/popper.js"></script>
+	<script src="../../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../../resources/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="../../resources/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../../resources/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../../resources/vendor/slick/slick.min.js"></script>
+	<script src="../../resources/js/slick-custom.js"></script>
+<!--===============================================================================================-->
+	<script src="../../resources/vendor/parallax100/parallax100.js"></script>
+	<script>
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script src="../../resources/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="../../resources/vendor/isotope/isotope.pkgd.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../../resources/vendor/sweetalert/sweetalert.min.js"></script>
+	<script>
+		$('.js-addwish-b2').on('click', function(e){
+			e.preventDefault();
+		});
 
+		$('.js-addwish-b2').each(function(){
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
 
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
 
+		$('.js-addwish-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+
+		/*---------------------------------------------*/
+
+		$('.js-addcart-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+	
+	</script>
+<!--===============================================================================================-->
+	<script src="../../resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="../../resources/js/main.js"></script>
+	<script id="menuSource" type="text/x-handlebars-template">
+		{{#each.}}
+			<li class="p-b-10">
+				<a href="{{href}}" class="stext-107 cl7 hov-cl1 trans-04">
+					{{category}}
+				</a>
+			</li>
+		{{/each}}
+	</script>
+	<script type="text/javascript">
+		getMenu();
+		function getMenu() {
+			$.getJSON("/menu", function(data) {
+				var source = $("#menuSource").html();
+				var template = Handlebars.compile(source)
+
+				$("#categories").html(template(data));
+			})
+		}
+	</script>
+	
 </body>
-
-</html>
+</html>	
