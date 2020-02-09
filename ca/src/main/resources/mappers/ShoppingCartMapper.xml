@@ -1,0 +1,69 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ca.mapper.shoppingCart">
+
+	<select id="selectShoppingCart"
+		resultType="kr.ca.domain.ShoppingCartDTO">
+		select * from tbl_shopping_cart where id = #{id} and
+		pno=#{pno} and
+		volume=#{volume}
+	</select>
+
+	<!-- check amount -->
+	<select id="checkAmount" resultType="Integer">
+		select amount from
+		tbl_shopping_cart where id=#{id} and pno=#{pno} and volume=#{volume}
+	</select>
+
+	<!-- oAmount가 Null이 아닐때 -->
+	<insert id="insertShoppingCart">
+		update tbl_shopping_cart set amount =
+		amount+#{amount} where id=#{id} and
+		pno=#{pno} and volume = #{volume}
+	</insert>
+
+	<!-- oAmount가 Null일때 -->
+	<insert id="insertShoppingCartNull">
+		insert into tbl_shopping_cart values (#{id}, #{pno},
+		#{amount}, #{volume},
+		#{price})
+	</insert>
+
+	<!-- 장바구니 list -->
+	<select id="listShoppingCart"
+		resultType="kr.ca.domain.ShoppingCartDTO">
+		select * from tbl_shopping_cart where id = #{id} order by
+		pno asc, volume
+		asc
+	</select>
+
+	<!-- 장바구니 물건 개수 update -->
+	<update id="updateShoppingCart">
+		update tbl_shopping_cart set amount = #{amount} where
+		id = #{id} and pno =
+		#{pno} and volume=#{volume}
+	</update>
+
+	<!-- 장바구니 delete -->
+	<delete id="deleteShoppingCart">
+		delete from tbl_shopping_cart where id = #{id} and
+		pno = #{pno} and
+		volume=#{volume}
+	</delete>
+
+	<select id="selectShoppingCartPno" resultType="Integer">
+		select pno from
+		tbl_shopping_cart where id = #{id}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+

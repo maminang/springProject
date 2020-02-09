@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		id="dataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url"
+			value="jdbc:oracle:thin:@192.168.219.177:1521:orcl"></property>
+		<property name="username" value="hamin"></property>
+		<property name="password" value="hamin"></property>
+	</bean>
+	
+	<!-- mail  -->
+
+	   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	      <property name="host" value="smtp.gmail.com" />
+	      <property name="port" value="587" />
+	      <property name="defaultEncoding" value="utf-8"/>
+	      <property name="username" value="demoneyo.oooo" />
+	      <property name="password" value="eunju1234!" />
+
+     <!-- email 요청시는 SMTP -->
+	      <property name="javaMailProperties">
+	         <props>
+	            <prop key="mail.transport.protocol">smtp</prop>
+	            <prop key="mail.smtp.auth">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.debug">true</prop>
+	         </props>
+	      </property>
+	   </bean>
+
+	<bean id="email" class="kr.ca.utils.Email">
+	</bean>
+	<bean id="emailSender" class="kr.ca.utils.EmailSender">
+	</bean>
+	
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
+		id="sqlSessionFactory">
+		<property ref="dataSource" name="dataSource"></property>
+		<property value="classpath:/mybatis-config.xml"
+			name="configLocation"></property>
+		<property value="classpath:mappers/**/*Mapper.xml"
+			name="mapperLocations"></property>
+	</bean>
+
+	<bean
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		id="transactionManager">
+		<property ref="dataSource" name="dataSource"></property>
+	</bean>
+	<tx:annotation-driven />
+
+	<bean destroy-method="clearCache" id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+
+	<context:component-scan
+		base-package="kr.ca.service" />
+	<context:component-scan base-package="kr.ca.dao" />
+
+</beans>
